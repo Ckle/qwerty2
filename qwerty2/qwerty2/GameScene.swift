@@ -1,50 +1,16 @@
 //
-//  GameScene.swift
+//  GameScene2.swift
 //  qwerty2
 //
-//  Created by Chris Lee on 2014-12-17.
+//  Created by Chris Lee on 2014-12-18.
 //  Copyright (c) 2014 Coffee Digital. All rights reserved.
 //
 
 import SpriteKit
 
 class GameScene: SKScene {
-    override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-
-        let greenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
-        greenNode.position = CGPointMake(150, 150)
-        self.addChild(greenNode)
-        //let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        //myLabel.text = "Hello, World!";
-        //myLabel.fontSize = 65;
-        //myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
-        
-        //self.addChild(myLabel)
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        /* Called when a touch begins */
-        
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-            
-        }
-    }
-   
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+    override func didMoveToView(view: SKView!) {
+        println("We are at the new scene")
+        self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
     }
 }

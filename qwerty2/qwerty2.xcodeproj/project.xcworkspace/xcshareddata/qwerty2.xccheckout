@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>64856030-1BCE-47B0-AE15-FB53481C2688</string>
+	<key>IDESourceControlProjectName</key>
+	<string>qwerty2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0BDA8A35F9B4F7F11AAD069D6473D790FF84E334</key>
+		<string>https://github.com/Ckle/qwerty2.git</string>
+		<key>BFF4D1E2AFE7DBD810AFC88B47777CF1BFE1EF0C</key>
+		<string>https://github.com/Ckle/sproutup2.0.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>qwerty2/qwerty2.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0BDA8A35F9B4F7F11AAD069D6473D790FF84E334</key>
+		<string>../../..</string>
+		<key>BFF4D1E2AFE7DBD810AFC88B47777CF1BFE1EF0C</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Ckle/qwerty2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0BDA8A35F9B4F7F11AAD069D6473D790FF84E334</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BFF4D1E2AFE7DBD810AFC88B47777CF1BFE1EF0C</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0BDA8A35F9B4F7F11AAD069D6473D790FF84E334</string>
+			<key>IDESourceControlWCCName</key>
+			<string>qwerty2</string>
+		</dict>
+	</array>
+</dict>
+</plist>
