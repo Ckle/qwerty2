@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B13A2341A43AB1000B61A5B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* GameScene.swift */; };
+		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
+		5BA01ACB1A44AB79005BAE16 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA01ACA1A44AB79005BAE16 /* GameScene.swift */; };
+		5BA01ACD1A44ABF4005BAE16 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BA01ACC1A44ABF4005BAE16 /* GameScene.sks */; };
+		5BA01ACF1A44AE8F005BAE16 /* LevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BA01ACE1A44AE8F005BAE16 /* LevelScene.sks */; };
 		5BF4B7711A42A7F0001EB977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF4B7701A42A7F0001EB977 /* AppDelegate.swift */; };
 		5BF4B7731A42A7F0001EB977 /* TitleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BF4B7721A42A7F0001EB977 /* TitleScene.sks */; };
 		5BF4B7751A42A7F0001EB977 /* TitleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF4B7741A42A7F0001EB977 /* TitleScene.swift */; };
@@ -29,7 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5B13A2331A43AB1000B61A5B /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
+		5BA01ACA1A44AB79005BAE16 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5BA01ACC1A44ABF4005BAE16 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5BA01ACE1A44AE8F005BAE16 /* LevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelScene.sks; sourceTree = "<group>"; };
 		5BF4B76B1A42A7F0001EB977 /* qwerty2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qwerty2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BF4B76F1A42A7F0001EB977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BF4B7701A42A7F0001EB977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,10 +90,13 @@
 			isa = PBXGroup;
 			children = (
 				5BF4B7701A42A7F0001EB977 /* AppDelegate.swift */,
+				5BF4B7761A42A7F0001EB977 /* GameViewController.swift */,
 				5BF4B7721A42A7F0001EB977 /* TitleScene.sks */,
 				5BF4B7741A42A7F0001EB977 /* TitleScene.swift */,
-				5BF4B7761A42A7F0001EB977 /* GameViewController.swift */,
-				5B13A2331A43AB1000B61A5B /* GameScene.swift */,
+				5BA01ACC1A44ABF4005BAE16 /* GameScene.sks */,
+				5BA01ACA1A44AB79005BAE16 /* GameScene.swift */,
+				5BA01ACE1A44AE8F005BAE16 /* LevelScene.sks */,
+				5B13A2331A43AB1000B61A5B /* LevelScene.swift */,
 				5BF4B7781A42A7F0001EB977 /* Main.storyboard */,
 				5BF4B77B1A42A7F0001EB977 /* Images.xcassets */,
 				5BF4B77D1A42A7F0001EB977 /* LaunchScreen.xib */,
@@ -202,9 +211,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BF4B77F1A42A7F0001EB977 /* LaunchScreen.xib in Resources */,
+				5BA01ACD1A44ABF4005BAE16 /* GameScene.sks in Resources */,
 				5BF4B77C1A42A7F0001EB977 /* Images.xcassets in Resources */,
 				5BF4B7731A42A7F0001EB977 /* TitleScene.sks in Resources */,
 				5BF4B77A1A42A7F0001EB977 /* Main.storyboard in Resources */,
+				5BA01ACF1A44AE8F005BAE16 /* LevelScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,8 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA01ACB1A44AB79005BAE16 /* GameScene.swift in Sources */,
 				5BF4B7751A42A7F0001EB977 /* TitleScene.swift in Sources */,
-				5B13A2341A43AB1000B61A5B /* GameScene.swift in Sources */,
+				5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */,
 				5BF4B7771A42A7F0001EB977 /* GameViewController.swift in Sources */,
 				5BF4B7711A42A7F0001EB977 /* AppDelegate.swift in Sources */,
 			);
