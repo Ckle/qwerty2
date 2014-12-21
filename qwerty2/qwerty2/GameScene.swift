@@ -32,7 +32,7 @@ class GameScene: SKScene {
     func startGame() {
         
         let aSelector : Selector = "updateTime"
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
         
     }
@@ -40,20 +40,21 @@ class GameScene: SKScene {
     func updateTime() {
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
         var elapsedTime = currentTime - startTime
-        var seconds = gameTime-elapsedTime
+        var seconds = Double(gameTime - elapsedTime)
         if seconds > 0 {
             elapsedTime -= NSTimeInterval(seconds)
-            println("\(Int(seconds))")
+            println("\(Double(seconds))")
         } else {
             timer.invalidate()
         
         var secondsLeft = CGFloat(seconds / gameTime)
-        //self.timerBar.size.width = (xScale: (secondsLeft / 10))
-        self.timerBar.size.width = secondsLeft
+        self.timerBar.size.width = ((self.size.width) * secondsLeft)
+
     }
 }
      override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        
     }
 }
 
