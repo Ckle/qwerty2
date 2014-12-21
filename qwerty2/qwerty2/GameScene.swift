@@ -49,6 +49,7 @@ class GameScene: SKScene {
         
         var secondsLeft = CGFloat(seconds / gameTime)
         self.timerBar.size.width = ((self.size.width) * secondsLeft)
+        // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
 
     }
 }
