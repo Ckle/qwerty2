@@ -67,6 +67,7 @@ class GameScene: SKScene {
         para.appendAttributedString(attrString1)
         para.appendAttributedString(attrString2)
         para.appendAttributedString(attrString3)
+        para.addAttribute(NSFontAttributeName, value: UIFont(name: "Georgia", size: 18.0)!, range: NSRange(location: 7, length: 5))
         
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
@@ -77,7 +78,7 @@ class GameScene: SKScene {
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         
         // Create UITextView
-        let textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetWidth(self.frame)-20))
+        textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetWidth(self.frame)-20))
         
         // Add string to UITextView
         textDisplay.attributedText = para
@@ -128,6 +129,7 @@ class GameScene: SKScene {
     override func willMoveFromView(view: SKView) {
         println("Removed UIElement from Scene")
         textDisplay.removeFromSuperview()
+        // textDisplay.hidden = true
     }
     
     override func update(currentTime: CFTimeInterval) {
