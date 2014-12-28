@@ -20,6 +20,9 @@ class GameScene: SKScene {
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
+    // Text Display
+    var textDisplay = UITextView()
+    
     override func didMoveToView(view: SKView) {
         
         // SKView Properties
@@ -74,14 +77,13 @@ class GameScene: SKScene {
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         
         // Create UITextView
-        let textBox = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetWidth(self.frame)-20))
+        let textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetWidth(self.frame)-20))
         
         // Add string to UITextView
-        textBox.attributedText = para
-        
-        // Add UITextView to main view
-        self.scene?.view?.addSubview(textBox)
+        textDisplay.attributedText = para
 
+        // Add UITextView to main view
+        self.view?.addSubview(textDisplay)
     }
     
     func startGame() {
@@ -122,15 +124,15 @@ class GameScene: SKScene {
             }
         }
     }
-
-     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-        
-    }
     
     override func willMoveFromView(view: SKView) {
         println("Removed UIElement from Scene")
-        textBox.removeFromSuperview()
+        textDisplay.removeFromSuperview()
+    }
+    
+    override func update(currentTime: CFTimeInterval) {
+        /* Called before each frame is rendered */
+        
     }
 }
 
