@@ -17,10 +17,6 @@ class GameScene: SKScene {
     var timer = NSTimer()
     var gameTime: Double = 10.0
     
-    // Type
-    let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
-    let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
-    
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
@@ -45,7 +41,16 @@ class GameScene: SKScene {
         self.addChild(titleScreenNode)
         self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
         
+        addUIElements()
+        
+    }
+    
+    func addUIElements() {
+       
         // Type
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
+        let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
+       
         // Define string attributes
         // Create a string that will be our paragraph
         let para = NSMutableAttributedString()
@@ -75,8 +80,8 @@ class GameScene: SKScene {
         textBox.attributedText = para
         
         // Add UITextView to main view
-        self.view?.addSubview(textBox)
-        
+        self.scene?.view?.addSubview(textBox)
+
     }
     
     func startGame() {
@@ -124,8 +129,8 @@ class GameScene: SKScene {
     }
     
     override func willMoveFromView(view: SKView) {
-        super.willMoveFromView(view)
-        self.view?.removeFromSuperview(textBox)
+        println("Removed UIElement from Scene")
+        textBox.removeFromSuperview()
     }
 }
 
