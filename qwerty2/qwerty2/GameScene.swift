@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Coffee Digital. All rights reserved.
 //
 
-import UIKit
 import SpriteKit
+import UIKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, UITextViewDelegate {
     
     // Timer Bar
     var timerBar = SKSpriteNode()
@@ -78,7 +78,13 @@ class GameScene: SKScene {
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         
         // Create UITextView
-        textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetWidth(self.frame)-20))
+        textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+        
+        // Bring Up Keyboard Immediately
+        textDisplay.autocorrectionType = UITextAutocorrectionType.No
+        textDisplay.becomeFirstResponder()
+        // textDisplay.hidden = true
+        textDisplay.keyboardType = UIKeyboardType.EmailAddress
         
         // Add string to UITextView
         textDisplay.attributedText = para
@@ -89,13 +95,14 @@ class GameScene: SKScene {
     
     func startGame() {
         
-        let aSelector : Selector = "updateTime"
+        let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
         
     }
     
     func updateTime() {
+        
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
         var elapsedTime = currentTime - startTime
         var seconds = Double(gameTime - elapsedTime)
@@ -109,8 +116,26 @@ class GameScene: SKScene {
         // var secondsLeft = CGFloat(seconds / gameTime)
         // self.timerBar.size.width = ((self.size.width) * secondsLeft)
         // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
+    }
     
-}
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        
+        var totalCharsTyped = (countElements(textDisplay.text))
+        var lastCharTypedIndex = totalCharsTyped - 1
+        var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
+        println("\(lastCharTyped)")
+        
+        return true
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        var totalCharsTyped = (countElements(textDisplay.text))
+        var lastCharTypedIndex = totalCharsTyped - 1
+        var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
+        println("\(lastCharTyped) HELLO")
+        
+    }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
