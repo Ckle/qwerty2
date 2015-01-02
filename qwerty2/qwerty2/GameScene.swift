@@ -8,21 +8,22 @@
 
 import SpriteKit
 import UIKit
+import Foundation
 
-class GameScene: SKScene, UITextViewDelegate {
+class GameScene: SKScene {
     
     // Timer Bar
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var gameTime: Double = 10.0
-    
+
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
     // Text Display
     var textDisplay = UITextView()
-    
+
     override func didMoveToView(view: SKView) {
         
         // SKView Properties
@@ -117,18 +118,22 @@ class GameScene: SKScene, UITextViewDelegate {
         // self.timerBar.size.width = ((self.size.width) * secondsLeft)
         // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
     }
-    
-    
+
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
+        if textView == textDisplay {
+            println("HI")
+            if text == "z" {
+                println("WHOA")
+            }
+        }
         var totalCharsTyped = (countElements(textDisplay.text))
         var lastCharTypedIndex = totalCharsTyped - 1
         var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         println("\(lastCharTyped)")
-        
         return true
     }
-    
+    //**BTW other functions don't need to be called as they are already called by viewctrer
     func textViewDidChange(textView: UITextView) {
         var totalCharsTyped = (countElements(textDisplay.text))
         var lastCharTypedIndex = totalCharsTyped - 1
@@ -162,7 +167,6 @@ class GameScene: SKScene, UITextViewDelegate {
         
     }
 }
-
 
 
 

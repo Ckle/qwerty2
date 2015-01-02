@@ -26,8 +26,10 @@ extension SKNode {
     }
 }
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController  {
+    
+    var delegate:UITextView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
