@@ -14,6 +14,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     var textDisplay = UITextView()
     var textShown = UITextView()
+    var rangeOfTextShown = 0
     // Timer Bar
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
@@ -136,7 +137,7 @@ class GameScene: SKScene, UITextViewDelegate {
         var charTyped = text
         println("\(charTyped)")
         
-        if charTyped == "z" {
+        if charTyped == charRequired {
             println("WHOA")
         }
         // ** This was supposed to identify the last character typed. the above does that much quicker.
@@ -144,8 +145,18 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTypedIndex = totalCharsTyped - 1
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
+        
+        func addToRange() {
+            ++rangeOfTextShown
+        }
+        var rangeOfTextDisplay = (Range(start: textDisplay.text.startIndex, end: textDisplay.text.endIndex))
+        var testRange = textDisplay.text.substringWithRange(rangeOfTextDisplay)
+        println("TRUE + \(testRange)")
+        
+        
         return true
     }
+    
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         for touch: AnyObject in touches {
