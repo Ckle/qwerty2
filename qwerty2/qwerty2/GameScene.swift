@@ -14,7 +14,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     var textDisplay = UITextView()
     var textShown = UITextView()
-    var rangeOfText = -1
+    var rangeOfText = -1 // For the addToRange function which moves the marker of the visible UITextView
     
     // Timer Bar
     var timerBar = SKSpriteNode()
@@ -145,20 +145,26 @@ class GameScene: SKScene, UITextViewDelegate {
         
         var charTyped = text
         println("\(charTyped)")
+    
+        addToRange()
+        
+        var rangeOfTextShown = (Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText+1)))
+        var testRange = textShown.text.substringWithRange(rangeOfTextShown)
+        
+        charRequired = testRange
+        println("\(testRange)")
         
         if charTyped == charRequired {
-            println("WHOA")
+            println("CORRECT")
+        } else {
+            println("FALSE")
         }
+        
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
-        addToRange()
-        
-        var rangeOfTextShown = (Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText+1)))
-        var testRange = textShown.text.substringWithRange(rangeOfTextShown)
-        println("TRUE + \(testRange)")
         
         return true
     }
