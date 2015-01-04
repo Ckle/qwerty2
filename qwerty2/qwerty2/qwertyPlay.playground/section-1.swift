@@ -4,44 +4,52 @@ import UIKit
 
 var str = "Hello, playground"
 
-var timerBar = SKSpriteNode()
-var startTime = NSTimeInterval()
-var timer = NSTimer()
-var gameTime: Double = 10.0
-
-func didMoveToView(view: SKView) {
-    backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
+func addUIElements() {
     
-    timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-    timerBar.color = SKColor .blueColor()
-    timerBar.anchorPoint = CGPoint(x: 0,y: 1)
-    timerBar.size.width = (self.size.width)
-    timerBar.size.height = 40
-    addChild(timerBar)
+    // Type
+    let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
+    let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
     
-    startGame()
+    // Define string attributes
+    // Create a string that will be our paragraph
+    let para = NSMutableAttributedString()
+    
+    // Create locally formatted strings
+    let attrString1 = NSAttributedString(string: "Hello Swift! This is a tutorial looking at ", attributes:textFont)
+    let attrString2 = NSAttributedString(string: "attributed", attributes:italFont)
+    let attrString3 = NSAttributedString(string: " strings.", attributes:textFont)
+    
+    // Add locally formatted strings to paragraph
+    para.appendAttributedString(attrString1)
+    para.appendAttributedString(attrString2)
+    para.appendAttributedString(attrString3)
+    para.addAttribute(NSFontAttributeName, value: UIFont(name: "Georgia", size: 18.0)!, range: NSRange(location: 7, length: 5))
+    
+    // Define paragraph styling
+    let paraStyle = NSMutableParagraphStyle()
+    paraStyle.firstLineHeadIndent = 15.0
+    paraStyle.paragraphSpacingBefore = 10.0
+    
+    // Apply paragraph styles to paragraph
+    para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
+    
+    // Create UITextView
+    textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+    
+    // Bring Up Keyboard Immediately
+    textDisplay.autocorrectionType = UITextAutocorrectionType.No
+    textDisplay.becomeFirstResponder()
+    // textDisplay.hidden = true
+    textDisplay.keyboardType = UIKeyboardType.EmailAddress
+    
+    // Add string to UITextView
+    textDisplay.attributedText = para
+    textDisplay.hidden = true
+    // Add UITextView to main view
+    self.view?.addSubview(textDisplay)
+    
+    // Assign the UITextView's(textDisplay's) delegate to be the class we're in.
+    textDisplay.delegate = self
+    
 }
-
-func startGame() {
     
-    let aSelector : Selector = "updateTime"
-    timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: aSelector, userInfo: nil, repeats: true)
-    startTime = NSDate.timeIntervalSinceReferenceDate()
-    
-}
-
-func updateTime() {
-    var currentTime = NSDate.timeIntervalSinceReferenceDate()
-    var elapsedTime = currentTime - startTime
-    var seconds = gameTime - elapsedTime
-    if seconds > 0 {
-        elapsedTime -= NSTimeInterval(seconds)
-        println("\(Int(seconds))")
-    } else {
-        timer.invalidate()
-        
-        var secondsLeft = CGFloat(seconds / gameTime)
-        
-        self.timerBar.size.width = SKAction.scale
-    }
-}

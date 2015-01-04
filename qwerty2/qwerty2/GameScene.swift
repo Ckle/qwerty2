@@ -10,8 +10,10 @@ import SpriteKit
 import UIKit
 import Foundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, UITextViewDelegate {
     
+    var textDisplay = UITextView()
+    var textShown = UITextView()
     // Timer Bar
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
@@ -21,8 +23,10 @@ class GameScene: SKScene {
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
+    var charTyped = String()
+    var charRequired = String()
     // Text Display
-    var textDisplay = UITextView()
+    // var lvl1 = Levels()
 
     override func didMoveToView(view: SKView) {
         
@@ -80,6 +84,7 @@ class GameScene: SKScene {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+        textShown = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -89,9 +94,16 @@ class GameScene: SKScene {
         
         // Add string to UITextView
         textDisplay.attributedText = para
-
+        textShown.attributedText = para
+        
+        textDisplay.hidden = true
         // Add UITextView to main view
         self.view?.addSubview(textDisplay)
+        self.view?.addSubview(textShown)
+        
+        // Assign the UITextView's(textDisplay's) delegate to be the class we're in.
+        textDisplay.delegate = self
+
     }
     
     func startGame() {
@@ -121,25 +133,18 @@ class GameScene: SKScene {
 
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
-        if textView == textDisplay {
-            println("HI")
-            if text == "z" {
-                println("WHOA")
-            }
-        }
-        var totalCharsTyped = (countElements(textDisplay.text))
-        var lastCharTypedIndex = totalCharsTyped - 1
-        var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
-        println("\(lastCharTyped)")
-        return true
-    }
-    //**BTW other functions don't need to be called as they are already called by viewctrer
-    func textViewDidChange(textView: UITextView) {
-        var totalCharsTyped = (countElements(textDisplay.text))
-        var lastCharTypedIndex = totalCharsTyped - 1
-        var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
-        println("\(lastCharTyped) HELLO")
+        var charTyped = text
+        println("\(charTyped)")
         
+        if charTyped == "z" {
+            println("WHOA")
+        }
+        // ** This was supposed to identify the last character typed. the above does that much quicker.
+        //var totalCharsTyped = (countElements(textDisplay.text))
+        //var lastCharTypedIndex = totalCharsTyped - 1
+        //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
+        //println("\(lastCharTyped)")
+        return true
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
