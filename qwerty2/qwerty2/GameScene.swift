@@ -25,22 +25,30 @@ class GameScene: SKScene, UITextViewDelegate {
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
+    // Characters Typed or Required to be typed
     var charTyped = String()
     var charRequired = String()
+    
     // Text Display
     // var lvl1 = Levels()
 
+    // Score Counter
+    var correctCharsTyped = SKLabelNode()
+    var mistakesMadeLabel = SKLabelNode()
+    var mistakesMade = Int()
+    
     override func didMoveToView(view: SKView) {
         
         // SKView Properties
-        self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 242/255, green: 211/255, blue: 157/255, alpha: 1.0)
         
         // Timer Bar Initialize
         self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-        self.timerBar.color = SKColor .blueColor()
+        self.timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
         self.timerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.timerBar.size.width = (self.size.width)
         self.timerBar.size.height = 40
+        self.timerBar.zPosition = 5
         self.addChild(timerBar)
         
         startGame()
@@ -49,7 +57,14 @@ class GameScene: SKScene, UITextViewDelegate {
         // Transition Scene button
         self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
         self.addChild(titleScreenNode)
-        self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
+        
+        // Mistake Counter
+        self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
+        self.mistakesMadeLabel.fontSize = 40.00
+        self.mistakesMadeLabel.fontName = "Helvetica Neue"
+        self.mistakesMadeLabel.fontColor = SKColor.blackColor()
+        self.addChild(mistakesMadeLabel)
+        
         
         addUIElements()
         
@@ -86,7 +101,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
-        textShown = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+        textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -144,7 +159,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         var charTyped = text
-        println("\(charTyped)")
+        println("Character Typed = \(charTyped)")
     
         addToRange()
         
@@ -152,12 +167,13 @@ class GameScene: SKScene, UITextViewDelegate {
         var testRange = textShown.text.substringWithRange(rangeOfTextShown)
         
         charRequired = testRange
-        println("\(testRange)")
+        println("Character Required = \(testRange)")
         
         if charTyped == charRequired {
             println("CORRECT")
         } else {
             println("FALSE")
+            ++mistakesMade
         }
         
         // ** This was supposed to identify the last character typed. the above does that much quicker.
@@ -187,12 +203,13 @@ class GameScene: SKScene, UITextViewDelegate {
     override func willMoveFromView(view: SKView) {
         println("Removed UIElement from Scene")
         textDisplay.removeFromSuperview()
+        textShown.removeFromSuperview()
         // textDisplay.hidden = true
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        
+        self.mistakesMadeLabel.text = "\(mistakesMade)"
     }
 }
 
