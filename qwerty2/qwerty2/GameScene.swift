@@ -14,7 +14,8 @@ class GameScene: SKScene, UITextViewDelegate {
     
     var textDisplay = UITextView()
     var textShown = UITextView()
-    var rangeOfTextShown = 0
+    var rangeOfText = -1
+    
     // Timer Bar
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
@@ -97,7 +98,10 @@ class GameScene: SKScene, UITextViewDelegate {
         textDisplay.attributedText = para
         textShown.attributedText = para
         
+        // Visibility of the two UITextViews
         textDisplay.hidden = true
+        textShown.editable = false
+        
         // Add UITextView to main view
         self.view?.addSubview(textDisplay)
         self.view?.addSubview(textShown)
@@ -132,6 +136,11 @@ class GameScene: SKScene, UITextViewDelegate {
         // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
     }
 
+    func addToRange() {
+        ++rangeOfText
+        // increment the range of textShown so that the marker will move fwd
+    }
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         var charTyped = text
@@ -145,14 +154,11 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTypedIndex = totalCharsTyped - 1
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
+        addToRange()
         
-        func addToRange() {
-            ++rangeOfTextShown
-        }
-        var rangeOfTextDisplay = (Range(start: textDisplay.text.startIndex, end: textDisplay.text.endIndex))
-        var testRange = textDisplay.text.substringWithRange(rangeOfTextDisplay)
+        var rangeOfTextShown = (Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText+1)))
+        var testRange = textShown.text.substringWithRange(rangeOfTextShown)
         println("TRUE + \(testRange)")
-        
         
         return true
     }
