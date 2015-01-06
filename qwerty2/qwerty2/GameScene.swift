@@ -29,6 +29,9 @@ class GameScene: SKScene, UITextViewDelegate {
     var charTyped = String()
     var charRequired = String()
     
+    // Create a string that will be our visible UITextView Paragraph
+    let para = NSMutableAttributedString()
+    
     // Text Display
     // var lvl1 = Levels()
 
@@ -77,11 +80,9 @@ class GameScene: SKScene, UITextViewDelegate {
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
-        // Create a string that will be our paragraph
-        let para = NSMutableAttributedString()
         
         // Create locally formatted strings
-        let attrString1 = NSAttributedString(string: "Hello Swift! This is a tutorial looking at ", attributes:textFont)
+        let attrString1 = NSAttributedString(string: "Hello Swift!", attributes:textFont)
         let attrString2 = NSAttributedString(string: "attributed", attributes:italFont)
         let attrString3 = NSAttributedString(string: " strings.", attributes:textFont)
         
@@ -90,6 +91,7 @@ class GameScene: SKScene, UITextViewDelegate {
         para.appendAttributedString(attrString2)
         para.appendAttributedString(attrString3)
         para.addAttribute(NSFontAttributeName, value: UIFont(name: "Georgia", size: 18.0)!, range: NSRange(location: 7, length: 5))
+      //  para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
         
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
@@ -161,16 +163,23 @@ class GameScene: SKScene, UITextViewDelegate {
         var charTyped = text
         println("Character Typed = \(charTyped)")
     
-        addToRange()
+        addToRange() // Moves the marker forward to the next required character in visible UITextView
         
-        var rangeOfTextShown = (Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText+1)))
+        // Finding the current selection of character that needs to be typed from the visible UITextView
+        var rangeOfTextShown = Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText + 1))
         var testRange = textShown.text.substringWithRange(rangeOfTextShown)
+        
+        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
+        let nsText = testRange as NSString
+        let nsRangeOfTextShown = NSMakeRange(0, nsText.length)
+        let attributedString = NSMutableAttributedString(string: nsText)
         
         charRequired = testRange
         println("Character Required = \(testRange)")
         
         if charTyped == charRequired {
             println("CORRECT")
+            para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
         } else {
             println("FALSE")
             ++mistakesMade
@@ -212,8 +221,6 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.text = "\(mistakesMade)"
     }
 }
-
-
 
 
 
