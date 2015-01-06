@@ -169,22 +169,24 @@ class GameScene: SKScene, UITextViewDelegate {
         // Finding the current selection of character that needs to be typed from the visible UITextView
         var rangeOfTextShown = Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText + 1))
         var testRange = textShown.text.substringWithRange(rangeOfTextShown)
-        
-        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
-        let nsText = testRange as NSString
-        let nsRangeOfTextShown = NSMakeRange(0, nsText.length)
-        let attributedString = NSMutableAttributedString(string: nsText)
-        
         charRequired = testRange
         println("Character Required = \(testRange)")
         
+        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
+        let nsText = textShown.text as NSString
+        let nsRangeOfTextShown = NSMakeRange(rangeOfText, 1)
+        // let attributedString = NSMutableAttributedString(string: nsText) 
+        // Above not needed because i am using para as the attributed string
+        
         if charTyped == charRequired {
             println("CORRECT")
-            para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: nsRangeOfTextShown)
+            para.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0), range: nsRangeOfTextShown)
             textShown.attributedText = para
         } else {
             println("FALSE")
             ++mistakesMade
+            para.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0), range: nsRangeOfTextShown)
+            textShown.attributedText = para
         }
         
         // ** This was supposed to identify the last character typed. the above does that much quicker.
