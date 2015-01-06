@@ -12,15 +12,18 @@ import Foundation
 
 class GameScene: SKScene, UITextViewDelegate {
     
+    // --------------------------- GAME VARIABLEs
+    
+    // UITextViews
     var textDisplay = UITextView()
     var textShown = UITextView()
-    var rangeOfText = -1 // For the addToRange function which moves the selected character of the visible UITextView
+    var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
     
     // Timer Bar
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
     var timer = NSTimer()
-    var gameTime: Double = 10.0
+    var gameTime: Double = 30.0
 
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
@@ -40,6 +43,11 @@ class GameScene: SKScene, UITextViewDelegate {
     var mistakesMadeLabel = SKLabelNode()
     var mistakesMade = Int()
     
+    // Game Over Node
+    var gameOverLayer = SKNode()
+    
+    // --------------------------- GAME METHODS
+    
     override func didMoveToView(view: SKView) {
         
         // SKView Properties
@@ -54,9 +62,6 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBar.zPosition = 5
         self.addChild(timerBar)
         
-        startGame()
-        self.timerBar.runAction(SKAction.scaleXTo(0, duration: gameTime))
-        
         // Transition Scene button
         self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
         self.addChild(titleScreenNode)
@@ -68,8 +73,15 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.addChild(mistakesMadeLabel)
         
-        
+        // Add UITextViews
         addUIElements()
+        
+        // Game Over Screen
+        gameOverLayer.zPosition = 100
+        gameOverLayer.alpha = 0
+        self.addChild(gameOverLayer)
+        
+        startGame()
         
     }
     
@@ -91,7 +103,6 @@ class GameScene: SKScene, UITextViewDelegate {
         para.appendAttributedString(attrString2)
         para.appendAttributedString(attrString3)
         para.addAttribute(NSFontAttributeName, value: UIFont(name: "Georgia", size: 18.0)!, range: NSRange(location: 7, length: 5))
-       // para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
         
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
@@ -101,19 +112,22 @@ class GameScene: SKScene, UITextViewDelegate {
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         
+        // Make the paragraph the default colour
+        para.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: para.length))
+        
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-200))
+        textShown.backgroundColor = UIColor(netHex:0x9C5960)
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
         textDisplay.becomeFirstResponder()
-        // textDisplay.hidden = true
-        textDisplay.keyboardType = UIKeyboardType.EmailAddress
+        textDisplay.keyboardType = UIKeyboardType.Default
         
         // Add string to UITextView
         textDisplay.attributedText = para
-        textShown.attributedText = para //SOMETHING HERE IS NOT ALLOWING PARA TO CHANGE COLORS AFTER
+        textShown.attributedText = para
         
         // Visibility of the two UITextViews
         textDisplay.hidden = true
@@ -131,9 +145,23 @@ class GameScene: SKScene, UITextViewDelegate {
     
     func startGame() {
         
+        // Starts Timer
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
+        self.timerBar.size.width = (self.size.width)
+        self.timerBar.runAction(SKAction.scaleXTo(0, duration: gameTime))
+        
+        // Sets the first character required to 0
+        rangeOfText = -1
+        
+        // Sets mistakes to 0
+        mistakesMade = 0
+        
+        // Reset Paragraph to default color
+        para.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: para.length))
+        para.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location: 0, length: para.length))
+        textShown.attributedText = para
         
     }
     
@@ -164,7 +192,8 @@ class GameScene: SKScene, UITextViewDelegate {
         var charTyped = text
         println("Character Typed = \(charTyped)")
     
-        addToRange() // Moves the marker forward to the next required character in visible UITextView
+        // Moves the marker forward to the next required character in visible UITextView
+        addToRange()
         
         // Finding the current selection of character that needs to be typed from the visible UITextView
         var rangeOfTextShown = Range(start: advance(textShown.text.startIndex, rangeOfText), end: advance(textShown.text.startIndex, rangeOfText + 1))
@@ -182,10 +211,12 @@ class GameScene: SKScene, UITextViewDelegate {
             println("CORRECT")
             para.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0), range: nsRangeOfTextShown)
             textShown.attributedText = para
+            // have to make sure to add the attributed text string to the UITextView or it won't show
         } else {
             println("FALSE")
             ++mistakesMade
             para.addAttribute(NSForegroundColorAttributeName, value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0), range: nsRangeOfTextShown)
+            para.addAttribute(NSBackgroundColorAttributeName, value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5), range: nsRangeOfTextShown)
             textShown.attributedText = para
         }
         
@@ -198,8 +229,14 @@ class GameScene: SKScene, UITextViewDelegate {
         return true
     }
     
+    func gameOver() {
+        
+        var gameOverScreenBg = SKSpriteNode()
+
+    }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+       
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             if self.nodeAtPoint(location) == self.titleScreenNode {
@@ -214,10 +251,11 @@ class GameScene: SKScene, UITextViewDelegate {
     }
     
     override func willMoveFromView(view: SKView) {
-        println("Removed UIElement from Scene")
+        
+        // Remove these UITextViews from the SKView
         textDisplay.removeFromSuperview()
         textShown.removeFromSuperview()
-        // textDisplay.hidden = true
+
     }
     
     override func update(currentTime: CFTimeInterval) {
