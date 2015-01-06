@@ -91,7 +91,7 @@ class GameScene: SKScene, UITextViewDelegate {
         para.appendAttributedString(attrString2)
         para.appendAttributedString(attrString3)
         para.addAttribute(NSFontAttributeName, value: UIFont(name: "Georgia", size: 18.0)!, range: NSRange(location: 7, length: 5))
-      //  para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
+       // para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
         
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
@@ -103,7 +103,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
-        textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+        textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-200))
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -111,12 +111,14 @@ class GameScene: SKScene, UITextViewDelegate {
         // textDisplay.hidden = true
         textDisplay.keyboardType = UIKeyboardType.EmailAddress
         
+        
         // Add string to UITextView
         textDisplay.attributedText = para
-        textShown.attributedText = para
+        textShown.attributedText = para //SOMETHING HERE IS NOT ALLOWING PARA TO CHANGE COLORS AFTER
         
         // Visibility of the two UITextViews
         textDisplay.hidden = true
+        textShown.hidden = false
         textShown.editable = false
         
         // Add UITextView to main view
