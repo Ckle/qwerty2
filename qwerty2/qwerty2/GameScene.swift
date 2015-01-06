@@ -14,7 +14,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     var textDisplay = UITextView()
     var textShown = UITextView()
-    var rangeOfText = -1 // For the addToRange function which moves the marker of the visible UITextView
+    var rangeOfText = -1 // For the addToRange function which moves the selected character of the visible UITextView
     
     // Timer Bar
     var timerBar = SKSpriteNode()
@@ -111,7 +111,6 @@ class GameScene: SKScene, UITextViewDelegate {
         // textDisplay.hidden = true
         textDisplay.keyboardType = UIKeyboardType.EmailAddress
         
-        
         // Add string to UITextView
         textDisplay.attributedText = para
         textShown.attributedText = para //SOMETHING HERE IS NOT ALLOWING PARA TO CHANGE COLORS AFTER
@@ -181,7 +180,8 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if charTyped == charRequired {
             println("CORRECT")
-            para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSRange(location: 7, length: 5))
+            para.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: nsRangeOfTextShown)
+            textShown.attributedText = para
         } else {
             println("FALSE")
             ++mistakesMade
