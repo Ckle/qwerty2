@@ -43,16 +43,24 @@ class GameScene: SKScene, UITextViewDelegate {
     var mistakesMadeLabel = SKLabelNode()
     var mistakesMade = Int()
     
-    // Game Over Node
-    var gameOverLayer = SKNode()
+    // Game Layers
+    let gameLayer = SKNode()
+    let gameObjects = SKNode()
+    let gameMenu = SKNode()
+    let gameOverLayer = SKNode()
     
-    // --------------------------- GAME METHODS
+    // -------------------------- INITs
     
-    override func didMoveToView(view: SKView) {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder) is not used in this app")
+    }
+    
+    override init(size: CGSize) {
+    super.init(size: size)
         
         // SKView Properties
         self.backgroundColor = UIColor(red: 242/255, green: 211/255, blue: 157/255, alpha: 1.0)
-        
+
         // Timer Bar Initialize
         self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
@@ -76,10 +84,24 @@ class GameScene: SKScene, UITextViewDelegate {
         // Add UITextViews
         addUIElements()
         
+        // Layers
+        gameLayer.hidden = true
+        addChild(gameLayer)
+        
         // Game Over Screen
         gameOverLayer.zPosition = 100
         gameOverLayer.alpha = 0
-        self.addChild(gameOverLayer)
+        gameLayer.addChild(gameOverLayer)
+        
+        
+    }
+    
+    // --------------------------- GAME METHODS
+    
+    override func didMoveToView(view: SKView) {
+        
+        // Add UITextViews
+        addUIElements()
         
         startGame()
         
