@@ -49,11 +49,8 @@ class GameScene: SKScene, UITextViewDelegate {
     let gameMenu = SKNode()
     let gameOverLayer = SKNode()
     
-    // -------------------------- INITs
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder) is not used in this app")
-    }
+    // -------------------------- INITs
     
     override init(size: CGSize) {
     super.init(size: size)
@@ -76,13 +73,11 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Mistake Counter
         self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
+        self.mistakesMadeLabel.zPosition = 100
         self.mistakesMadeLabel.fontSize = 40.00
         self.mistakesMadeLabel.fontName = "Helvetica Neue"
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.addChild(mistakesMadeLabel)
-        
-        // Add UITextViews
-        addUIElements()
         
         // Layers
         gameLayer.hidden = true
@@ -93,7 +88,10 @@ class GameScene: SKScene, UITextViewDelegate {
         gameOverLayer.alpha = 0
         gameLayer.addChild(gameOverLayer)
         
-        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // --------------------------- GAME METHODS
@@ -110,13 +108,13 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 18.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
-        let attrString1 = NSAttributedString(string: "Hello Swift!", attributes:textFont)
+        let attrString1 = NSAttributedString(string: "Hello Swift! THERE IS lots of text here too long for the UITextView HAHAH AHAHA Hahahahahah ahahaha hahaha", attributes:textFont)
         let attrString2 = NSAttributedString(string: "attributed", attributes:italFont)
         let attrString3 = NSAttributedString(string: " strings.", attributes:textFont)
         
@@ -242,6 +240,11 @@ class GameScene: SKScene, UITextViewDelegate {
             textShown.attributedText = para
         }
         
+        if mistakesMade == 3 || gameTime == 0 {
+            //GameViewController().gameOverPanel.image = UIImage(named: "Spaceship")
+            GameViewController().showGameOver()
+        }
+        
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
@@ -249,12 +252,6 @@ class GameScene: SKScene, UITextViewDelegate {
         //println("\(lastCharTyped)")
         
         return true
-    }
-    
-    func gameOver() {
-        
-        var gameOverScreenBg = SKSpriteNode()
-
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {

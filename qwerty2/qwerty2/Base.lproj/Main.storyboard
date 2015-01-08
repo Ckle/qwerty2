@@ -15,8 +15,23 @@
                     <view key="view" contentMode="scaleToFill" id="bdc-N1-crn" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.59999999999999964" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zEl-bN-IJe">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.49303805439999998" green="0.67000001669999998" blue="0.67000001669999998" alpha="1" colorSpace="deviceRGB"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1YI-V6-41x" firstAttribute="top" secondItem="zEl-bN-IJe" secondAttribute="bottom" id="8TO-hS-n3u"/>
+                            <constraint firstAttribute="trailing" secondItem="zEl-bN-IJe" secondAttribute="trailing" id="MYH-eJ-XKC"/>
+                            <constraint firstItem="zEl-bN-IJe" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" id="qPL-x5-4UP"/>
+                            <constraint firstItem="zEl-bN-IJe" firstAttribute="top" secondItem="bdc-N1-crn" secondAttribute="top" id="xkE-dl-WP9"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="gameOverPanel" destination="zEl-bN-IJe" id="7ZS-uJ-r3q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
