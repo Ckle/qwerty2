@@ -12,15 +12,8 @@ import Foundation
 
 class GameViewController: UIViewController  {
     
-    var tapGestureRecognizer: UITapGestureRecognizer!
-    var gameScene: GameScene!
-    
-    @IBOutlet weak var gameOverPanel: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        gameOverPanel.hidden = false
         
         if let scene = TitleScene.unarchiveFromFile("TitleScene") as? TitleScene {
             // Configure the view.
@@ -37,25 +30,6 @@ class GameViewController: UIViewController  {
             
             skView.presentScene(scene)
         }
-    }
-    
-    func showGameOver() {
-        gameOverPanel.hidden = false
-        self.view.userInteractionEnabled = false
-        
-        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hideGameOver")
-        view.addGestureRecognizer(tapGestureRecognizer)
-        
-    }
-    
-    func hideGameOver() {
-        view.removeGestureRecognizer(tapGestureRecognizer)
-        tapGestureRecognizer = nil
-        
-        gameOverPanel.hidden = true
-        self.view.userInteractionEnabled = true
-        
-        gameScene.startGame()
     }
     
     override func shouldAutorotate() -> Bool {
