@@ -107,13 +107,13 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
-        let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
+        let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
-        let attrString1 = NSAttributedString(string: "Hello my name is Dug. ", attributes:textFont)
+        let attrString1 = NSAttributedString(string: " Hello my name is Dug. ", attributes:textFont)
         let attrString2 = NSAttributedString(string: "I am a Pug", attributes:italFont)
         let attrString3 = NSAttributedString(string: "- said Dug the Pug", attributes:textFont)
         //** Final string has to have an extra space at the end to account for a weird crash that happens when the last character is typed. See the textView method for more details.
@@ -132,7 +132,14 @@ class GameScene: SKScene, UITextViewDelegate {
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
         
         // Make the paragraph the default colour
-        para.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: para.length))
+        para.addAttribute(
+            NSForegroundColorAttributeName,
+            value: UIColor.blackColor(),
+            range: NSRange(location: 0, length: para.length))
+        para.addAttribute(
+            NSUnderlineStyleAttributeName,
+            value: NSUnderlineStyle.StyleDouble.rawValue,
+            range: NSMakeRange(1, 1))
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
@@ -173,7 +180,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
         
         // Sets the first character required to 0
-        rangeOfText = -1
+        rangeOfText =  0
         
         // Sets mistakes to 0
         mistakesMade = 0
@@ -266,6 +273,16 @@ class GameScene: SKScene, UITextViewDelegate {
         // let attributedString = NSMutableAttributedString(string: nsText) 
         // Above not needed because i am using para as the attributed string
         
+        
+        // Creates the Underline. Removes first underline
+        para.addAttribute(
+            NSUnderlineStyleAttributeName,
+            value: NSUnderlineStyle.StyleDouble.rawValue,
+            range: NSMakeRange((rangeOfText + 1), 1))
+        para.removeAttribute(
+            NSUnderlineStyleAttributeName,
+            range: NSMakeRange((rangeOfText), 1))
+        
         if charTyped == charRequired {
            
             println("CORRECT")
@@ -273,10 +290,6 @@ class GameScene: SKScene, UITextViewDelegate {
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
-            para.addAttribute(
-                NSUnderlineStyleAttributeName,
-                value: NSUnderlineStyle.StyleDouble.rawValue,
-                range: NSMakeRange(rangeOfText, (rangeOfText + 1)))
             textShown.attributedText = para
             // have to make sure to add the attributed text string to the UITextView or it won't show
         
@@ -292,10 +305,6 @@ class GameScene: SKScene, UITextViewDelegate {
                 NSBackgroundColorAttributeName,
                 value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                 range: nsRangeOfTextShown)
-            para.addAttribute(
-                NSUnderlineStyleAttributeName,
-                value: NSUnderlineStyle.StyleDouble.rawValue,
-                range: NSMakeRange(rangeOfText, (rangeOfText + 2)))
             textShown.attributedText = para
         }
         
