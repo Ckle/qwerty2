@@ -114,8 +114,8 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create locally formatted strings
         let attrString1 = NSAttributedString(string: "Hello my name is Dug. ", attributes:textFont)
-        let attrString2 = NSAttributedString(string: "I am a Pug.", attributes:italFont)
-        let attrString3 = NSAttributedString(string: "- said Dug the Pug nonchalantly. ", attributes:textFont)
+        let attrString2 = NSAttributedString(string: "I am a Pug", attributes:italFont)
+        let attrString3 = NSAttributedString(string: "- said Dug the Pug", attributes:textFont)
         //** Final string has to have an extra space at the end to account for a weird crash that happens when the last character is typed. See the textView method for more details.
         
         // Add locally formatted strings to paragraph
@@ -222,7 +222,8 @@ class GameScene: SKScene, UITextViewDelegate {
     }
 
     func addToRange() {
-        ++rangeOfText
+        
+        rangeOfText++
         // increment the range of textShown so that the marker will move fwd
     }
     
@@ -272,6 +273,10 @@ class GameScene: SKScene, UITextViewDelegate {
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
+            para.addAttribute(
+                NSUnderlineStyleAttributeName,
+                value: NSUnderlineStyle.StyleDouble.rawValue,
+                range: NSMakeRange(rangeOfText, (rangeOfText + 1)))
             textShown.attributedText = para
             // have to make sure to add the attributed text string to the UITextView or it won't show
         
@@ -287,6 +292,10 @@ class GameScene: SKScene, UITextViewDelegate {
                 NSBackgroundColorAttributeName,
                 value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                 range: nsRangeOfTextShown)
+            para.addAttribute(
+                NSUnderlineStyleAttributeName,
+                value: NSUnderlineStyle.StyleDouble.rawValue,
+                range: NSMakeRange(rangeOfText, (rangeOfText + 2)))
             textShown.attributedText = para
         }
         
