@@ -12,7 +12,7 @@ import SpriteKit
 class TitleScene: SKScene {
     
     let greenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
-    let playButton = SKLabelNode(fontNamed: "Play")
+    let playButton = SKLabelNode(fontNamed: "Helvetica Neue")
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */

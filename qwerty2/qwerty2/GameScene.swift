@@ -49,6 +49,16 @@ class GameScene: SKScene, UITextViewDelegate {
     let gameMenu = SKNode()
     let gameOverLayer = SKNode()
     
+    var gameOver = GameOverScene()
+    
+    // Paragraph Phrases
+    var attrString1 = NSAttributedString()
+    var attrString2 = NSAttributedString()
+    var attrString3 = NSAttributedString()
+    var attrString4 = NSAttributedString()
+    var attrString5 = NSAttributedString()
+    var attrString6 = NSAttributedString()
+    
     // -------------------------- INITs
     
     override init(size: CGSize) {
@@ -107,26 +117,34 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
-        let attrString1 = NSAttributedString(string: " Hello my name is Dug. ", attributes:textFont)
-        let attrString2 = NSAttributedString(string: "I am a Pug", attributes:italFont)
-        let attrString3 = NSAttributedString(string: "- said Dug the Pug", attributes:textFont)
+        attrString1 = NSAttributedString(string: " My name is Dug. ", attributes:textFont)
+        attrString2 = NSAttributedString(string: "My male man, who has the name “Jake”, ", attributes:textFont)
+        attrString3 = NSAttributedString(string: "recently started meeting frequently with a female man. ", attributes:textFont)
+        attrString4 = NSAttributedString(string: "I know it is a female man because of her fur.", attributes:textFont)
+        attrString5 = NSAttributedString(string: "It is long like an English Sheepdog, ", attributes:textFont)
+        attrString6 = NSAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes:textFont)
+        
         //** Final string has to have an extra space at the end to account for a weird crash that happens when the last character is typed. See the textView method for more details.
         
         // Add locally formatted strings to paragraph
         para.appendAttributedString(attrString1)
         para.appendAttributedString(attrString2)
         para.appendAttributedString(attrString3)
-        
+        para.appendAttributedString(attrString4)
+        para.appendAttributedString(attrString5)
+        para.appendAttributedString(attrString6)
+    
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.firstLineHeadIndent = 15.0
         paraStyle.paragraphSpacingBefore = 10.0
+        paraStyle.lineSpacing = 100.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
@@ -144,7 +162,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-200))
-        textShown.backgroundColor = UIColor(netHex:0x9C5960)
+        textShown.backgroundColor = UIColor.clearColor()
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -172,7 +190,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (20-15+1)) + 15)
+        gameTime = CGFloat((arc4random() % (18-15+1)) + 15)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -226,7 +244,22 @@ class GameScene: SKScene, UITextViewDelegate {
         scene.size = skView.bounds.size
         skView.presentScene(scene)
         timer.invalidate()
+        gameOver.didLose()
     }
+    
+    func levelWin() {
+        
+        println("WIN")
+        var scene = GameOverScene(size: self.size)
+        let skView = self.view as SKView!
+        skView.ignoresSiblingOrder = true
+        scene.scaleMode = .ResizeFill
+        scene.size = skView.bounds.size
+        skView.presentScene(scene)
+        timer.invalidate()
+        gameOver.didWin()
+    }
+
 
     func addToRange() {
         
@@ -237,7 +270,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         var charTyped = text // Character that was typed
-        var totalCharsShown = (countElements(textShown.text)) - 1 // Used to detect win condition
+        var totalCharsShown = (countElements(textShown.text)) - 2 // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
         
         // Moves the marker forward to the next required character in visible UITextView
@@ -253,13 +286,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         } else if totalCharsShown == rangeOfText {
             
-            println("WIN")
-            var scene = GameOverScene(size: self.size)
-            let skView = self.view as SKView!
-            skView.ignoresSiblingOrder = true
-            scene.scaleMode = .ResizeFill
-            scene.size = skView.bounds.size
-            skView.presentScene(scene)
+            levelWin()
         }
         
         println("Character Typed = \(charTyped)")
@@ -268,8 +295,8 @@ class GameScene: SKScene, UITextViewDelegate {
         println("Total Characters = \(totalCharsShown)")
         
         // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
-        let nsText = textShown.text as NSString
         let nsRangeOfTextShown = NSMakeRange(rangeOfText, 1)
+        // let nsText = textShown.text as NSString
         // let attributedString = NSMutableAttributedString(string: nsText) 
         // Above not needed because i am using para as the attributed string
         
@@ -286,17 +313,19 @@ class GameScene: SKScene, UITextViewDelegate {
         if charTyped == charRequired {
            
             println("CORRECT")
+            // Changes the color of the text if correct letter was typed
             para.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
-            textShown.attributedText = para
             // have to make sure to add the attributed text string to the UITextView or it won't show
+            textShown.attributedText = para
         
         } else {
             
             println("FALSE")
             ++mistakesMade
+            // Changes the color of the text if incorrect letter was typed
             para.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
@@ -308,6 +337,7 @@ class GameScene: SKScene, UITextViewDelegate {
             textShown.attributedText = para
         }
         
+        textShown.scrollRangeToVisible(NSMakeRange(200, 5))
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
