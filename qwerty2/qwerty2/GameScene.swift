@@ -117,13 +117,13 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
-        attrString1 = NSAttributedString(string: " My name is Dug. ", attributes:textFont)
+        attrString1 = NSAttributedString(string: " My name is Dug.\r", attributes:textFont)
         attrString2 = NSAttributedString(string: "My male man, who has the name “Jake”, ", attributes:textFont)
         attrString3 = NSAttributedString(string: "recently started meeting frequently with a female man. ", attributes:textFont)
         attrString4 = NSAttributedString(string: "I know it is a female man because of her fur.", attributes:textFont)
@@ -142,9 +142,9 @@ class GameScene: SKScene, UITextViewDelegate {
     
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
-        paraStyle.firstLineHeadIndent = 15.0
         paraStyle.paragraphSpacingBefore = 10.0
-        paraStyle.lineSpacing = 100.0
+        
+        // paraStyle.lineSpacing = 100.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
@@ -337,7 +337,8 @@ class GameScene: SKScene, UITextViewDelegate {
             textShown.attributedText = para
         }
         
-        textShown.scrollRangeToVisible(NSMakeRange(200, 5))
+        // textShown.scrollRangeToVisible(NSMakeRange(200, 5))
+        
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
