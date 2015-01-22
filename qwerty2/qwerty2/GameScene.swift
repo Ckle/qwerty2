@@ -124,18 +124,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Define string attributes
         
         // Create locally formatted strings
-<<<<<<< HEAD
-        attrString1 = NSAttributedString(string: " My name is Dug. My male man, who has the name Jake, recently started meeting frequently with a female man. I know it is a female man because of her fur. It is long like an English Sheepdog, except that an English Sheepdog is beautiful.", attributes:textFont)
-=======
-        attrString1 = NSAttributedString(string: " My name is Dug.\r", attributes:textFont)
-        attrString2 = NSAttributedString(string: "My male man, who has the name “Jake”, ", attributes:textFont)
-        attrString3 = NSAttributedString(string: "recently started meeting frequently with a female man. ", attributes:textFont)
-        attrString4 = NSAttributedString(string: "I know it is a female man because of her fur.", attributes:textFont)
-        attrString5 = NSAttributedString(string: "It is long like an English Sheepdog, ", attributes:textFont)
-        attrString6 = NSAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes:textFont)
->>>>>>> parent of 40e77d0... Revert bc7e255..95fbc2f
-        
-        //** Final string has to have an extra space at the end to account for a weird crash that happens when the last character is typed. See the textView method for more details.
+        attrString1 = NSAttributedString(string: "My name is Dug. My male man, who has the name Jake recently started meeting frequently with a female man. It is long like an English Sheepdog, except that an English Sheepdog is beautiful. ", attributes:textFont)
         
         // Add locally formatted strings to paragraph
         para.appendAttributedString(attrString1)
@@ -143,8 +132,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.paragraphSpacingBefore = 10.0
-        
-        // paraStyle.lineSpacing = 100.0
+        paraStyle.lineSpacing = 100.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
@@ -157,11 +145,11 @@ class GameScene: SKScene, UITextViewDelegate {
         para.addAttribute(
             NSUnderlineStyleAttributeName,
             value: NSUnderlineStyle.StyleDouble.rawValue,
-            range: NSMakeRange(1, 1))
+            range: NSMakeRange(0, 1))
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
-        textShown = UITextView(frame: CGRect(x: 0, y: 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-200))
+        textShown = UITextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown.backgroundColor = UIColor.clearColor()
         
         // Bring Up Keyboard Immediately
@@ -263,12 +251,9 @@ class GameScene: SKScene, UITextViewDelegate {
 
     func addToRange() {
         
-        if rangeOfText < (totalCharsShown - 1) {
-        
             // increment the range of textShown so that the marker will move fwd
             rangeOfText++
-        
-        }
+
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
@@ -277,12 +262,15 @@ class GameScene: SKScene, UITextViewDelegate {
         totalCharsShown = (countElements(textShown.text)) // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
         
-        // Moves the marker forward to the next required character in visible UITextView
-        addToRange()
-        
+        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
+        let nsRangeOfTextShown = NSMakeRange(rangeOfText, 1)
+        // let nsText = textShown.text as NSString
+        // let attributedString = NSMutableAttributedString(string: nsText)
+        // Above not needed because i am using para as the attributed string
+       
+        // logic for underline changing along with incrementing text range to determine character required
         if totalCharsShown > (rangeOfText + 1) {
             
-            println("AOJ")
             // Finding the current selection of character that needs to be typed from the visible UITextView
             var rangeOfTextShown: Range = Range(
                 start: advance(textShown.text.startIndex, rangeOfText),
@@ -297,8 +285,16 @@ class GameScene: SKScene, UITextViewDelegate {
             para.removeAttribute(
                 NSUnderlineStyleAttributeName,
                 range: NSMakeRange((rangeOfText), 1))
+            
+            // Scroll down when out of view
+          //  textShown.scrollRangeToVisible(NSMakeRange((rangeOfText + 1), 1))
         
         } else {
+            
+            var rangeOfTextShown: Range = Range(
+                start: advance(textShown.text.startIndex, rangeOfText),
+                end: advance(textShown.text.startIndex, rangeOfText + 1))
+            charRequired = textShown.text.substringWithRange(rangeOfTextShown)
             
             levelWin()
         }
@@ -308,12 +304,8 @@ class GameScene: SKScene, UITextViewDelegate {
         println("Range of Text = \(rangeOfText)")
         println("Total Characters = \(totalCharsShown)")
         
-        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
-        let nsRangeOfTextShown = NSMakeRange(rangeOfText, 1)
-        // let nsText = textShown.text as NSString
-        // let attributedString = NSMutableAttributedString(string: nsText) 
-        // Above not needed because i am using para as the attributed string
         
+        // Logic for matching character typed to character required
         if charTyped == charRequired {
            
             println("CORRECT")
@@ -325,7 +317,7 @@ class GameScene: SKScene, UITextViewDelegate {
             // have to make sure to add the attributed text string to the UITextView or it won't show
             textShown.attributedText = para
         
-        } else {
+        } else if charTyped != charRequired {
             
             println("FALSE")
             ++mistakesMade
@@ -339,15 +331,31 @@ class GameScene: SKScene, UITextViewDelegate {
                 value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                 range: nsRangeOfTextShown)
             textShown.attributedText = para
+            
+        } else {
+            
+            para.addAttribute(
+                NSForegroundColorAttributeName,
+                value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+                range: nsRangeOfTextShown)
         }
-        
-        // textShown.scrollRangeToVisible(NSMakeRange(200, 5))
         
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
+        
+        if rangeOfText < (totalCharsShown - 1) {
+        
+            // Moves the marker forward to the next required character in visible UITextView
+            addToRange()
+        }
+        
+        if mistakesMade == 3 {
+            
+            levelFail()
+        }
         
         return true
     }
@@ -380,10 +388,6 @@ class GameScene: SKScene, UITextViewDelegate {
         /* Called before each frame is rendered */
         self.mistakesMadeLabel.text = "\(mistakesMade)"
         
-        if mistakesMade == 3 {
-            
-            levelFail()
-        }
     }
 }
 
