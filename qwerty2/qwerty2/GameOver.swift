@@ -22,6 +22,8 @@ class GameOverScene: SKScene {
         youLoseNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 100)
         youWinNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 100)
         
+        youLoseNode.hidden = true
+        youWinNode.hidden = true
         youLoseNode.text = "You Lose"
         youWinNode.text = "You Win!"
         

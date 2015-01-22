@@ -17,6 +17,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // UITextViews
     var textDisplay = UITextView()
     var textShown = UITextView()
+    var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
     
     // Timer Bar
@@ -117,34 +118,33 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
-        attrString1 = NSAttributedString(string: " My name is Dug. ", attributes:textFont)
+<<<<<<< HEAD
+        attrString1 = NSAttributedString(string: " My name is Dug. My male man, who has the name Jake, recently started meeting frequently with a female man. I know it is a female man because of her fur. It is long like an English Sheepdog, except that an English Sheepdog is beautiful.", attributes:textFont)
+=======
+        attrString1 = NSAttributedString(string: " My name is Dug.\r", attributes:textFont)
         attrString2 = NSAttributedString(string: "My male man, who has the name “Jake”, ", attributes:textFont)
         attrString3 = NSAttributedString(string: "recently started meeting frequently with a female man. ", attributes:textFont)
         attrString4 = NSAttributedString(string: "I know it is a female man because of her fur.", attributes:textFont)
         attrString5 = NSAttributedString(string: "It is long like an English Sheepdog, ", attributes:textFont)
         attrString6 = NSAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes:textFont)
+>>>>>>> parent of 40e77d0... Revert bc7e255..95fbc2f
         
         //** Final string has to have an extra space at the end to account for a weird crash that happens when the last character is typed. See the textView method for more details.
         
         // Add locally formatted strings to paragraph
         para.appendAttributedString(attrString1)
-        para.appendAttributedString(attrString2)
-        para.appendAttributedString(attrString3)
-        para.appendAttributedString(attrString4)
-        para.appendAttributedString(attrString5)
-        para.appendAttributedString(attrString6)
     
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
-        paraStyle.firstLineHeadIndent = 15.0
         paraStyle.paragraphSpacingBefore = 10.0
-        paraStyle.lineSpacing = 100.0
+        
+        // paraStyle.lineSpacing = 100.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
@@ -263,28 +263,42 @@ class GameScene: SKScene, UITextViewDelegate {
 
     func addToRange() {
         
-        rangeOfText++
-        // increment the range of textShown so that the marker will move fwd
+        if rangeOfText < (totalCharsShown - 1) {
+        
+            // increment the range of textShown so that the marker will move fwd
+            rangeOfText++
+        
+        }
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         var charTyped = text // Character that was typed
-        var totalCharsShown = (countElements(textShown.text)) - 2 // Used to detect win condition
+        totalCharsShown = (countElements(textShown.text)) // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
         
         // Moves the marker forward to the next required character in visible UITextView
         addToRange()
         
-        if totalCharsShown != rangeOfText {
+        if totalCharsShown > (rangeOfText + 1) {
             
+            println("AOJ")
             // Finding the current selection of character that needs to be typed from the visible UITextView
             var rangeOfTextShown: Range = Range(
                 start: advance(textShown.text.startIndex, rangeOfText),
                 end: advance(textShown.text.startIndex, rangeOfText + 1))
             charRequired = textShown.text.substringWithRange(rangeOfTextShown)
+            
+            // Creates the Underline. Removes first underline
+            para.addAttribute(
+                NSUnderlineStyleAttributeName,
+                value: NSUnderlineStyle.StyleDouble.rawValue,
+                range: NSMakeRange((rangeOfText + 1), 1))
+            para.removeAttribute(
+                NSUnderlineStyleAttributeName,
+                range: NSMakeRange((rangeOfText), 1))
         
-        } else if totalCharsShown == rangeOfText {
+        } else {
             
             levelWin()
         }
@@ -299,16 +313,6 @@ class GameScene: SKScene, UITextViewDelegate {
         // let nsText = textShown.text as NSString
         // let attributedString = NSMutableAttributedString(string: nsText) 
         // Above not needed because i am using para as the attributed string
-        
-        
-        // Creates the Underline. Removes first underline
-        para.addAttribute(
-            NSUnderlineStyleAttributeName,
-            value: NSUnderlineStyle.StyleDouble.rawValue,
-            range: NSMakeRange((rangeOfText + 1), 1))
-        para.removeAttribute(
-            NSUnderlineStyleAttributeName,
-            range: NSMakeRange((rangeOfText), 1))
         
         if charTyped == charRequired {
            
@@ -337,7 +341,8 @@ class GameScene: SKScene, UITextViewDelegate {
             textShown.attributedText = para
         }
         
-        textShown.scrollRangeToVisible(NSMakeRange(200, 5))
+        // textShown.scrollRangeToVisible(NSMakeRange(200, 5))
+        
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
