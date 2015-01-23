@@ -132,7 +132,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.paragraphSpacingBefore = 10.0
-        paraStyle.lineSpacing = 100.0
+        // paraStyle.lineSpacing = 100.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
