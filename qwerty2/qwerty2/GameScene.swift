@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 Coffee Digital. All rights reserved.
 //
 
-import SpriteKit
+
 import UIKit
 import Foundation
+import SpriteKit
 
 class GameScene: SKScene, UITextViewDelegate {
     
@@ -54,11 +55,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // Paragraph Phrases
     var attrString1 = NSAttributedString()
-    var attrString2 = NSAttributedString()
-    var attrString3 = NSAttributedString()
-    var attrString4 = NSAttributedString()
-    var attrString5 = NSAttributedString()
-    var attrString6 = NSAttributedString()
+    var paragraph = NSMutableArray()
     
     // -------------------------- INITs
     
@@ -132,7 +129,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Define paragraph styling
         let paraStyle = NSMutableParagraphStyle()
         paraStyle.paragraphSpacingBefore = 10.0
-        // paraStyle.lineSpacing = 100.0
+        //paraStyle.lineSpacing = 50.0
         
         // Apply paragraph styles to paragraph
         para.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: para.length))
@@ -213,7 +210,7 @@ class GameScene: SKScene, UITextViewDelegate {
         } else {
             
             timer.invalidate()
-            levelFail()
+            gameEnded(false)
         }
 
         // **Keep for learning purposes**
@@ -222,32 +219,32 @@ class GameScene: SKScene, UITextViewDelegate {
         // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
     }
     
-    func levelFail() {
+    func gameEnded(didWin: Bool) {
         
-        println("FAIL")
-        var scene = GameOverScene(size: self.size)
-        let skView = self.view as SKView!
-        skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
-        scene.size = skView.bounds.size
-        skView.presentScene(scene)
-        timer.invalidate()
-        gameOver.didLose()
-    }
-    
-    func levelWin() {
-        
-        println("WIN")
-        var scene = GameOverScene(size: self.size)
-        let skView = self.view as SKView!
-        skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
-        scene.size = skView.bounds.size
-        skView.presentScene(scene)
-        timer.invalidate()
-        gameOver.didWin()
-    }
+        if didWin == true {
+            
+            println("FAIL")
+            var scene = GameOverScene(size: self.size)
+            let skView = self.view as SKView!
+            skView.ignoresSiblingOrder = true
+            scene.scaleMode = .ResizeFill
+            scene.size = skView.bounds.size
+            skView.presentScene(scene)
+            timer.invalidate()
+            
+        } else {
+            
+            println("WIN")
+            var scene = LevelFinishedScene(size: self.size)
+            let skView = self.view as SKView!
+            skView.ignoresSiblingOrder = true
+            scene.scaleMode = .ResizeFill
+            scene.size = skView.bounds.size
+            skView.presentScene(scene)
+            timer.invalidate()
 
+        }
+    }
 
     func addToRange() {
         
@@ -288,7 +285,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             // Scroll down when out of view
           //  textShown.scrollRangeToVisible(NSMakeRange((rangeOfText + 1), 1))
-        
+            
         } else {
             
             var rangeOfTextShown: Range = Range(
@@ -296,14 +293,14 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textShown.text.startIndex, rangeOfText + 1))
             charRequired = textShown.text.substringWithRange(rangeOfTextShown)
             
-            levelWin()
+            // WIN
+            gameEnded(true)
         }
         
         println("Character Typed = \(charTyped)")
         println("Character Required = \(charRequired)")
         println("Range of Text = \(rangeOfText)")
         println("Total Characters = \(totalCharsShown)")
-        
         
         // Logic for matching character typed to character required
         if charTyped == charRequired {
@@ -354,12 +351,19 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if mistakesMade == 3 {
             
-            levelFail()
+            gameEnded(false)
         }
         
         return true
     }
     
+//    func textViewDidChange(textView: UITextView) {
+//        
+//        for (component: String) in textShown.text.componentsSeparatedByString("\n") {
+//            var mutableComponent: NSMutableString = component.mutableCopy() as NSMutableString
+//
+//        }
+//    }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
        
