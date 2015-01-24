@@ -51,8 +51,6 @@ class GameScene: SKScene, UITextViewDelegate {
     let gameMenu = SKNode()
     let gameOverLayer = SKNode()
     
-    var gameOver = GameOverScene()
-    
     // Paragraph Phrases
     var attrString1 = NSAttributedString()
     var paragraph = NSMutableArray()
@@ -196,6 +194,7 @@ class GameScene: SKScene, UITextViewDelegate {
         scene?.userInteractionEnabled = true
     }
     
+    // Updates Timer Bar
     func updateTime() {
         
         var currentTime = NSDate.timeIntervalSinceReferenceDate()
@@ -210,7 +209,7 @@ class GameScene: SKScene, UITextViewDelegate {
         } else {
             
             timer.invalidate()
-            gameEnded(false)
+            gameEnded(didWin: false)
         }
 
         // **Keep for learning purposes**
@@ -219,29 +218,22 @@ class GameScene: SKScene, UITextViewDelegate {
         // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
     }
     
-    func gameEnded(didWin: Bool) {
+    // Handles Game Over Functions
+    func gameEnded(#didWin: Bool) {
         
-        if didWin == true {
-            
-            println("FAIL")
-            var scene = GameOverScene(size: self.size)
-            let skView = self.view as SKView!
-            skView.ignoresSiblingOrder = true
-            scene.scaleMode = .ResizeFill
-            scene.size = skView.bounds.size
-            skView.presentScene(scene)
-            timer.invalidate()
-            
-        } else {
+        timer.invalidate()
+        
+        if didWin {
             
             println("WIN")
-            var scene = LevelFinishedScene(size: self.size)
-            let skView = self.view as SKView!
-            skView.ignoresSiblingOrder = true
-            scene.scaleMode = .ResizeFill
-            scene.size = skView.bounds.size
-            skView.presentScene(scene)
-            timer.invalidate()
+            let scene = LevelFinishedScene(size: self.size)
+            self.view?.presentScene(scene)
+
+        } else {
+            
+            println("FAIL")
+            let scene = GameOverScene(size: self.size)
+            self.view?.presentScene(scene)
 
         }
     }
@@ -293,8 +285,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textShown.text.startIndex, rangeOfText + 1))
             charRequired = textShown.text.substringWithRange(rangeOfTextShown)
             
-            // WIN
-            gameEnded(true)
+            gameEnded(didWin: true)
         }
         
         println("Character Typed = \(charTyped)")
@@ -351,7 +342,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if mistakesMade == 3 {
             
-            gameEnded(false)
+            gameEnded(didWin: false)
         }
         
         return true
