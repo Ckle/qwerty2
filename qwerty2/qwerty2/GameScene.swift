@@ -17,7 +17,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // UITextViews
     var textDisplay = UITextView()
-    var textShown = UITextView()
+    var textShown = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
     
@@ -144,7 +144,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
-        textShown = UITextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown.backgroundColor = UIColor.clearColor()
         
         // Bring Up Keyboard Immediately
@@ -386,5 +386,13 @@ class GameScene: SKScene, UITextViewDelegate {
     }
 }
 
+// To make sure the textview cannot be tapped on.
+class CustomTextView: UITextView {
+    
+    override func canBecomeFirstResponder() -> Bool {
+
+        return false
+    }
+}
 
 

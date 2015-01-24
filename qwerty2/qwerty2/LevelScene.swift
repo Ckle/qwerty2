@@ -10,8 +10,13 @@ import SpriteKit
 
 class LevelScene: SKScene {
     
+    
+    // Constants
     let levelButton = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(25.0, 25.0))
     let maxLevels = 4
+    
+    // Vars
+    var isLoading = false
     // var progressLoader: ProgressLoaderNode!
     
     override func didMoveToView(view: SKView) {
@@ -51,8 +56,45 @@ class LevelScene: SKScene {
         }
         
     }
+    
+    internal func loadLevel(level: String) {
+       
+        if isLoading {
+            NSLog("Avoiding interruptive load")
+            return
+        }
+        
+        isLoading = true
+        
+       // addProgressLoaderNode()
+    }
+    
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
+      //  func loadLevel
+        
         for touch: AnyObject in touches {
+            
+            // Below is a more proper way? to make sure the touch is the node at a particular point.
+            // let location = touch.locationInNode(self)
+
+            let node = self.nodeAtPoint(touch.locationInNode(self))
+            
+            if node.name == "1" || node.parent?.name == "1" {
+                var scene = GameScene(size: self.size)
+                self.view?.presentScene(scene)
+            }
+//            if node.name == "2" || node.parent?.name == "2" {
+//                loadLevel("2")
+//            }
+//            if node.name == "3" || node.parent?.name == "3" {
+//                loadLevel("3")
+//            }
+//            if node.name == "4" || node.parent?.name == "4" {
+//                loadLevel("4")
+//            }
+            
+            
             let location = touch.locationInNode(self)
             if self.nodeAtPoint(location) == self.levelButton {
                 var scene = GameScene(size: self.size)
