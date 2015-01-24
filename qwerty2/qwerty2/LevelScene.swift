@@ -11,8 +11,11 @@ import SpriteKit
 class LevelScene: SKScene {
     
     let Level1Node = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
+    let maxLevels = 4
+    // var progressLoader: ProgressLoaderNode!
     
     override func didMoveToView(view: SKView) {
+        
         self.Level1Node.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         self.addChild(Level1Node)
         self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
@@ -23,11 +26,7 @@ class LevelScene: SKScene {
             let location = touch.locationInNode(self)
             if self.nodeAtPoint(location) == self.Level1Node {
                 var scene = GameScene(size: self.size)
-                let skView = self.view as SKView!
-                skView.ignoresSiblingOrder = true
-                scene.scaleMode = .ResizeFill
-                scene.size = skView.bounds.size
-                skView.presentScene(scene)
+                self.view?.presentScene(scene)
             }
         }
     }
