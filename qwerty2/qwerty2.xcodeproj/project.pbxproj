@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5B023FFB1A77FDF700C833F2 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B023FFA1A77FDF700C833F2 /* Sprites.atlas */; };
 		5B0D44AC1A7847AE00082948 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B0D44AB1A7847AE00082948 /* 1.txt */; };
-		5B0D44AE1A784A4300082948 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D44AD1A784A4300082948 /* Files.swift */; };
 		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
 		5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A688D1A6089B8007209C5 /* GameOverScene.swift */; };
 		5B7E89311A74326300B50AEA /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */; };
@@ -39,7 +38,6 @@
 /* Begin PBXFileReference section */
 		5B023FFA1A77FDF700C833F2 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 		5B0D44AB1A7847AE00082948 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
-		5B0D44AD1A784A4300082948 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = qwertyPlay.playground; sourceTree = "<group>"; };
 		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5B3A688D1A6089B8007209C5 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				5B986F281A5EF6B800676E9D /* Extensions.swift */,
-				5B0D44AD1A784A4300082948 /* Files.swift */,
 				5B0D44AB1A7847AE00082948 /* 1.txt */,
 				5BF4B76F1A42A7F0001EB977 /* Info.plist */,
 			);
@@ -257,7 +254,6 @@
 				5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */,
 				5BF4B7771A42A7F0001EB977 /* GameViewController.swift in Sources */,
 				5BF4B7711A42A7F0001EB977 /* AppDelegate.swift in Sources */,
-				5B0D44AE1A784A4300082948 /* Files.swift in Sources */,
 				5B986F291A5EF6B800676E9D /* Extensions.swift in Sources */,
 				5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */,
 			);

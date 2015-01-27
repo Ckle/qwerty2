@@ -11,7 +11,7 @@ class File {
     
     class func read (path: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> String? {
         if File.exists(path) {
-            return String(contentsOfFile: path, encoding: encoding, error: nil)!
+            return String(contentsOfFile: path, encoding: encoding, error: nil)
         }
         
         return nil
@@ -19,7 +19,7 @@ class File {
     
 }
 
-let read : String? = File.read("/qwerty2/1.txt")
+let read : String? = File.read("/Users/chris_lee/Documents/Coffee/qwerty2/qwerty2/qwerty2/1.txt")
 
 println("\(read)")
 
