@@ -86,11 +86,6 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.addChild(mistakesMadeLabel)
         
-        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.documentD, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
-        if ((dirs) != nil) {
-            let dir = dirs![0]; //documents directory
-            
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -118,7 +113,6 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create locally formatted strings
         attrString1 = NSAttributedString(string: "My name is Dug. My male man, who has the name Jake recently started meeting frequently with a female man. It is long like an English Sheepdog, except that an English Sheepdog is beautiful. ", attributes:textFont)
-//        attrString1 = String(contents
         
         // Add locally formatted strings to paragraph
         para.appendAttributedString(attrString1)
