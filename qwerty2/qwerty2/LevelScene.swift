@@ -38,7 +38,7 @@ class LevelScene: SKScene {
         // in between them.
         var tileWidth = levelTile.size().width
         var tileHeight = levelTile.size().height
-        var gap = tileWidth
+        var gap = tileWidth / 2
         
         // We also need a selector width and an initial x
         // and y coordinate set.
@@ -58,7 +58,7 @@ class LevelScene: SKScene {
             level.yScale = getSceneScaleY()
             
             x += tileWidth + gap
-            self.addChild(level)
+            addChild(level)
         }
         
     }
@@ -76,11 +76,16 @@ class LevelScene: SKScene {
         
         // Declare the scene variable as nil so you can 
         // reference it from any closure functions used later to do the background operations.
-        var scene: GameScene? = nil
+        // var scene: GameScene? = nil
         // Create an array where you can store empty closure functions. 
         // The point of this is to eventually run this array of functions 
         // in the background loading. I removed the other work however, refer to SafariBooks if i want to implement background loading. I'd have to Load the current level as variable "scene" and append it to the array.
         var work: [Void -> Any?] = []
+        
+        var scene = GameScene(size: self.size)
+        self.view?.presentScene(scene)
+        
+        // ** CREATE A FUNCTION THAT LOADS CONTENT FROM THE LEVEL CLASS
         
         
     }
@@ -97,8 +102,7 @@ class LevelScene: SKScene {
             let node = self.nodeAtPoint(touch.locationInNode(self))
             
             if node.name == "1" || node.parent?.name == "1" {
-                var scene = GameScene(size: self.size)
-                self.view?.presentScene(scene)
+                loadLevel("1")
             }
 //            if node.name == "2" || node.parent?.name == "2" {
 //                loadLevel("2")
