@@ -26,6 +26,8 @@ class GameScene: SKScene, UITextViewDelegate {
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var gameTime = CGFloat()
+    
+    public var currentLevel: Int = 1
 
     // Transition Scene Button Variable Declaration
     let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))

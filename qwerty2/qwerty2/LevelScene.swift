@@ -17,7 +17,7 @@ class LevelScene: SKScene {
     
     // Vars
     var isLoading: Bool = false
-    var progressLoader: ProgressLoaderNode!
+    // var progressLoader: ProgressLoaderNode!
     
     override func didMoveToView(view: SKView) {
         
@@ -44,7 +44,8 @@ class LevelScene: SKScene {
         // and y coordinate set.
         var selectorWidth = tileWidth * CGFloat(maxLevels) + gap * CGFloat(maxLevels - 2)
         
-        // subtract the selector width from the width of the entire view and divide that value by two in order to get the center
+        // subtract the selector width from the width of the 
+        // entire view and divide that value by two in order to get the center
         var x = (self.frame.width - selectorWidth) / 2
         var y = self.frame.height / 2
         
@@ -53,8 +54,8 @@ class LevelScene: SKScene {
             let level = SKSpriteNode(texture: atlas.textureNamed("L\(i)-\(suffix)"))
             level.name = "\(i)"
             level.position = CGPoint(x: x, y: y)
-
-
+            level.xScale = getSceneScaleX()
+            level.yScale = getSceneScaleY()
             
             x += tileWidth + gap
             self.addChild(level)
@@ -64,6 +65,8 @@ class LevelScene: SKScene {
     
     internal func loadLevel(level: String) {
        
+        // If we're already loading a level, disallow
+        // other levels being loaded.
         if isLoading {
             NSLog("Avoiding interruptive load")
             return
@@ -71,34 +74,15 @@ class LevelScene: SKScene {
         
         isLoading = true
         
-        // Declare the scene variable as nil so you can reference it from any closure functions used later to do the background operations.
+        // Declare the scene variable as nil so you can 
+        // reference it from any closure functions used later to do the background operations.
         var scene: GameScene? = nil
-        // Create an array where you can store empty closure functions. The point of this is to eventually run this array of functions in the background loading.
+        // Create an array where you can store empty closure functions. 
+        // The point of this is to eventually run this array of functions 
+        // in the background loading. I removed the other work however, refer to SafariBooks if i want to implement background loading. I'd have to Load the current level as variable "scene" and append it to the array.
         var work: [Void -> Any?] = []
         
-        // Unarchive Scene
-        // Load the current level as variable "scene" and append it to the array.
-        work.append {
-            
-            scene = GameScene.unarchiveFromFile(level) as GameScene?
-        }
         
-        // Prepare the Level
-        work.append {
-            
-            if scene != nil {
-                
-                // Give the scene access to the progress loader so it can update progress while it loads
-                scene!.progressNode = self.progressLoader
-                // Prepare the level, which takes time
-                scene!.prepareLevel()
-            }
-            
-            return scene
-        }
-        
-        
-        addProgressLoaderNode()
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
