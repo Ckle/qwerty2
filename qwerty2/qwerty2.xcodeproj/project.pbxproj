@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5B023FFB1A77FDF700C833F2 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B023FFA1A77FDF700C833F2 /* Sprites.atlas */; };
+		5B0D44AC1A7847AE00082948 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B0D44AB1A7847AE00082948 /* 1.txt */; };
+		5B0D44AE1A784A4300082948 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0D44AD1A784A4300082948 /* Files.swift */; };
 		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
 		5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A688D1A6089B8007209C5 /* GameOverScene.swift */; };
 		5B7E89311A74326300B50AEA /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */; };
@@ -36,6 +38,9 @@
 
 /* Begin PBXFileReference section */
 		5B023FFA1A77FDF700C833F2 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
+		5B0D44AB1A7847AE00082948 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
+		5B0D44AD1A784A4300082948 /* Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
+		5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = qwertyPlay.playground; sourceTree = "<group>"; };
 		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5B3A688D1A6089B8007209C5 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
@@ -99,13 +104,12 @@
 				5BF6BFC71A76BDEF00EEBA29 /* Levels.atlas */,
 				5BF4B7701A42A7F0001EB977 /* AppDelegate.swift */,
 				5BF4B7761A42A7F0001EB977 /* GameViewController.swift */,
-				5B986F281A5EF6B800676E9D /* Extensions.swift */,
 				5BF4B7741A42A7F0001EB977 /* TitleScene.swift */,
+				5B13A2331A43AB1000B61A5B /* LevelScene.swift */,
 				5BA01ACA1A44AB79005BAE16 /* GameScene.swift */,
 				5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */,
 				5B3A688D1A6089B8007209C5 /* GameOverScene.swift */,
 				5B90798F1A57759F0063A5E0 /* Levels.swift */,
-				5B13A2331A43AB1000B61A5B /* LevelScene.swift */,
 				5BF4B7781A42A7F0001EB977 /* Main.storyboard */,
 				5BF4B77B1A42A7F0001EB977 /* Images.xcassets */,
 				5BF4B77D1A42A7F0001EB977 /* LaunchScreen.xib */,
@@ -117,6 +121,9 @@
 		5BF4B76E1A42A7F0001EB977 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B986F281A5EF6B800676E9D /* Extensions.swift */,
+				5B0D44AD1A784A4300082948 /* Files.swift */,
+				5B0D44AB1A7847AE00082948 /* 1.txt */,
 				5BF4B76F1A42A7F0001EB977 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -125,6 +132,7 @@
 		5BF4B7871A42A7F0001EB977 /* qwerty2Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */,
 				5BF4B78A1A42A7F0001EB977 /* qwerty2Tests.swift */,
 				5BF4B7881A42A7F0001EB977 /* Supporting Files */,
 			);
@@ -219,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0D44AC1A7847AE00082948 /* 1.txt in Resources */,
 				5BF4B77F1A42A7F0001EB977 /* LaunchScreen.xib in Resources */,
 				5BF4B77C1A42A7F0001EB977 /* Images.xcassets in Resources */,
 				5BF6BFC81A76BDEF00EEBA29 /* Levels.atlas in Resources */,
@@ -248,6 +257,7 @@
 				5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */,
 				5BF4B7771A42A7F0001EB977 /* GameViewController.swift in Sources */,
 				5BF4B7711A42A7F0001EB977 /* AppDelegate.swift in Sources */,
+				5B0D44AE1A784A4300082948 /* Files.swift in Sources */,
 				5B986F291A5EF6B800676E9D /* Extensions.swift in Sources */,
 				5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */,
 			);
