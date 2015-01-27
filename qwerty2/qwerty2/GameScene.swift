@@ -204,6 +204,18 @@ class GameScene: SKScene, UITextViewDelegate {
             timer.invalidate()
             gameEnded(didWin: false)
         }
+        
+        // For Bronze/silver colors of TimerBar
+        var sceneHalfSize = self.frame.width / 2
+        
+        if timerBar.size.width < sceneHalfSize / 2  {
+            
+            timerBar.color = UIColor.redColor()
+            
+        } else if timerBar.size.width < sceneHalfSize {
+            
+            timerBar.color = UIColor.orangeColor()
+        }
 
         // **Keep for learning purposes**
         // var secondsLeft = CGFloat(seconds / gameTime)
