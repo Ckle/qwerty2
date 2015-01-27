@@ -84,15 +84,6 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.addChild(mistakesMadeLabel)
         
-        // Layers
-        gameLayer.hidden = true
-        addChild(gameLayer)
-        
-        // Game Over Screen
-        gameOverLayer.zPosition = 100
-        gameOverLayer.alpha = 0
-        gameLayer.addChild(gameOverLayer)
-        
     }
 
     required init?(coder aDecoder: NSCoder) {

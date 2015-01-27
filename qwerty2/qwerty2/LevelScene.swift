@@ -16,22 +16,28 @@ class LevelScene: SKScene {
     let maxLevels = 4
     
     // Vars
-    var isLoading = false
-    // var progressLoader: ProgressLoaderNode!
+    var isLoading: Bool = false
+    var progressLoader: ProgressLoaderNode!
     
     override func didMoveToView(view: SKView) {
         
         self.backgroundColor = UIColor(red: 81/255, green: 150/255, blue: 111/255, alpha: 1.0)
+        
         addLevelSelectandHighScore()
     }
     
     internal func addLevelSelectandHighScore() {
         
+        var suffix = "enabled"
+        
+        let atlas = SKTextureAtlas(named: "Levels")
+        let levelTile = atlas.textureNamed("L1-enabled")
+        
         // In order to create a grid for the level buttons,
         // we a tile width, height and a value for the gap
         // in between them.
-        var tileWidth = levelButton.size.width
-        var tileHeight = levelButton.size.height
+        var tileWidth = levelTile.size().width
+        var tileHeight = levelTile.size().height
         var gap = tileWidth
         
         // We also need a selector width and an initial x
@@ -44,12 +50,11 @@ class LevelScene: SKScene {
         
         for i in 1...maxLevels {
             
-            let level = SKLabelNode(text: "\(i)")
+            let level = SKSpriteNode(texture: atlas.textureNamed("L\(i)-\(suffix)"))
             level.name = "\(i)"
-            level.fontSize = 18.0
-            level.fontName = "Helvetica"
             level.position = CGPoint(x: x, y: y)
-            level.fontColor = UIColor.blackColor()
+
+
             
             x += tileWidth + gap
             self.addChild(level)
@@ -66,7 +71,34 @@ class LevelScene: SKScene {
         
         isLoading = true
         
-       // addProgressLoaderNode()
+        // Declare the scene variable as nil so you can reference it from any closure functions used later to do the background operations.
+        var scene: GameScene? = nil
+        // Create an array where you can store empty closure functions. The point of this is to eventually run this array of functions in the background loading.
+        var work: [Void -> Any?] = []
+        
+        // Unarchive Scene
+        // Load the current level as variable "scene" and append it to the array.
+        work.append {
+            
+            scene = GameScene.unarchiveFromFile(level) as GameScene?
+        }
+        
+        // Prepare the Level
+        work.append {
+            
+            if scene != nil {
+                
+                // Give the scene access to the progress loader so it can update progress while it loads
+                scene!.progressNode = self.progressLoader
+                // Prepare the level, which takes time
+                scene!.prepareLevel()
+            }
+            
+            return scene
+        }
+        
+        
+        addProgressLoaderNode()
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -95,11 +127,6 @@ class LevelScene: SKScene {
 //            }
             
             
-            let location = touch.locationInNode(self)
-            if self.nodeAtPoint(location) == self.levelButton {
-                var scene = GameScene(size: self.size)
-                self.view?.presentScene(scene)
-            }
         }
     }
     override func update(currentTime: CFTimeInterval) {
