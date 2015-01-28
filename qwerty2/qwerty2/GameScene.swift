@@ -43,9 +43,6 @@ class GameScene: SKScene, UITextViewDelegate {
     // Characters Typed or Required to be typed
     var charTyped = String()
     var charRequired = String()
-    
-    // Create a string that will be our visible UITextView Paragraph
-    let para = NSMutableAttributedString()
 
     // Score Counter
     var correctCharsTyped = SKLabelNode()
@@ -134,15 +131,15 @@ class GameScene: SKScene, UITextViewDelegate {
         attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
     
         // Define paragraph styling
-        let paraStyle = NSMutableParagraphStyle()
-        paraStyle.paragraphSpacingBefore = 10.0
+//        let paraStyle = NSMutableParagraphStyle()
+//        paraStyle.paragraphSpacingBefore = 10.0
         //paraStyle.lineSpacing = 50.0
         
         // Make the paragraph the default colour
         attrString1.addAttribute(
             NSForegroundColorAttributeName,
             value: UIColor.blackColor(),
-            range: NSRange(location: 0, length: para.length))
+            range: NSRange(location: 0, length: attrString1.length))
         attrString1.addAttribute(
             NSUnderlineStyleAttributeName,
             value: NSUnderlineStyle.StyleDouble.rawValue,
@@ -159,7 +156,7 @@ class GameScene: SKScene, UITextViewDelegate {
         textDisplay.keyboardType = UIKeyboardType.Default
         
         // Add string to UITextView
-        textDisplay.attributedText = para
+        textDisplay.attributedText = attrString1
         textShown1.attributedText = attrString1
         
         // Visibility of the two UITextViews
@@ -193,8 +190,8 @@ class GameScene: SKScene, UITextViewDelegate {
         mistakesMade = 0
         
         // Reset Paragraph to default color
-        attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: para.length))
-        attrString1.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location: 0, length: para.length))
+        attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: attrString1.length))
+        attrString1.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location: 0, length: attrString1.length))
         textShown1.attributedText = attrString1
         
         scene?.userInteractionEnabled = true
@@ -285,11 +282,11 @@ class GameScene: SKScene, UITextViewDelegate {
             charRequired = textShown1.text.substringWithRange(rangeOfTextShown)
             
             // Creates the Underline. Removes first underline
-            para.addAttribute(
+            attrString1.addAttribute(
                 NSUnderlineStyleAttributeName,
                 value: NSUnderlineStyle.StyleDouble.rawValue,
                 range: NSMakeRange((rangeOfText + 1), 1))
-            para.removeAttribute(
+            attrString1.removeAttribute(
                 NSUnderlineStyleAttributeName,
                 range: NSMakeRange((rangeOfText), 1))
             
@@ -316,31 +313,31 @@ class GameScene: SKScene, UITextViewDelegate {
            
             println("CORRECT")
             // Changes the color of the text if correct letter was typed
-            para.addAttribute(
+            attrString1.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
             // have to make sure to add the attributed text string to the UITextView or it won't show
-            textShown1.attributedText = para
+            textShown1.attributedText = attrString1
         
         } else if charTyped != charRequired {
             
             println("FALSE")
             ++mistakesMade
             // Changes the color of the text if incorrect letter was typed
-            para.addAttribute(
+            attrString1.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
-            para.addAttribute(
+            attrString1.addAttribute(
                 NSBackgroundColorAttributeName,
                 value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                 range: nsRangeOfTextShown)
-            textShown1.attributedText = para
+            textShown1.attributedText = attrString1
             
         } else {
             
-            para.addAttribute(
+            attrString1.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
