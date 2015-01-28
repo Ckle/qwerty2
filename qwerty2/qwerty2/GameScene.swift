@@ -115,7 +115,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 20.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
@@ -148,7 +148,21 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         textShown1 = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown2 = CustomTextView(frame: CGRect(x: 0, y: 240, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown3 = CustomTextView(frame: CGRect(x: 0, y: 280, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown4 = CustomTextView(frame: CGRect(x: 0, y: 320, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown5 = CustomTextView(frame: CGRect(x: 0, y: 360, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown6 = CustomTextView(frame: CGRect(x: 0, y: 400, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown7 = CustomTextView(frame: CGRect(x: 0, y: 440, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown8 = CustomTextView(frame: CGRect(x: 0, y: 480, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown1.backgroundColor = UIColor.clearColor()
+        textShown2.backgroundColor = UIColor.clearColor()
+        textShown3.backgroundColor = UIColor.clearColor()
+        textShown4.backgroundColor = UIColor.clearColor()
+        textShown5.backgroundColor = UIColor.clearColor()
+        textShown6.backgroundColor = UIColor.clearColor()
+        textShown7.backgroundColor = UIColor.clearColor()
+        textShown8.backgroundColor = UIColor.clearColor()
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -157,7 +171,15 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Add string to UITextView
         textDisplay.attributedText = attrString1
+        
         textShown1.attributedText = attrString1
+        textShown2.attributedText = attrString2
+        textShown3.attributedText = attrString3
+        textShown4.attributedText = attrString4
+        textShown5.attributedText = attrString5
+        textShown6.attributedText = attrString6
+        textShown7.attributedText = attrString7
+        textShown8.attributedText = attrString8
         
         // Visibility of the two UITextViews
         textDisplay.hidden = true
@@ -167,6 +189,13 @@ class GameScene: SKScene, UITextViewDelegate {
         // Add UITextView to main view
         self.view?.addSubview(textDisplay)
         self.view?.addSubview(textShown1)
+        self.view?.addSubview(textShown2)
+        self.view?.addSubview(textShown3)
+        self.view?.addSubview(textShown4)
+        self.view?.addSubview(textShown5)
+        self.view?.addSubview(textShown6)
+        self.view?.addSubview(textShown7)
+        self.view?.addSubview(textShown8)
         
         // Assign the UITextView's(textDisplay's) delegate to be the class we're in.
         textDisplay.delegate = self
@@ -391,6 +420,13 @@ class GameScene: SKScene, UITextViewDelegate {
         // Remove these UITextViews from the SKView
         textDisplay.removeFromSuperview()
         textShown1.removeFromSuperview()
+        textShown2.removeFromSuperview()
+        textShown3.removeFromSuperview()
+        textShown4.removeFromSuperview()
+        textShown5.removeFromSuperview()
+        textShown6.removeFromSuperview()
+        textShown7.removeFromSuperview()
+        textShown8.removeFromSuperview()
 
     }
     
