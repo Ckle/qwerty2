@@ -423,6 +423,14 @@ class GameScene: SKScene, UITextViewDelegate {
             // paragraphs.count is -1 because it counts 3 items, when an array starts index 0 ie (0,1,2) != (1,2,3)
             if currentParagraph < paragraphs.count - 1 {
             
+                UIView.animateWithDuration(1, delay: 0.5, options: .CurveEaseOut, animations: {
+                    var frame = self.textViewForPlayer.frame
+                    frame.origin.y += frame.size.height
+                    self.textViewForPlayer.frame = frame
+                    }, completion: { finished in
+                        println("FINISHED")}
+                )
+                
                 textViewForPlayer = paragraphs[++currentParagraph]
                 textForPlayer = paragraphStrings[++currentString]
                 println("\(currentParagraph) in \(paragraphs.count)")
