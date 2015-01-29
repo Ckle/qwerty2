@@ -26,8 +26,12 @@ class GameScene: SKScene, UITextViewDelegate {
     var textShown7 = CustomTextView()
     var textShown8 = CustomTextView()
     var textShown9 = CustomTextView()
+    var paragraphStrings: [NSMutableAttributedString] = [] // An array that all the other AttributedStrings are attached to
     var paragraphs: [CustomTextView] = [] // An array that all the other textViews are added to
-    var textShownForPlayer = CustomTextView()
+    var currentString = Int() // Integer that points to item in AS array
+    var currentParagraph = Int() // The integer that points to which item in the paragraph array
+    var textForPlayer = NSMutableAttributedString()
+    var textViewForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
     var paragraphCount = 8
@@ -90,9 +94,6 @@ class GameScene: SKScene, UITextViewDelegate {
         self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
         self.addChild(titleScreenNode)
         
-        // Create array of paragraphs
-        paragraphs = [textShown1, textShown2, textShown3]
-        
         // Mistake Counter
         self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
         self.mistakesMadeLabel.zPosition = 100
@@ -135,11 +136,6 @@ class GameScene: SKScene, UITextViewDelegate {
         attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
         attrString7 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
         attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
-    
-        // Define paragraph styling
-//        let paraStyle = NSMutableParagraphStyle()
-//        paraStyle.paragraphSpacingBefore = 10.0
-        //paraStyle.lineSpacing = 50.0
         
         // Make the paragraph the default colour
         attrString1.addAttribute(
@@ -204,6 +200,14 @@ class GameScene: SKScene, UITextViewDelegate {
         self.view?.addSubview(textShown7)
         self.view?.addSubview(textShown8)
         
+        // Creating Arrays of TextViews and AttributedStrings to be used in cursor mvmt
+        paragraphs = [textShown1, textShown2, textShown3]
+        currentParagraph = 0
+        paragraphStrings = [attrString1, attrString2, attrString3]
+        currentString = 0
+        textViewForPlayer = paragraphs[0]
+        textForPlayer = paragraphStrings[0]
+        
         // Assign the UITextView's(textDisplay's) delegate to be the class we're in.
         textDisplay.delegate = self
 
@@ -228,7 +232,6 @@ class GameScene: SKScene, UITextViewDelegate {
         // Reset Paragraph to default color
         attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: attrString1.length))
         attrString1.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location: 0, length: attrString1.length))
-        textShown1.attributedText = attrString1
         
         scene?.userInteractionEnabled = true
     }
@@ -298,8 +301,12 @@ class GameScene: SKScene, UITextViewDelegate {
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
+        // WHAT IS HAPPENING HERE:
+        // Tracking an incrementing string character in the chosen TextView
+        // Changing the attributes of an attributed string in the chosen TextView
+        
         var charTyped = text // Character that was typed
-        totalCharsShown = (countElements(textShown1.text)) // Used to detect win condition
+        totalCharsShown = (countElements(textViewForPlayer.text)) // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
         
         // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
@@ -307,36 +314,44 @@ class GameScene: SKScene, UITextViewDelegate {
         // let nsText = textShown.text as NSString
         // let attributedString = NSMutableAttributedString(string: nsText)
         // Above not needed because i am using para as the attributed string
-       
+
         // logic for underline changing along with incrementing text range to determine character required
         if totalCharsShown > (rangeOfText + 1) {
             
             // Finding the current selection of character that needs to be typed from the visible UITextView
             var rangeOfTextShown: Range = Range(
-                start: advance(textShown1.text.startIndex, rangeOfText),
-                end: advance(textShown1.text.startIndex, rangeOfText + 1))
-            charRequired = textShown1.text.substringWithRange(rangeOfTextShown)
+                start: advance(textViewForPlayer.text.startIndex, rangeOfText),
+                end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
+            charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
             // Creates the Underline. Removes first underline
-            attrString1.addAttribute(
+            textForPlayer.addAttribute(
                 NSUnderlineStyleAttributeName,
                 value: NSUnderlineStyle.StyleDouble.rawValue,
                 range: NSMakeRange((rangeOfText + 1), 1))
-            attrString1.removeAttribute(
+            textForPlayer.removeAttribute(
                 NSUnderlineStyleAttributeName,
                 range: NSMakeRange((rangeOfText), 1))
-            
-            // Scroll down when out of view
-          //  textShown.scrollRangeToVisible(NSMakeRange((rangeOfText + 1), 1))
             
         } else {
             
             var rangeOfTextShown: Range = Range(
-                start: advance(textShown1.text.startIndex, rangeOfText),
-                end: advance(textShown1.text.startIndex, rangeOfText + 1))
-            charRequired = textShown1.text.substringWithRange(rangeOfTextShown)
+                start: advance(textViewForPlayer.text.startIndex, rangeOfText),
+                end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
+            charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
-            gameEnded(didWin: true)
+//            if currentParagraph < paragraphs.count {
+            
+                textViewForPlayer = paragraphs[currentParagraph++]
+                println("\(currentParagraph)")
+                println("\(paragraphs[1].text)")
+                textForPlayer = paragraphStrings[currentString++]
+                rangeOfText = 0
+
+//            } else if currentParagraph == paragraphs.count {
+//                
+//                gameEnded(didWin: true)
+//            }
         }
         
         println("Character Typed = \(charTyped)")
@@ -349,31 +364,31 @@ class GameScene: SKScene, UITextViewDelegate {
            
             println("CORRECT")
             // Changes the color of the text if correct letter was typed
-            attrString1.addAttribute(
+            textForPlayer.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
             // have to make sure to add the attributed text string to the UITextView or it won't show
-            textShown1.attributedText = attrString1
+            textViewForPlayer.attributedText = textForPlayer
         
         } else if charTyped != charRequired {
             
             println("FALSE")
             ++mistakesMade
             // Changes the color of the text if incorrect letter was typed
-            attrString1.addAttribute(
+            textForPlayer.addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
-            attrString1.addAttribute(
+            textForPlayer.addAttribute(
                 NSBackgroundColorAttributeName,
                 value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                 range: nsRangeOfTextShown)
-            textShown1.attributedText = attrString1
+            textViewForPlayer.attributedText = textForPlayer
             
         } else {
             
-            attrString1.addAttribute(
+            textForPlayer .addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
                 range: nsRangeOfTextShown)
