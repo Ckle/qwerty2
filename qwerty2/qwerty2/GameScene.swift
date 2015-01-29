@@ -122,15 +122,15 @@ class GameScene: SKScene, UITextViewDelegate {
     func addUIElements() {
        
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 20.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
        
         // Define string attributes
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "My male man, who has the name Jake", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "My male man,", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "recently started", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
         attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
         attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
@@ -150,14 +150,14 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
     
-        textShown1 = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown2 = CustomTextView(frame: CGRect(x: 0, y: 240, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown3 = CustomTextView(frame: CGRect(x: 0, y: 280, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown4 = CustomTextView(frame: CGRect(x: 0, y: 320, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown5 = CustomTextView(frame: CGRect(x: 0, y: 360, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown1 = CustomTextView(frame: CGRect(x: 0, y: 150, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown2 = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown3 = CustomTextView(frame: CGRect(x: 0, y: 250, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown4 = CustomTextView(frame: CGRect(x: 0, y: 300, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown5 = CustomTextView(frame: CGRect(x: 0, y: 350, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown6 = CustomTextView(frame: CGRect(x: 0, y: 400, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown7 = CustomTextView(frame: CGRect(x: 0, y: 440, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown8 = CustomTextView(frame: CGRect(x: 0, y: 480, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown7 = CustomTextView(frame: CGRect(x: 0, y: 450, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown8 = CustomTextView(frame: CGRect(x: 0, y: 500, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown1.backgroundColor = UIColor.clearColor()
         textShown2.backgroundColor = UIColor.clearColor()
         textShown3.backgroundColor = UIColor.clearColor()
@@ -216,7 +216,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (18-15+1)) + 15)
+        gameTime = CGFloat((arc4random() % (25-20+1)) + 20)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -368,6 +368,11 @@ class GameScene: SKScene, UITextViewDelegate {
                     range: nsRangeOfTextShown)
             }
 
+            if rangeOfText < (totalCharsShown - 1) {
+                
+                // Moves the marker forward to the next required character in visible UITextView
+                addToRange()
+            }
             
         } else {
             
@@ -378,15 +383,14 @@ class GameScene: SKScene, UITextViewDelegate {
             
             // This if statement will increment the current TextView selected for identifying characters required/shown,
             // along with the current attributed string that needs to now have its new attributes changed.
-            if currentParagraph < paragraphs.count {
+            if currentParagraph < paragraphs.count - 1 {
             
                 textViewForPlayer = paragraphs[++currentParagraph]
                 textForPlayer = paragraphStrings[++currentString]
-                println("\(textForPlayer)")
-                println("\(currentString) CURRENT STRING")
+                println("\(currentParagraph) in \(paragraphs.count)")
                 rangeOfText = 0
 
-            } else if currentParagraph == paragraphs.count {
+            } else if currentParagraph == paragraphs.count - 1 {
                 
                 gameEnded(didWin: true)
             }
@@ -396,18 +400,12 @@ class GameScene: SKScene, UITextViewDelegate {
         println("Character Required = \(charRequired)")
         println("Range of Text = \(rangeOfText)")
         println("Total Characters = \(totalCharsShown)")
-                
+        
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
-        
-        if rangeOfText < (totalCharsShown - 1) {
-            
-            // Moves the marker forward to the next required character in visible UITextView
-            addToRange()
-        }
         
         if mistakesMade == 3 {
             

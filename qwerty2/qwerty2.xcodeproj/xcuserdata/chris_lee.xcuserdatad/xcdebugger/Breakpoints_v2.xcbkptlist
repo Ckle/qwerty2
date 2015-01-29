@@ -446,11 +446,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444210953.798084"
+            timestampString = "444252076.813329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "484"
-            endingLineNumber = "484">
+            startingLineNumber = "482"
+            endingLineNumber = "482">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
