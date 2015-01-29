@@ -129,8 +129,8 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "My male man,", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "recently started", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "My male man, who has the name Jake", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
         attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
         attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
@@ -309,11 +309,13 @@ class GameScene: SKScene, UITextViewDelegate {
         totalCharsShown = (countElements(textViewForPlayer.text)) // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
         
-        // Since changing the attributed String range REQUIRES an NSRange (rangeOfTextShown is a Range, not NSRange - the testRange String is converted to NSString, so that we can make a NSRange of out it)
+        // Since changing the attributed String range REQUIRES an NSRange 
+        // (rangeOfTextShown is a Range, not NSRange - the testRange String 
+        // is converted to NSString, so that we can make a NSRange of out it)
         let nsRangeOfTextShown = NSMakeRange(rangeOfText, 1)
         // let nsText = textShown.text as NSString
         // let attributedString = NSMutableAttributedString(string: nsText)
-        // Above not needed because i am using para as the attributed string
+        // Above not needed because i DID using para as the attributed string
 
         // logic for underline changing along with incrementing text range to determine character required
         if totalCharsShown > (rangeOfText + 1) {
@@ -324,7 +326,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
             charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
-            // Creates the Underline. Removes first underline
+            // Creates the Underline. Removes first underline which was just manually put in place when gameScene init
             textForPlayer.addAttribute(
                 NSUnderlineStyleAttributeName,
                 value: NSUnderlineStyle.StyleDouble.rawValue,
@@ -381,14 +383,57 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
             charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
+            // Logic for matching character typed to character required - AGAIN. 
+            // THERE IS PROBABLY A BETTER WAY TO DO THIS THAN REPEATING CODE
+            if charTyped == charRequired {
+                
+                println("CORRECT")
+                // Changes the color of the text if correct letter was typed
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+                    range: nsRangeOfTextShown)
+                // have to make sure to add the attributed text string to the UITextView or it won't show
+                textViewForPlayer.attributedText = textForPlayer
+                
+            } else if charTyped != charRequired {
+                
+                println("FALSE")
+                ++mistakesMade
+                // Changes the color of the text if incorrect letter was typed
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
+                    range: nsRangeOfTextShown)
+                textForPlayer.addAttribute(
+                    NSBackgroundColorAttributeName,
+                    value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
+                    range: nsRangeOfTextShown)
+                textViewForPlayer.attributedText = textForPlayer
+                
+            }
+            
+            textForPlayer.removeAttribute(
+                NSUnderlineStyleAttributeName,
+                range: NSMakeRange((rangeOfText), 1))
+            textViewForPlayer.attributedText = textForPlayer
+            
             // This if statement will increment the current TextView selected for identifying characters required/shown,
             // along with the current attributed string that needs to now have its new attributes changed.
+            // paragraphs.count is -1 because it counts 3 items, when an array starts index 0 ie (0,1,2) != (1,2,3)
             if currentParagraph < paragraphs.count - 1 {
             
                 textViewForPlayer = paragraphs[++currentParagraph]
                 textForPlayer = paragraphStrings[++currentString]
                 println("\(currentParagraph) in \(paragraphs.count)")
                 rangeOfText = 0
+                
+                // adds the initial underline back into the next paragraph
+                textForPlayer.addAttribute(
+                    NSUnderlineStyleAttributeName,
+                    value: NSUnderlineStyle.StyleDouble.rawValue,
+                    range: NSMakeRange(0, 1))
+                textViewForPlayer.attributedText = textForPlayer
 
             } else if currentParagraph == paragraphs.count - 1 {
                 
@@ -414,14 +459,6 @@ class GameScene: SKScene, UITextViewDelegate {
 
         return true
     }
-    
-//    func textViewDidChange(textView: UITextView) {
-//        
-//        for (component: String) in textShown.text.componentsSeparatedByString("\n") {
-//            var mutableComponent: NSMutableString = component.mutableCopy() as NSMutableString
-//
-//        }
-//    }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
        
