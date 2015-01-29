@@ -16,7 +16,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // --------------------------- GAME VARIABLEs
     
     // UITextViews
-    var textDisplay = UITextView()
+    var textDisplay = UITextView() // Hidden textView just to detect typing
     var textShown1 = CustomTextView()
     var textShown2 = CustomTextView()
     var textShown3 = CustomTextView()
@@ -26,8 +26,11 @@ class GameScene: SKScene, UITextViewDelegate {
     var textShown7 = CustomTextView()
     var textShown8 = CustomTextView()
     var textShown9 = CustomTextView()
+    var paragraphs: [CustomTextView] = [] // An array that all the other textViews are added to
+    var textShownForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
+    var paragraphCount = 8
     
     // Timer Bar
     var timerBar = SKSpriteNode()
@@ -86,6 +89,9 @@ class GameScene: SKScene, UITextViewDelegate {
         // Transition Scene button
         self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
         self.addChild(titleScreenNode)
+        
+        // Create array of paragraphs
+        paragraphs = [textShown1, textShown2, textShown3]
         
         // Mistake Counter
         self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
@@ -147,6 +153,7 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+    
         textShown1 = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown2 = CustomTextView(frame: CGRect(x: 0, y: 240, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown3 = CustomTextView(frame: CGRect(x: 0, y: 280, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))

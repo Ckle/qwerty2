@@ -24,3 +24,7 @@ let read : String? = File.read("/Users/chris_lee/Documents/Coffee/qwerty2/qwerty
 println("\(read)")
 
     
+var paragraphs: [String] = ["Hi", "Hello"]
+
+paragraphs[0]
+
