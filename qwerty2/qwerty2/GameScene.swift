@@ -333,6 +333,42 @@ class GameScene: SKScene, UITextViewDelegate {
                 NSUnderlineStyleAttributeName,
                 range: NSMakeRange((rangeOfText), 1))
             
+            // Logic for matching character typed to character required
+            if charTyped == charRequired {
+                
+                println("CORRECT")
+                // Changes the color of the text if correct letter was typed
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+                    range: nsRangeOfTextShown)
+                // have to make sure to add the attributed text string to the UITextView or it won't show
+                textViewForPlayer.attributedText = textForPlayer
+                
+            } else if charTyped != charRequired {
+                
+                println("FALSE")
+                ++mistakesMade
+                // Changes the color of the text if incorrect letter was typed
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
+                    range: nsRangeOfTextShown)
+                textForPlayer.addAttribute(
+                    NSBackgroundColorAttributeName,
+                    value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
+                    range: nsRangeOfTextShown)
+                textViewForPlayer.attributedText = textForPlayer
+                
+            } else {
+                
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+                    range: nsRangeOfTextShown)
+            }
+
+            
         } else {
             
             var rangeOfTextShown: Range = Range(
@@ -340,60 +376,27 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
             charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
-//            if currentParagraph < paragraphs.count {
+            // This if statement will increment the current TextView selected for identifying characters required/shown,
+            // along with the current attributed string that needs to now have its new attributes changed.
+            if currentParagraph < paragraphs.count {
             
-                textViewForPlayer = paragraphs[currentParagraph++]
-                println("\(currentParagraph)")
-                println("\(paragraphs[1].text)")
-                textForPlayer = paragraphStrings[currentString++]
+                textViewForPlayer = paragraphs[++currentParagraph]
+                textForPlayer = paragraphStrings[++currentString]
+                println("\(textForPlayer)")
+                println("\(currentString) CURRENT STRING")
                 rangeOfText = 0
 
-//            } else if currentParagraph == paragraphs.count {
-//                
-//                gameEnded(didWin: true)
-//            }
+            } else if currentParagraph == paragraphs.count {
+                
+                gameEnded(didWin: true)
+            }
         }
         
         println("Character Typed = \(charTyped)")
         println("Character Required = \(charRequired)")
         println("Range of Text = \(rangeOfText)")
         println("Total Characters = \(totalCharsShown)")
-        
-        // Logic for matching character typed to character required
-        if charTyped == charRequired {
-           
-            println("CORRECT")
-            // Changes the color of the text if correct letter was typed
-            textForPlayer.addAttribute(
-                NSForegroundColorAttributeName,
-                value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
-                range: nsRangeOfTextShown)
-            // have to make sure to add the attributed text string to the UITextView or it won't show
-            textViewForPlayer.attributedText = textForPlayer
-        
-        } else if charTyped != charRequired {
-            
-            println("FALSE")
-            ++mistakesMade
-            // Changes the color of the text if incorrect letter was typed
-            textForPlayer.addAttribute(
-                NSForegroundColorAttributeName,
-                value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
-                range: nsRangeOfTextShown)
-            textForPlayer.addAttribute(
-                NSBackgroundColorAttributeName,
-                value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
-                range: nsRangeOfTextShown)
-            textViewForPlayer.attributedText = textForPlayer
-            
-        } else {
-            
-            textForPlayer .addAttribute(
-                NSForegroundColorAttributeName,
-                value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
-                range: nsRangeOfTextShown)
-        }
-        
+                
         // ** This was supposed to identify the last character typed. the above does that much quicker.
         //var totalCharsTyped = (countElements(textDisplay.text))
         //var lastCharTypedIndex = totalCharsTyped - 1
@@ -401,7 +404,7 @@ class GameScene: SKScene, UITextViewDelegate {
         //println("\(lastCharTyped)")
         
         if rangeOfText < (totalCharsShown - 1) {
-        
+            
             // Moves the marker forward to the next required character in visible UITextView
             addToRange()
         }
@@ -410,7 +413,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             gameEnded(didWin: false)
         }
-        
+
         return true
     }
     
