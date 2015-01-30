@@ -17,6 +17,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // UITextViews
     var textDisplay = UITextView() // Hidden textView just to detect typing
+    let textShownYPos: CGFloat = 150
     var textShown1 = CustomTextView()
     var textShown2 = CustomTextView()
     var textShown3 = CustomTextView()
@@ -125,7 +126,6 @@ class GameScene: SKScene, UITextViewDelegate {
         let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
         let textFont2 = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
-        let textShownYPos: CGFloat = 150
         // Define string attributes
         
         // Create locally formatted strings
@@ -446,15 +446,15 @@ class GameScene: SKScene, UITextViewDelegate {
                         println("FINISHED")}
                 )
                 
-//                UIView.animateWithDuration(1, delay: 0.5, options: .CurveEaseOut, animations: {
-//                    self.textForPlayer.addAttribute(
-//                        NSForegroundColorAttributeName,
-//                        value: UIColor.greenColor(),
-//                        range: NSRange(location: self.rangeOfText, length: 1))
-//                    self.textViewForPlayer.attributedText = self.textForPlayer
-//                    }, completion: { finished in
-//                        println("FINISHED")}
-//                )
+                UIView.transitionWithView(textViewForPlayer, duration: 5.1, options: .CurveEaseOut, animations: {
+                    self.textForPlayer.addAttribute(
+                        NSForegroundColorAttributeName,
+                        value: UIColor.greenColor(),
+                        range: NSRange(location: self.rangeOfText, length: 1))
+                    self.textViewForPlayer.attributedText = self.textForPlayer
+                    }, completion: { finished in
+                        println("FINISHED")}
+                )
 
                 
                 textViewForPlayer = paragraphs[++currentParagraph]
