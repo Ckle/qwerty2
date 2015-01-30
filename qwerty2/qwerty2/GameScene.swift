@@ -34,7 +34,7 @@ class GameScene: SKScene, UITextViewDelegate {
     var textViewForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
-    var paragraphCount = 8
+    public var paragraphCount = 8
     
     // Timer Bar
     var timerBar = SKSpriteNode()
@@ -123,13 +123,14 @@ class GameScene: SKScene, UITextViewDelegate {
        
         // Type
         let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont2 = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
-       
+        let textShownYPos: CGFloat = 150
         // Define string attributes
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "My male man, who has the name Jake", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "The male man, who has the name Jake", attributes: textFont)
         attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
         attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
@@ -150,14 +151,14 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
     
-        textShown1 = CustomTextView(frame: CGRect(x: 0, y: 150, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown2 = CustomTextView(frame: CGRect(x: 0, y: 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown3 = CustomTextView(frame: CGRect(x: 0, y: 250, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown4 = CustomTextView(frame: CGRect(x: 0, y: 300, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown5 = CustomTextView(frame: CGRect(x: 0, y: 350, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown6 = CustomTextView(frame: CGRect(x: 0, y: 400, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown7 = CustomTextView(frame: CGRect(x: 0, y: 450, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown8 = CustomTextView(frame: CGRect(x: 0, y: 500, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown1 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown2 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown3 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown4 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 150, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown5 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown6 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 250, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown7 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 300, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown8 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 350, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown1.backgroundColor = UIColor.clearColor()
         textShown2.backgroundColor = UIColor.clearColor()
         textShown3.backgroundColor = UIColor.clearColor()
@@ -166,6 +167,13 @@ class GameScene: SKScene, UITextViewDelegate {
         textShown6.backgroundColor = UIColor.clearColor()
         textShown7.backgroundColor = UIColor.clearColor()
         textShown8.backgroundColor = UIColor.clearColor()
+    
+//        for i in 1...paragraphCount {
+//            textShown1 = CustomTextView(frame: CGRect(x: 0, y: 125 + (50 * i), width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+//            
+//            paragraphs.append(textShown1)
+//            self.view?.addSubview(textShown1)
+//        }
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -423,13 +431,31 @@ class GameScene: SKScene, UITextViewDelegate {
             // paragraphs.count is -1 because it counts 3 items, when an array starts index 0 ie (0,1,2) != (1,2,3)
             if currentParagraph < paragraphs.count - 1 {
             
-                UIView.animateWithDuration(1, delay: 0.5, options: .CurveEaseOut, animations: {
-                    var frame = self.textViewForPlayer.frame
-                    frame.origin.y += frame.size.height
-                    self.textViewForPlayer.frame = frame
+                
+                UIView.animateWithDuration(0.4, delay: 0.2, options: .CurveEaseOut, animations: {
+                    var frame = self.textShown1.frame
+                    frame.origin.y += 20
+                    self.textShown1.frame = frame
                     }, completion: { finished in
+                        UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+                            var frame = self.textShown1.frame
+                            frame.origin.y -= 80
+                            self.textShown1.frame = frame
+                            }, completion: { finished in
+                            })
                         println("FINISHED")}
                 )
+                
+//                UIView.animateWithDuration(1, delay: 0.5, options: .CurveEaseOut, animations: {
+//                    self.textForPlayer.addAttribute(
+//                        NSForegroundColorAttributeName,
+//                        value: UIColor.greenColor(),
+//                        range: NSRange(location: self.rangeOfText, length: 1))
+//                    self.textViewForPlayer.attributedText = self.textForPlayer
+//                    }, completion: { finished in
+//                        println("FINISHED")}
+//                )
+
                 
                 textViewForPlayer = paragraphs[++currentParagraph]
                 textForPlayer = paragraphStrings[++currentString]
@@ -497,6 +523,8 @@ class GameScene: SKScene, UITextViewDelegate {
         textShown8.removeFromSuperview()
 
     }
+    
+    
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
