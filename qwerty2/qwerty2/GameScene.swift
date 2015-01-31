@@ -347,13 +347,35 @@ class GameScene: SKScene, UITextViewDelegate {
             if charTyped == charRequired {
                 
                 println("CORRECT")
+                
+                // BELOW NOT NEEDED NOW BECAUSE OF ANIMATION.
                 // Changes the color of the text if correct letter was typed
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
-                    range: nsRangeOfTextShown)
-                // have to make sure to add the attributed text string to the UITextView or it won't show
-                textViewForPlayer.attributedText = textForPlayer
+//                textForPlayer.addAttribute(
+//                    NSForegroundColorAttributeName,
+//                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+//                    range: nsRangeOfTextShown)
+//                // have to make sure to add the attributed text string to the UITextView or it won't show
+//                
+//                textViewForPlayer.attributedText = textForPlayer
+                
+                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .TransitionCrossDissolve, animations: {
+                    self.textForPlayer.addAttribute(
+                        NSForegroundColorAttributeName,
+                        value: UIColor.clearColor(),
+                        range: nsRangeOfTextShown)
+                    self.textViewForPlayer.attributedText = self.textForPlayer
+                    }, completion: { finished in
+                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .TransitionCrossDissolve, animations: {
+                            self.textForPlayer.addAttribute(
+                                NSForegroundColorAttributeName,
+                                value: UIColor.greenColor(),
+                                range: nsRangeOfTextShown)
+                            self.textViewForPlayer.attributedText = self.textForPlayer
+                            }, completion: { finished in
+                        })
+                        println("FINISHED2")}
+                )
+                
                 
             } else if charTyped != charRequired {
                 
@@ -433,35 +455,17 @@ class GameScene: SKScene, UITextViewDelegate {
             
                 
                 UIView.animateWithDuration(0.4, delay: 0.2, options: .CurveEaseOut, animations: {
-                    var frame = self.textShown1.frame
+                    var frame = self.textViewForPlayer.frame
                     frame.origin.y += 20
-                    self.textShown1.frame = frame
+                    self.textViewForPlayer.frame = frame
                     }, completion: { finished in
                         UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
-                            var frame = self.textShown1.frame
+                            var frame = self.textViewForPlayer.frame
                             frame.origin.y -= 80
-                            self.textShown1.frame = frame
+                            self.textViewForPlayer.frame = frame
                             }, completion: { finished in
                             })
-                        println("FINISHED")}
-                )
-                
-                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .TransitionCrossDissolve, animations: {
-                    self.textForPlayer.addAttribute(
-                        NSForegroundColorAttributeName,
-                        value: UIColor.clearColor(),
-                        range: NSRange(location: self.rangeOfText, length: 1))
-                    self.textViewForPlayer.attributedText = self.textForPlayer
-                    }, completion: { finished in
-                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .TransitionCrossDissolve, animations: {
-                            self.textForPlayer.addAttribute(
-                                NSForegroundColorAttributeName,
-                                value: UIColor.greenColor(),
-                                range: NSRange(location: self.rangeOfText, length: 1))
-                            self.textViewForPlayer.attributedText = self.textForPlayer
-                            }, completion: { finished in
-                            })
-                        println("FINISHED")}
+                        }
                 )
 
                 textViewForPlayer = paragraphs[++currentParagraph]
