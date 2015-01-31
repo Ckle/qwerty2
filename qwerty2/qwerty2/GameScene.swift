@@ -358,14 +358,14 @@ class GameScene: SKScene, UITextViewDelegate {
 //                
 //                textViewForPlayer.attributedText = textForPlayer
                 
-                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .TransitionCrossDissolve, animations: {
+                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
                     self.textForPlayer.addAttribute(
                         NSForegroundColorAttributeName,
                         value: UIColor.clearColor(),
                         range: nsRangeOfTextShown)
                     self.textViewForPlayer.attributedText = self.textForPlayer
                     }, completion: { finished in
-                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .TransitionCrossDissolve, animations: {
+                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
                             self.textForPlayer.addAttribute(
                                 NSForegroundColorAttributeName,
                                 value: UIColor.greenColor(),
@@ -464,12 +464,12 @@ class GameScene: SKScene, UITextViewDelegate {
                             frame.origin.y -= 80
                             self.textViewForPlayer.frame = frame
                             }, completion: { finished in
+                                self.textViewForPlayer = self.paragraphs[++self.currentParagraph]
+                                self.textForPlayer = self.paragraphStrings[++self.currentString]
                             })
                         }
                 )
 
-                textViewForPlayer = paragraphs[++currentParagraph]
-                textForPlayer = paragraphStrings[++currentString]
                 println("\(currentParagraph) in \(paragraphs.count)")
                 rangeOfText = 0
                 
