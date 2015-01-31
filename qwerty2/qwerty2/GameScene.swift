@@ -446,17 +446,24 @@ class GameScene: SKScene, UITextViewDelegate {
                         println("FINISHED")}
                 )
                 
-                UIView.transitionWithView(textViewForPlayer, duration: 5.1, options: .CurveEaseOut, animations: {
+                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .TransitionCrossDissolve, animations: {
                     self.textForPlayer.addAttribute(
                         NSForegroundColorAttributeName,
-                        value: UIColor.greenColor(),
+                        value: UIColor.clearColor(),
                         range: NSRange(location: self.rangeOfText, length: 1))
                     self.textViewForPlayer.attributedText = self.textForPlayer
                     }, completion: { finished in
+                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .TransitionCrossDissolve, animations: {
+                            self.textForPlayer.addAttribute(
+                                NSForegroundColorAttributeName,
+                                value: UIColor.greenColor(),
+                                range: NSRange(location: self.rangeOfText, length: 1))
+                            self.textViewForPlayer.attributedText = self.textForPlayer
+                            }, completion: { finished in
+                            })
                         println("FINISHED")}
                 )
 
-                
                 textViewForPlayer = paragraphs[++currentParagraph]
                 textForPlayer = paragraphStrings[++currentString]
                 println("\(currentParagraph) in \(paragraphs.count)")
