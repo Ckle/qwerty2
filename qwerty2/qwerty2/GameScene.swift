@@ -192,10 +192,8 @@ class GameScene: SKScene, UITextViewDelegate {
         textShown7.attributedText = attrString7
         textShown8.attributedText = attrString8
         
-        // Visibility of the two UITextViews
+        // Visibility of the hidden textView 
         textDisplay.hidden = true
-        textShown1.hidden = false
-        textShown1.editable = false
         
         // Add UITextView to main view
         self.view?.addSubview(textDisplay)
@@ -453,7 +451,7 @@ class GameScene: SKScene, UITextViewDelegate {
             // paragraphs.count is -1 because it counts 3 items, when an array starts index 0 ie (0,1,2) != (1,2,3)
             if currentParagraph < paragraphs.count - 1 {
             
-                
+                // Animates the paragraphs going down, and back up
                 UIView.animateWithDuration(0.4, delay: 0.2, options: .CurveEaseOut, animations: {
                     var frame = self.textViewForPlayer.frame
                     frame.origin.y += 20
@@ -464,21 +462,24 @@ class GameScene: SKScene, UITextViewDelegate {
                             frame.origin.y -= 80
                             self.textViewForPlayer.frame = frame
                             }, completion: { finished in
+                                // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
+                                // while the completion block happens after the incrementation.
+                                // self.textViewForPlayer.removeFromSuperview()
                                 self.textViewForPlayer = self.paragraphs[++self.currentParagraph]
                                 self.textForPlayer = self.paragraphStrings[++self.currentString]
+                                
+                                println("\(self.currentParagraph) in \(self.paragraphs.count)")
+                                self.rangeOfText = 0
+                                
+                                // adds the initial underline back into the next paragraph
+                                self.textForPlayer.addAttribute(
+                                    NSUnderlineStyleAttributeName,
+                                    value: NSUnderlineStyle.StyleDouble.rawValue,
+                                    range: NSMakeRange(0, 1))
+                                self.textViewForPlayer.attributedText = self.textForPlayer
                             })
                         }
                 )
-
-                println("\(currentParagraph) in \(paragraphs.count)")
-                rangeOfText = 0
-                
-                // adds the initial underline back into the next paragraph
-                textForPlayer.addAttribute(
-                    NSUnderlineStyleAttributeName,
-                    value: NSUnderlineStyle.StyleDouble.rawValue,
-                    range: NSMakeRange(0, 1))
-                textViewForPlayer.attributedText = textForPlayer
 
             } else if currentParagraph == paragraphs.count - 1 {
                 
