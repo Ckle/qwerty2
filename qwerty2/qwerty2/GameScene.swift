@@ -462,12 +462,16 @@ class GameScene: SKScene, UITextViewDelegate {
                             frame.origin.y -= 80
                             self.textViewForPlayer.frame = frame
                             }, completion: { finished in
-                            })
-                        }
+                                UIView.animateWithDuration(0.8, delay: 0.2, options: .CurveEaseIn, animations: {
+                                    self.textViewForPlayer.alpha = 0.0
+                                    }, completion: { finished in
+                                })}
+                        )}
                 )
                 
                 textDisplay.userInteractionEnabled = false
                 
+                // Delays this until after the animation block executes
                 delay(2.0) {
                     // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
                     // while the completion block happens after the incrementation.
