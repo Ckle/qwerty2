@@ -80,7 +80,7 @@ class GameScene: SKScene, UITextViewDelegate {
     super.init(size: size)
         
         // SKView Properties
-        self.backgroundColor = UIColor(red: 242/255, green: 211/255, blue: 157/255, alpha: 1.0)
+        self.backgroundColor = UIColor(red: 102/255, green: 56/255, blue: 85/255, alpha: 1.0)
 
         // Timer Bar Initialize
         self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
@@ -150,6 +150,13 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
+        
+//        for i in 1...paragraphCount {
+//            textShown1 = CustomTextView(frame: CGRect(x: 0, y: 125 + (50 * i), width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+//
+//            paragraphs.append(textShown1)
+//            self.view?.addSubview(textShown1)
+//        }
     
         textShown1 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown2 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
@@ -167,13 +174,6 @@ class GameScene: SKScene, UITextViewDelegate {
         textShown6.backgroundColor = UIColor.clearColor()
         textShown7.backgroundColor = UIColor.clearColor()
         textShown8.backgroundColor = UIColor.clearColor()
-    
-//        for i in 1...paragraphCount {
-//            textShown1 = CustomTextView(frame: CGRect(x: 0, y: 125 + (50 * i), width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-//            
-//            paragraphs.append(textShown1)
-//            self.view?.addSubview(textShown1)
-//        }
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
