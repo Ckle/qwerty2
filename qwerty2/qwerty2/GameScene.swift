@@ -192,7 +192,7 @@ class GameScene: SKScene, UITextViewDelegate {
         textShown7.attributedText = attrString7
         textShown8.attributedText = attrString8
         
-        // Visibility of the hidden textView 
+        // Visibility of the hidden textView
         textDisplay.hidden = true
         
         // Add UITextView to main view
@@ -462,25 +462,34 @@ class GameScene: SKScene, UITextViewDelegate {
                             frame.origin.y -= 80
                             self.textViewForPlayer.frame = frame
                             }, completion: { finished in
-                                // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
-                                // while the completion block happens after the incrementation.
-                                // self.textViewForPlayer.removeFromSuperview()
-                                self.textViewForPlayer = self.paragraphs[++self.currentParagraph]
-                                self.textForPlayer = self.paragraphStrings[++self.currentString]
-                                
-                                println("\(self.currentParagraph) in \(self.paragraphs.count)")
-                                self.rangeOfText = 0
-                                
-                                // adds the initial underline back into the next paragraph
-                                self.textForPlayer.addAttribute(
-                                    NSUnderlineStyleAttributeName,
-                                    value: NSUnderlineStyle.StyleDouble.rawValue,
-                                    range: NSMakeRange(0, 1))
-                                self.textViewForPlayer.attributedText = self.textForPlayer
                             })
                         }
                 )
-
+                
+                textDisplay.userInteractionEnabled = false
+                
+                delay(2.0) {
+                    // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
+                    // while the completion block happens after the incrementation.
+                    // self.textViewForPlayer.removeFromSuperview()
+                    self.textViewForPlayer = self.paragraphs[++self.currentParagraph]
+                    self.textForPlayer = self.paragraphStrings[++self.currentString]
+                    
+                    println("\(self.currentParagraph) in \(self.paragraphs.count)")
+                    self.rangeOfText = 0
+                    
+                    // adds the initial underline back into the next paragraph
+                    self.textForPlayer.addAttribute(
+                        NSUnderlineStyleAttributeName,
+                        value: NSUnderlineStyle.StyleDouble.rawValue,
+                        range: NSMakeRange(0, 1))
+                    self.textViewForPlayer.attributedText = self.textForPlayer
+                    
+                    self.textDisplay.editable = true
+                    self.textDisplay.userInteractionEnabled = true
+                    println("TRUE")
+                }
+                
             } else if currentParagraph == paragraphs.count - 1 {
                 
                 gameEnded(didWin: true)
@@ -552,6 +561,15 @@ class CustomTextView: UITextView {
 
         return false
     }
+}
+
+func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
 }
 
 
