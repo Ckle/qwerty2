@@ -304,19 +304,11 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if timerBar.size.width < sceneHalfSize / 2  {
             
-            bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronBot.png")
-            fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronTop.png")
-//            self.addChild(bgTimerBar)
-//            timerCrop.addChild(fgTimerBar)
-//            self.addChild(timerCrop)
+            changeTimerColor(color: 2)
             
         } else if timerBar.size.width < sceneHalfSize {
             
-            bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvBot.png")
-            fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvTop.png")
-            self.addChild(bgTimerBar)
-//            timerCrop.addChild(fgTimerBar)
-//            self.addChild(timerCrop)
+            changeTimerColor(color: 1)
             
         }
 
@@ -567,7 +559,48 @@ class GameScene: SKScene, UITextViewDelegate {
         return true
     }
     
-    
+    func changeTimerColor(#color: Int) {
+        
+        if color == 1 {
+           
+            self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvBot.png")
+            self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+            self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+            self.bgTimerBar.size.width = (self.size.width)
+            self.bgTimerBar.size.height = 40
+            self.bgTimerBar.zPosition = 0
+            self.addChild(bgTimerBar)
+            
+            self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvTop.png")
+            self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+            self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+            self.fgTimerBar.size.width = (self.size.width)
+            self.fgTimerBar.size.height = 40
+            
+            timerCrop.addChild(fgTimerBar)
+            
+        } else if color == 2 {
+            
+            self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronBot.png")
+            self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+            self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+            self.bgTimerBar.size.width = (self.size.width)
+            self.bgTimerBar.size.height = 40
+            self.bgTimerBar.zPosition = 0
+            self.addChild(bgTimerBar)
+            
+            self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronTop.png")
+            self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+            self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+            self.fgTimerBar.size.width = (self.size.width)
+            self.fgTimerBar.size.height = 40
+            
+            timerCrop.addChild(fgTimerBar)
+            
+        } else {
+            
+        }
+    }
     
     override func willMoveFromView(view: SKView) {
         
