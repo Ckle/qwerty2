@@ -38,6 +38,7 @@ class GameScene: SKScene, UITextViewDelegate {
     public var paragraphCount = 8
     
     // Timer Bar
+    let bgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
     var timer = NSTimer()
@@ -83,8 +84,15 @@ class GameScene: SKScene, UITextViewDelegate {
         self.backgroundColor = UIColor(red: 102/255, green: 56/255, blue: 85/255, alpha: 1.0)
 
         // Timer Bar Initialize
+        self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
+        self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        self.bgTimerBar.size.width = (self.size.width)
+        self.bgTimerBar.size.height = 40
+        self.addChild(bgTimerBar)
+        
+        self.timerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
         self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-        self.timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
         self.timerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.timerBar.size.width = (self.size.width)
         self.timerBar.size.height = 40
@@ -141,7 +149,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Make the paragraph the default colour
         attrString1.addAttribute(
             NSForegroundColorAttributeName,
-            value: UIColor.blackColor(),
+            value: UIColor(netHex: 0xcd948b),
             range: NSRange(location: 0, length: attrString1.length))
         attrString1.addAttribute(
             NSUnderlineStyleAttributeName,
@@ -156,6 +164,7 @@ class GameScene: SKScene, UITextViewDelegate {
 //
 //            paragraphs.append(textShown1)
 //            self.view?.addSubview(textShown1)
+//            
 //        }
     
         textShown1 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
@@ -366,7 +375,7 @@ class GameScene: SKScene, UITextViewDelegate {
                         UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
                             self.textForPlayer.addAttribute(
                                 NSForegroundColorAttributeName,
-                                value: UIColor.greenColor(),
+                                value: UIColor(netHex: 0x8b505c),
                                 range: nsRangeOfTextShown)
                             self.textViewForPlayer.attributedText = self.textForPlayer
                             }, completion: { finished in
