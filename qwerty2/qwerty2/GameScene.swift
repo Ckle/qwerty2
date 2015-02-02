@@ -187,15 +187,18 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         
-//        for i in 1...paragraphCount {
-//            textShown1 = CustomTextView(frame: CGRect(x: 0, y: 125 + (50 * i), width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-//
-//            paragraphs.append(textShown1)
-//            self.view?.addSubview(textShown1)
-//            
-//        }
+        for i in 1...8 {
+            
+            var converted: CGFloat = CGFloat(i)
+            // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
+            textShown1 = CustomTextView(frame: CGRectMake(0, 125 + (50 * converted), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
+
+            paragraphs.append(textShown1)
+            self.view?.addSubview(textShown1)
+            
+        }
     
-        textShown1 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
+        textShown1 = CustomTextView(frame: CGRect(x: 0, y: 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown2 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown3 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
         textShown4 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 150, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
@@ -558,6 +561,10 @@ class GameScene: SKScene, UITextViewDelegate {
 
         return true
     }
+    
+//    func animateCharacters() {
+//        var fadeOut = CABasicAnimation(key
+//    }
     
     func changeTimerColor(#color: Int) {
         

@@ -27,4 +27,3 @@ println("\(read)")
 var paragraphs: [String] = ["Hi", "Hello"]
 
 paragraphs[0]
-
