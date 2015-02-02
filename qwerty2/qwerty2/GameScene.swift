@@ -39,6 +39,8 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // Timer Bar
     let bgTimerBar = SKSpriteNode()
+    let timerCrop = SKCropNode()
+    var fgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
     var timer = NSTimer()
@@ -82,22 +84,34 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // SKView Properties
         self.backgroundColor = UIColor(red: 102/255, green: 56/255, blue: 85/255, alpha: 1.0)
-
+        
         // Timer Bar Initialize
         self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
         self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.bgTimerBar.size.width = (self.size.width)
         self.bgTimerBar.size.height = 40
+        self.bgTimerBar.zPosition = 0
         self.addChild(bgTimerBar)
         
-        self.timerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
+        self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
+        self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        self.fgTimerBar.size.width = (self.size.width)
+        self.fgTimerBar.size.height = 40
+        
+        self.timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
         self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.timerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.timerBar.size.width = (self.size.width)
         self.timerBar.size.height = 40
-        self.timerBar.zPosition = 5
-        self.addChild(timerBar)
+        
+        // 1. crop node's child is the node that is visible, but being masked by something else
+        // 2. crop node's maskNode property is the thing that will mask the child.
+        // 3. add the crop node to the scene.
+        timerCrop.maskNode = timerBar
+        timerCrop.addChild(fgTimerBar)
+        self.addChild(timerCrop)
         
         // Transition Scene button
         self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
@@ -245,7 +259,7 @@ class GameScene: SKScene, UITextViewDelegate {
         mistakesMade = 0
         
         // Reset Paragraph to default color
-        attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor.blackColor(), range: NSRange(location: 0, length: attrString1.length))
+        attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor(netHex: 0xcd948b), range: NSRange(location: 0, length: attrString1.length))
         attrString1.addAttribute(NSBackgroundColorAttributeName, value: UIColor.clearColor(), range: NSRange(location: 0, length: attrString1.length))
         
         scene?.userInteractionEnabled = true
