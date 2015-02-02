@@ -38,7 +38,7 @@ class GameScene: SKScene, UITextViewDelegate {
     public var paragraphCount = 8
     
     // Timer Bar
-    let bgTimerBar = SKSpriteNode()
+    var bgTimerBar = SKSpriteNode()
     let timerCrop = SKCropNode()
     let timerBarEdge = SKSpriteNode()
     var fgTimerBar = SKSpriteNode()
@@ -108,16 +108,17 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBar.size.height = 40
         
         self.timerCrop.zPosition = 1
-        
+
         // Create the edge of the bar. Child of timerBar to follow it's max X value
         // Also need to add the timerBar or edge won't show
         self.timerBarEdge = SKSpriteNode(imageNamed: "inGameTimerEdge.png")
         self.timerBarEdge.anchorPoint = CGPoint(x: 1,y: 1)
         self.timerBarEdge.size.height = 42
-        self.timerBarEdge.size.width = 30
-        self.timerBarEdge.zPosition = 2
-        timerBar.addChild(timerBarEdge)
+        self.timerBarEdge.size.width = 25
+        self.timerBarEdge.zPosition = 3
+        // timerBar.addChild(timerBarEdge)
         self.addChild(timerBar)
+        self.addChild(timerBarEdge)
         
         // 1. crop node's child is the node that is visible, but being masked by something else
         // 2. crop node's maskNode property is the thing that will mask the child.
@@ -265,7 +266,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBar.size.width = (self.size.width)
         self.timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
         // Moves the edge of the timerBar (a child of timerBar) to stick to the same max X value of the frame of parent
-        self.timerBarEdge.runAction(SKAction.moveToX((CGRectGetMaxX(timerBar.frame)), duration: 0))
+        // self.timerBarEdge.runAction(SKAction.moveToX((CGRectGetMaxX(timerBar.frame)), duration: 0))
         
         // Sets the first character required to 0
         rangeOfText =  0
@@ -303,11 +304,20 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if timerBar.size.width < sceneHalfSize / 2  {
             
-            timerBar.color = UIColor.redColor()
+            bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronBot.png")
+            fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronTop.png")
+//            self.addChild(bgTimerBar)
+//            timerCrop.addChild(fgTimerBar)
+//            self.addChild(timerCrop)
             
         } else if timerBar.size.width < sceneHalfSize {
             
-            timerBar.color = UIColor.orangeColor()
+            bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvBot.png")
+            fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvTop.png")
+//            self.addChild(bgTimerBar)
+//            timerCrop.addChild(fgTimerBar)
+//            self.addChild(timerCrop)
+            
         }
 
         // **Keep for learning purposes**
@@ -592,7 +602,7 @@ class GameScene: SKScene, UITextViewDelegate {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         self.mistakesMadeLabel.text = "\(mistakesMade)"
-        
+        self.timerBarEdge.position = CGPoint(x: CGRectGetMaxX(timerBar.frame), y: (CGRectGetMaxY(self.frame)))
     }
 }
 
