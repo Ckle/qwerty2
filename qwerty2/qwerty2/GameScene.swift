@@ -40,6 +40,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // Timer Bar
     let bgTimerBar = SKSpriteNode()
     let timerCrop = SKCropNode()
+    let timerBarEdge = SKSpriteNode()
     var fgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
     var startTime = NSTimeInterval()
@@ -105,6 +106,18 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.timerBar.size.width = (self.size.width)
         self.timerBar.size.height = 40
+        
+        self.timerCrop.zPosition = 1
+        
+        // Create the edge of the bar. Child of timerBar to follow it's max X value
+        // Also need to add the timerBar or edge won't show
+        self.timerBarEdge = SKSpriteNode(imageNamed: "inGameTimerEdge.png")
+        self.timerBarEdge.anchorPoint = CGPoint(x: 1,y: 1)
+        self.timerBarEdge.size.height = 42
+        self.timerBarEdge.size.width = 30
+        self.timerBarEdge.zPosition = 2
+        timerBar.addChild(timerBarEdge)
+        self.addChild(timerBar)
         
         // 1. crop node's child is the node that is visible, but being masked by something else
         // 2. crop node's maskNode property is the thing that will mask the child.
@@ -251,6 +264,8 @@ class GameScene: SKScene, UITextViewDelegate {
         startTime = NSDate.timeIntervalSinceReferenceDate()
         self.timerBar.size.width = (self.size.width)
         self.timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
+        // Moves the edge of the timerBar (a child of timerBar) to stick to the same max X value of the frame of parent
+        self.timerBarEdge.runAction(SKAction.moveToX((CGRectGetMaxX(timerBar.frame)), duration: 0))
         
         // Sets the first character required to 0
         rangeOfText =  0
