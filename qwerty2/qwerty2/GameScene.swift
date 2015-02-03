@@ -223,7 +223,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (25-20+1)) + 20)
+        gameTime = CGFloat((arc4random() % (42-39+1)) + 39)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -458,7 +458,7 @@ class GameScene: SKScene, UITextViewDelegate {
             // along with the current attributed string that needs to now have its new attributes changed.
             // paragraphs.count is -1 because it counts 3 items, when an array starts index 0 ie (0,1,2) != (1,2,3)
             if currentParagraph < paragraphs.count - 1 {
-            
+                
                 // Animates the paragraphs going down, and back up
                 UIView.animateWithDuration(0.4, delay: 0.2, options: .CurveEaseOut, animations: {
                     var frame = self.textViewForPlayer.frame
@@ -476,6 +476,24 @@ class GameScene: SKScene, UITextViewDelegate {
                                 })}
                         )}
                 )
+                
+                for i in 1..<(paragraphCount - currentParagraph) {
+                    
+                    var delay: NSTimeInterval = NSTimeInterval(i / 5)
+                    UIView.animateWithDuration(0.4, delay: delay, options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
+                        var frame = self.paragraphs[i].frame
+                        frame.origin.y += 20
+                        self.paragraphs[i].frame = frame
+                        }, completion: { finished in
+                            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+                                var frame = self.paragraphs[i].frame
+                                frame.origin.y -= 80
+                                self.paragraphs[i].frame = frame
+                                }, completion: { finished in
+                                    }
+                            )}
+                    )
+                }
                 
                 textDisplay.userInteractionEnabled = false
                 
