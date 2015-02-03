@@ -460,7 +460,7 @@ class GameScene: SKScene, UITextViewDelegate {
             if currentParagraph < paragraphs.count - 1 {
                 
                 // Animates the paragraphs going down, and back up
-                UIView.animateWithDuration(0.4, delay: 0.2, options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.4, delay: 0.25, options: .CurveEaseOut, animations: {
                     var frame = self.textViewForPlayer.frame
                     frame.origin.y += 20
                     self.textViewForPlayer.frame = frame
@@ -479,8 +479,8 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 for i in 1..<(paragraphCount - currentParagraph) {
                     
-                    var delay: NSTimeInterval = NSTimeInterval(i / 5)
-                    UIView.animateWithDuration(0.4, delay: delay, options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
+                    var delay: Double = Double(i * (1 / 4))
+                    UIView.animateWithDuration(0.4, delay: 0.25 + delay, options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
                         var frame = self.paragraphs[i].frame
                         frame.origin.y += 20
                         self.paragraphs[i].frame = frame
