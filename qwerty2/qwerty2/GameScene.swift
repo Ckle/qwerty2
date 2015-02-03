@@ -191,7 +191,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var converted: CGFloat = CGFloat(i)
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(0, 125 + (50 * converted), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(0, 150 + (50 * converted), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
 
             paragraphs.append(textShown1)
             self.view?.addSubview(textShown1)
@@ -562,9 +562,13 @@ class GameScene: SKScene, UITextViewDelegate {
         return true
     }
     
-//    func animateCharacters() {
-//        var fadeOut = CABasicAnimation(key
-//    }
+    func animateCharacters() {
+        var fadeOut = CABasicAnimation(keyPath: "opacity")
+        fadeOut.duration = 0.5
+        fadeOut.fillMode = kCAFillModeForwards
+        fadeOut.toValue = NSNumber(double: 0.0)
+        
+    }
     
     func changeTimerColor(#color: Int) {
         
