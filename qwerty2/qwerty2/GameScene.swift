@@ -175,11 +175,7 @@ class GameScene: SKScene, UITextViewDelegate {
     
     func addUIElements() {
         
-        // Make the paragraph the default colour
-        attrString1.addAttribute(
-            NSForegroundColorAttributeName,
-            value: UIColor(netHex: 0xcd948b),
-            range: NSRange(location: 0, length: attrString1.length))
+        // Add Underline to first attrString in array
         paragraphStrings[0].addAttribute(
             NSUnderlineStyleAttributeName,
             value: NSUnderlineStyle.StyleDouble.rawValue,
@@ -192,16 +188,18 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(0, 150 + (50 * paragraphNumber), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(50, 150 + (80 * paragraphNumber), CGRectGetWidth(self.frame) - 50, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
-            textShown1.attributedText = paragraphStrings[i]
             paragraphs.append(textShown1)
             
-            // Make the paragraph the default colour
+            // Make the paragraphs the default colour
             paragraphStrings[i].addAttribute(
                 NSForegroundColorAttributeName,
                 value: UIColor(netHex: 0xcd948b),
                 range: NSRange(location: 0, length: paragraphStrings[i].length))
+            
+            // Add the attributes to the attributed text
+            textShown1.attributedText = paragraphStrings[i]
             
             self.view?.addSubview(textShown1)
             
