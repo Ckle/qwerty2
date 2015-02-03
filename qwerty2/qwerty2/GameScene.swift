@@ -139,6 +139,23 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.addChild(mistakesMadeLabel)
         
+        // Type
+        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont2 = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
+        let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
+        // Define string attributes
+        
+        // Create locally formatted strings
+        attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "The male man, who has the name Jake", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
+        attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
+        attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
+        attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
+        attrString7 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
+        attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
+        
+        paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -157,29 +174,13 @@ class GameScene: SKScene, UITextViewDelegate {
     }
     
     func addUIElements() {
-       
-        // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
-        let textFont2 = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
-        let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
-        // Define string attributes
-        
-        // Create locally formatted strings
-        attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "The male man, who has the name Jake", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
-        attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
-        attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
-        attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
-        attrString7 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
-        attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
         
         // Make the paragraph the default colour
         attrString1.addAttribute(
             NSForegroundColorAttributeName,
             value: UIColor(netHex: 0xcd948b),
             range: NSRange(location: 0, length: attrString1.length))
-        attrString1.addAttribute(
+        paragraphStrings[0].addAttribute(
             NSUnderlineStyleAttributeName,
             value: NSUnderlineStyle.StyleDouble.rawValue,
             range: NSMakeRange(0, 1))
@@ -187,33 +188,24 @@ class GameScene: SKScene, UITextViewDelegate {
         // Create UITextView
         textDisplay = UITextView(frame: CGRect(x: 0, y: 20, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-60))
         
-        for i in 1...8 {
+        for i in 0..<paragraphCount {
             
-            var converted: CGFloat = CGFloat(i)
+            var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(0, 150 + (50 * converted), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
-
+            textShown1 = CustomTextView(frame: CGRectMake(0, 150 + (50 * paragraphNumber), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-400))
+            textShown1.backgroundColor = UIColor.clearColor()
+            textShown1.attributedText = paragraphStrings[i]
             paragraphs.append(textShown1)
+            
+            // Make the paragraph the default colour
+            paragraphStrings[i].addAttribute(
+                NSForegroundColorAttributeName,
+                value: UIColor(netHex: 0xcd948b),
+                range: NSRange(location: 0, length: paragraphStrings[i].length))
+            
             self.view?.addSubview(textShown1)
             
         }
-    
-        textShown1 = CustomTextView(frame: CGRect(x: 0, y: 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown2 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 50, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown3 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 100, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown4 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 150, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown5 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 200, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown6 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 250, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown7 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 300, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown8 = CustomTextView(frame: CGRect(x: 0, y: textShownYPos + 350, width: CGRectGetWidth(self.frame), height: CGRectGetHeight(self.frame)-400))
-        textShown1.backgroundColor = UIColor.clearColor()
-        textShown2.backgroundColor = UIColor.clearColor()
-        textShown3.backgroundColor = UIColor.clearColor()
-        textShown4.backgroundColor = UIColor.clearColor()
-        textShown5.backgroundColor = UIColor.clearColor()
-        textShown6.backgroundColor = UIColor.clearColor()
-        textShown7.backgroundColor = UIColor.clearColor()
-        textShown8.backgroundColor = UIColor.clearColor()
         
         // Bring Up Keyboard Immediately
         textDisplay.autocorrectionType = UITextAutocorrectionType.No
@@ -223,34 +215,13 @@ class GameScene: SKScene, UITextViewDelegate {
         // Add string to UITextView
         textDisplay.attributedText = attrString1
         
-        textShown1.attributedText = attrString1
-        textShown2.attributedText = attrString2
-        textShown3.attributedText = attrString3
-        textShown4.attributedText = attrString4
-        textShown5.attributedText = attrString5
-        textShown6.attributedText = attrString6
-        textShown7.attributedText = attrString7
-        textShown8.attributedText = attrString8
-        
         // Visibility of the hidden textView
         textDisplay.hidden = true
         
         // Add UITextView to main view
         self.view?.addSubview(textDisplay)
-        self.view?.addSubview(textShown1)
-        self.view?.addSubview(textShown2)
-        self.view?.addSubview(textShown3)
-        self.view?.addSubview(textShown4)
-        self.view?.addSubview(textShown5)
-        self.view?.addSubview(textShown6)
-        self.view?.addSubview(textShown7)
-        self.view?.addSubview(textShown8)
         
         // Creating Arrays of TextViews and AttributedStrings to be used in cursor mvmt
-        paragraphs = [textShown1, textShown2, textShown3]
-        currentParagraph = 0
-        paragraphStrings = [attrString1, attrString2, attrString3]
-        currentString = 0
         textViewForPlayer = paragraphs[0]
         textForPlayer = paragraphStrings[0]
         
@@ -276,6 +247,10 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Sets mistakes to 0
         mistakesMade = 0
+        
+        // variables to set the array index of paragraphs & paragraphStrings back to 0
+        currentParagraph = 0
+        currentString = 0
         
         // Reset Paragraph to default color
         attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor(netHex: 0xcd948b), range: NSRange(location: 0, length: attrString1.length))
@@ -617,14 +592,10 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Remove these UITextViews from the SKView
         textDisplay.removeFromSuperview()
-        textShown1.removeFromSuperview()
-        textShown2.removeFromSuperview()
-        textShown3.removeFromSuperview()
-        textShown4.removeFromSuperview()
-        textShown5.removeFromSuperview()
-        textShown6.removeFromSuperview()
-        textShown7.removeFromSuperview()
-        textShown8.removeFromSuperview()
+        
+        for i in 0..<paragraphCount {
+            paragraphs[i].removeFromSuperview()
+        }
 
     }
     
