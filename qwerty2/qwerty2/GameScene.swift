@@ -19,14 +19,6 @@ class GameScene: SKScene, UITextViewDelegate {
     var textDisplay = UITextView() // Hidden textView just to detect typing
     let textShownYPos: CGFloat = 150
     var textShown1 = CustomTextView()
-    var textShown2 = CustomTextView()
-    var textShown3 = CustomTextView()
-    var textShown4 = CustomTextView()
-    var textShown5 = CustomTextView()
-    var textShown6 = CustomTextView()
-    var textShown7 = CustomTextView()
-    var textShown8 = CustomTextView()
-    var textShown9 = CustomTextView()
     var paragraphStrings: [NSMutableAttributedString] = [] // An array that all the other AttributedStrings are attached to
     var paragraphs: [CustomTextView] = [] // An array that all the other textViews are added to
     var currentString = Int() // Integer that points to item in AS array
