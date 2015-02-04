@@ -356,31 +356,31 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 // BELOW NOT NEEDED NOW BECAUSE OF ANIMATION.
                 // Changes the color of the text if correct letter was typed
-//                textForPlayer.addAttribute(
-//                    NSForegroundColorAttributeName,
-//                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
-//                    range: nsRangeOfTextShown)
-//                // have to make sure to add the attributed text string to the UITextView or it won't show
-//                
-//                textViewForPlayer.attributedText = textForPlayer
+                textForPlayer.addAttribute(
+                    NSForegroundColorAttributeName,
+                    value: UIColor(netHex: 0x8b505c),
+                    range: nsRangeOfTextShown)
+                // have to make sure to add the attributed text string to the UITextView or it won't show
                 
-                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-                    self.textForPlayer.addAttribute(
-                        NSForegroundColorAttributeName,
-                        value: UIColor.clearColor(),
-                        range: nsRangeOfTextShown)
-                    self.textViewForPlayer.attributedText = self.textForPlayer
-                    }, completion: { finished in
-                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-                            self.textForPlayer.addAttribute(
-                                NSForegroundColorAttributeName,
-                                value: UIColor(netHex: 0x8b505c),
-                                range: nsRangeOfTextShown)
-                            self.textViewForPlayer.attributedText = self.textForPlayer
-                            }, completion: { finished in
-                        })
-                        println("FINISHED2")}
-                )
+                textViewForPlayer.attributedText = textForPlayer
+                
+//                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+//                    self.textForPlayer.addAttribute(
+//                        NSForegroundColorAttributeName,
+//                        value: UIColor.clearColor(),
+//                        range: nsRangeOfTextShown)
+//                    self.textViewForPlayer.attributedText = self.textForPlayer
+//                    }, completion: { finished in
+//                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+//                            self.textForPlayer.addAttribute(
+//                                NSForegroundColorAttributeName,
+//                                value: UIColor(netHex: 0x8b505c),
+//                                range: nsRangeOfTextShown)
+//                            self.textViewForPlayer.attributedText = self.textForPlayer
+//                            }, completion: { finished in
+//                        })
+//                        println("FINISHED2")}
+//                )
                 
                 
             } else if charTyped != charRequired {
@@ -427,7 +427,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 // Changes the color of the text if correct letter was typed
                 textForPlayer.addAttribute(
                     NSForegroundColorAttributeName,
-                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
+                    value: UIColor(netHex: 0x8b505c),
                     range: nsRangeOfTextShown)
                 // have to make sure to add the attributed text string to the UITextView or it won't show
                 textViewForPlayer.attributedText = textForPlayer
@@ -460,35 +460,34 @@ class GameScene: SKScene, UITextViewDelegate {
             if currentParagraph < paragraphs.count - 1 {
                 
                 // Animates the paragraphs going down, and back up
-                UIView.animateWithDuration(0.4, delay: 0.25, options: .CurveEaseOut, animations: {
+                UIView.animateWithDuration(0.1, delay: 0.25, options: .CurveEaseOut, animations: {
                     var frame = self.textViewForPlayer.frame
-                    frame.origin.y += 20
+                    frame.origin.y += 10
                     self.textViewForPlayer.frame = frame
                     }, completion: { finished in
                         UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
                             var frame = self.textViewForPlayer.frame
-                            frame.origin.y -= 80
+                            frame.origin.y -= 100
                             self.textViewForPlayer.frame = frame
                             }, completion: { finished in
-                                UIView.animateWithDuration(0.8, delay: 0.2, options: .CurveEaseIn, animations: {
+                                UIView.animateWithDuration(0.8, delay: 0.2, options: .CurveEaseOut, animations: {
                                     self.textViewForPlayer.alpha = 0.0
                                     }, completion: { finished in
                                 })}
                         )}
                 )
                 
-                for i in 1..<(paragraphCount - currentParagraph) {
+                for i in (currentParagraph + 1)..<(paragraphCount - currentParagraph) {
                     
                     var delay: Double = (1 / 4) * Double(i)
-                    println("\(delay)\(i)")
-                    UIView.animateWithDuration(0.4, delay: (0.25 + delay), options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
+                    UIView.animateWithDuration(0.1, delay: (0.25 + delay), options: .CurveEaseOut, animations: {
                         var frame = self.paragraphs[i].frame
-                        frame.origin.y += 20
+                        frame.origin.y += 10
                         self.paragraphs[i].frame = frame
                         }, completion: { finished in
                             UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
                                 var frame = self.paragraphs[i].frame
-                                frame.origin.y -= 80
+                                frame.origin.y -= 100
                                 self.paragraphs[i].frame = frame
                                 }, completion: { finished in
                                     }
