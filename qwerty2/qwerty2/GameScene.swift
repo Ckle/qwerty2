@@ -479,8 +479,9 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 for i in 1..<(paragraphCount - currentParagraph) {
                     
-                    var delay: Double = Double(i * (1 / 4))
-                    UIView.animateWithDuration(0.4, delay: 0.25 + delay, options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
+                    var delay: Double = (1 / 4) * Double(i)
+                    println("\(delay)\(i)")
+                    UIView.animateWithDuration(0.4, delay: (0.25 + delay), options: .CurveEaseOut | .BeginFromCurrentState | .AllowAnimatedContent, animations: {
                         var frame = self.paragraphs[i].frame
                         frame.origin.y += 20
                         self.paragraphs[i].frame = frame
