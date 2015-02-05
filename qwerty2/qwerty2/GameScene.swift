@@ -27,7 +27,7 @@ class GameScene: SKScene, UITextViewDelegate {
     var textViewForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
-    public var paragraphCount = 8
+    public var paragraphCount = 4
     
     // Timer Bar
     var bgTimerBar = SKSpriteNode()
@@ -223,7 +223,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (52-49+1)) + 49)
+        gameTime = CGFloat((arc4random() % (82-79+1)) + 49)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -480,7 +480,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 paraAnimDelay = 0 // To reset this value to be used in the for loop for animatinag paras below
                 
-                for i in (currentParagraph + 1)..<(paragraphCount - 1) {
+                for i in (currentParagraph + 1)..<(paragraphCount) {
                     
                     paraAnimDelay++
                     var delay: Double = (1 / 4) * Double(paraAnimDelay)
@@ -502,7 +502,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 textDisplay.userInteractionEnabled = false
                 
                 // Delays this until after the animation block executes
-                delay(2.0) {
+                delay(3.0) {
                     // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
                     // while the completion block happens after the incrementation.
                     // self.textViewForPlayer.removeFromSuperview()
