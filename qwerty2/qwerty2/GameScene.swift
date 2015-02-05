@@ -223,7 +223,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (42-39+1)) + 39)
+        gameTime = CGFloat((arc4random() % (52-49+1)) + 49)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -322,6 +322,7 @@ class GameScene: SKScene, UITextViewDelegate {
         var charTyped = text // Character that was typed
         totalCharsShown = (countElements(textViewForPlayer.text)) // Used to detect win condition
         var charRequired = String() // Character that needs to be typed next
+        var paraAnimDelay = Double() // Used for the animation of paragraphs
         
         // Since changing the attributed String range REQUIRES an NSRange 
         // (rangeOfTextShown is a Range, not NSRange - the testRange String 
@@ -354,33 +355,33 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 println("CORRECT")
                 
-                // BELOW NOT NEEDED NOW BECAUSE OF ANIMATION.
-                // Changes the color of the text if correct letter was typed
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(netHex: 0x8b505c),
-                    range: nsRangeOfTextShown)
-                // have to make sure to add the attributed text string to the UITextView or it won't show
+//                // BELOW NOT NEEDED NOW BECAUSE OF ANIMATION.
+//                // Changes the color of the text if correct letter was typed
+//                textForPlayer.addAttribute(
+//                    NSForegroundColorAttributeName,
+//                    value: UIColor(netHex: 0x8b505c),
+//                    range: nsRangeOfTextShown)
+//                // have to make sure to add the attributed text string to the UITextView or it won't show
+//                
+//                textViewForPlayer.attributedText = textForPlayer
                 
-                textViewForPlayer.attributedText = textForPlayer
-                
-//                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-//                    self.textForPlayer.addAttribute(
-//                        NSForegroundColorAttributeName,
-//                        value: UIColor.clearColor(),
-//                        range: nsRangeOfTextShown)
-//                    self.textViewForPlayer.attributedText = self.textForPlayer
-//                    }, completion: { finished in
-//                        UIView.transitionWithView(self.textViewForPlayer, duration: 2.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-//                            self.textForPlayer.addAttribute(
-//                                NSForegroundColorAttributeName,
-//                                value: UIColor(netHex: 0x8b505c),
-//                                range: nsRangeOfTextShown)
-//                            self.textViewForPlayer.attributedText = self.textForPlayer
-//                            }, completion: { finished in
-//                        })
-//                        println("FINISHED2")}
-//                )
+                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+                    self.textForPlayer.addAttribute(
+                        NSForegroundColorAttributeName,
+                        value: UIColor.whiteColor(),
+                        range: nsRangeOfTextShown)
+                    self.textViewForPlayer.attributedText = self.textForPlayer
+                    }, completion: { finished in
+                        UIView.transitionWithView(self.textViewForPlayer, duration: 0.2, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+                            self.textForPlayer.addAttribute(
+                                NSForegroundColorAttributeName,
+                                value: UIColor(netHex: 0x8b505c),
+                                range: nsRangeOfTextShown)
+                            self.textViewForPlayer.attributedText = self.textForPlayer
+                            }, completion: { finished in
+                        })
+                        println("FINISHED2")}
+                )
                 
                 
             } else if charTyped != charRequired {
@@ -412,7 +413,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 addToRange()
             }
             
-        } else {
+        } else { // This is when player reaches end of a paragraph
             
             var rangeOfTextShown: Range = Range(
                 start: advance(textViewForPlayer.text.startIndex, rangeOfText),
@@ -477,9 +478,12 @@ class GameScene: SKScene, UITextViewDelegate {
                         )}
                 )
                 
-                for i in (currentParagraph + 1)..<(paragraphCount - currentParagraph) {
+                paraAnimDelay = 0 // To reset this value to be used in the for loop for animatinag paras below
+                
+                for i in (currentParagraph + 1)..<(paragraphCount - 1) {
                     
-                    var delay: Double = (1 / 4) * Double(i)
+                    paraAnimDelay++
+                    var delay: Double = (1 / 4) * Double(paraAnimDelay)
                     UIView.animateWithDuration(0.1, delay: (0.25 + delay), options: .CurveEaseOut, animations: {
                         var frame = self.paragraphs[i].frame
                         frame.origin.y += 10
@@ -537,7 +541,7 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
         
-        if mistakesMade == 3 {
+        if mistakesMade == 30 {
             
             gameEnded(didWin: false)
         }
