@@ -181,7 +181,7 @@ class GameScene: SKScene, UITextViewDelegate {
         let progressTileGap = progressTileWidth * 1.2
         let selectorWidth = progressTileWidth * CGFloat(paragraphCount) + (progressTileGap * CGFloat(paragraphCount)-2)
         var x = (self.frame.width - selectorWidth) / 2
-        var y = self.frame.height / 2
+        var y = self.frame.height / 2 + 80
         
         for i in 1...paragraphCount {
             
@@ -226,7 +226,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-380))
+            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 175 + (90 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
             textShown1.center.x = CGRectGetMidX(self.frame)
             paragraphs.append(textShown1)
