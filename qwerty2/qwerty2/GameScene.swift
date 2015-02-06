@@ -16,7 +16,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // --------------------------- GAME VARIABLEs
     
     // UITextViews
-    let textDisplay = UITextView() // Hidden textView just to detect typing
+    var textDisplay = UITextView() // Hidden textView just to detect typing
     let textShownYPos: CGFloat = 150
     var textShown1 = CustomTextView()
     var paragraphStrings: [NSMutableAttributedString] = [] // An array that all the other AttributedStrings are attached to
@@ -73,7 +73,10 @@ class GameScene: SKScene, UITextViewDelegate {
     // Header Bar
     var header = SKSpriteNode()
     var bgContainer = SKSpriteNode()
-    var
+    
+    // Progress Bar
+    var progressMarkerOff = SKSpriteNode()
+    var progressMarkerOn = SKSpriteNode()
     
     // -------------------------- INITs
     
@@ -171,6 +174,26 @@ class GameScene: SKScene, UITextViewDelegate {
         self.header.size.height = 150
         self.header.anchorPoint = CGPoint(x: 0,y: 1)
         gameLayer.addChild(header)
+        
+        // Progress for paragraphs marker
+        self.progressMarkerOn = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
+        let progressTileWidth = progressMarkerOn.size.width / 4
+        let progressTileGap = progressTileWidth * 1.2
+        let selectorWidth = progressTileWidth * CGFloat(paragraphCount) + (progressTileGap * CGFloat(paragraphCount)-2)
+        var x = (self.frame.width - selectorWidth) / 2
+        var y = self.frame.height / 2
+        
+        for i in 1...paragraphCount {
+            
+            self.progressMarkerOff = SKSpriteNode(imageNamed: "inGameProgress-OFF.png")
+            progressMarkerOff.position = CGPoint(x: x, y: y)
+            progressMarkerOff.xScale = 0.3
+            progressMarkerOff.yScale = 0.3
+            
+            x += progressTileWidth + progressTileGap
+            gameLayer.addChild(progressMarkerOff)
+        }
+
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -203,7 +226,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-380))
             textShown1.backgroundColor = UIColor.clearColor()
             textShown1.center.x = CGRectGetMidX(self.frame)
             paragraphs.append(textShown1)
