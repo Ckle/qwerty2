@@ -16,7 +16,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // --------------------------- GAME VARIABLEs
     
     // UITextViews
-    var textDisplay = UITextView() // Hidden textView just to detect typing
+    let textDisplay = UITextView() // Hidden textView just to detect typing
     let textShownYPos: CGFloat = 150
     var textShown1 = CustomTextView()
     var paragraphStrings: [NSMutableAttributedString] = [] // An array that all the other AttributedStrings are attached to
@@ -72,14 +72,24 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // Header Bar
     var header = SKSpriteNode()
+    var bgContainer = SKSpriteNode()
+    var
     
     // -------------------------- INITs
     
     override init(size: CGSize) {
     super.init(size: size)
         
+        // Add Game Layer
         self.addChild(gameLayer)
         
+        // Add BG Lighter Color Container
+        self.bgContainer.size = CGSize(width: CGRectGetMaxX(self.frame)-60, height: CGRectGetMaxY(self.frame)-200)
+        self.bgContainer.color = UIColor(netHex: 0x72405f)
+        self.bgContainer.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame)+100)
+        self.bgContainer.anchorPoint = CGPoint(x: 0.5, y: 1)
+        gameLayer.addChild(bgContainer)
+    
         // SKView Properties
         self.backgroundColor = UIColor(netHex: 0x663855)
         
@@ -193,8 +203,9 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(50, 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 50, CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
+            textShown1.center.x = CGRectGetMidX(self.frame)
             paragraphs.append(textShown1)
             
             // Make the paragraphs the default colour
@@ -496,7 +507,7 @@ class GameScene: SKScene, UITextViewDelegate {
                         }, completion: { finished in
                             UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
                                 var frame = self.paragraphs[i].frame
-                                frame.origin.y -= 100
+                                frame.origin.y -= 110
                                 self.paragraphs[i].frame = frame
                                 }, completion: { finished in
                                     }
