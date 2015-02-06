@@ -56,7 +56,6 @@ class GameScene: SKScene, UITextViewDelegate {
     
     // Game Layers
     let gameLayer = SKNode()
-    let gameObjects = SKNode()
     let gameMenu = SKNode()
     let gameOverLayer = SKNode()
     
@@ -79,6 +78,8 @@ class GameScene: SKScene, UITextViewDelegate {
     override init(size: CGSize) {
     super.init(size: size)
         
+        self.addChild(gameLayer)
+        
         // SKView Properties
         self.backgroundColor = UIColor(netHex: 0x663855)
         
@@ -87,9 +88,9 @@ class GameScene: SKScene, UITextViewDelegate {
         self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.bgTimerBar.size.width = (self.size.width)
-        self.bgTimerBar.size.height = 40
+        self.bgTimerBar.size.height = 41
         self.bgTimerBar.zPosition = 0
-        self.addChild(bgTimerBar)
+        gameLayer.addChild(bgTimerBar)
         
         self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
         self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
@@ -113,15 +114,15 @@ class GameScene: SKScene, UITextViewDelegate {
         self.timerBarEdge.size.width = 25
         self.timerBarEdge.zPosition = 3
         // timerBar.addChild(timerBarEdge)
-        self.addChild(timerBar)
-        self.addChild(timerBarEdge)
+        gameLayer.addChild(timerBar)
+        gameLayer.addChild(timerBarEdge)
         
         // 1. crop node's child is the node that is visible, but being masked by something else
         // 2. crop node's maskNode property is the thing that will mask the child.
         // 3. add the crop node to the scene.
         timerCrop.maskNode = timerBar
         timerCrop.addChild(fgTimerBar)
-        self.addChild(timerCrop)
+        gameLayer.addChild(timerCrop)
         
         // Transition Scene button
 //        self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
@@ -134,7 +135,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontName = "Helvetica Neue"
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
         self.mistakesMadeLabel.zPosition = 5
-        self.addChild(mistakesMadeLabel)
+        gameLayer.addChild(mistakesMadeLabel)
         
         // Type
         let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-LightItalic", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
@@ -159,7 +160,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.header.size.width = CGRectGetWidth(self.frame)
         self.header.size.height = 150
         self.header.anchorPoint = CGPoint(x: 0,y: 1)
-        self.addChild(header)
+        gameLayer.addChild(header)
     }
 
     required init?(coder aDecoder: NSCoder) {
