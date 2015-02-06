@@ -27,7 +27,8 @@ class GameScene: SKScene, UITextViewDelegate {
     var textViewForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
-    public var paragraphCount = 4
+    public var paragraphCount = 8
+    var delayShrink = Double()
     
     // Timer Bar
     var bgTimerBar = SKSpriteNode()
@@ -69,6 +70,9 @@ class GameScene: SKScene, UITextViewDelegate {
     var attrString7 = NSMutableAttributedString()
     var attrString8 = NSMutableAttributedString()
     var attrString9 = NSMutableAttributedString()
+    
+    // Header Bar
+    var header = SKSpriteNode()
     
     // -------------------------- INITs
     
@@ -129,6 +133,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.mistakesMadeLabel.fontSize = 40.00
         self.mistakesMadeLabel.fontName = "Helvetica Neue"
         self.mistakesMadeLabel.fontColor = SKColor.blackColor()
+        self.mistakesMadeLabel.zPosition = 5
         self.addChild(mistakesMadeLabel)
         
         // Type
@@ -139,8 +144,8 @@ class GameScene: SKScene, UITextViewDelegate {
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "The male man, who has the name Jake", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "recently started meeting frequently", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "My male man, Jake", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "has started meeting frequently", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
         attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
         attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
@@ -148,6 +153,14 @@ class GameScene: SKScene, UITextViewDelegate {
         attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
+        
+        let headerTexture = SKTexture(imageNamed: "inGameHeader-1.png")
+        self.header = SKSpriteNode(texture: headerTexture)
+        self.header.position = CGPoint(x: 0, y: CGRectGetMaxY(self.frame)-39)
+        self.header.size.width = CGRectGetWidth(self.frame)
+        self.header.size.height = 150
+        self.header.anchorPoint = CGPoint(x: 0,y: 1)
+        self.addChild(header)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -180,7 +193,7 @@ class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(50, 150 + (80 * paragraphNumber), CGRectGetWidth(self.frame) - 50, CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(50, 150 + (100 * paragraphNumber), CGRectGetWidth(self.frame) - 50, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
             paragraphs.append(textShown1)
             
@@ -241,6 +254,9 @@ class GameScene: SKScene, UITextViewDelegate {
         // variables to set the array index of paragraphs & paragraphStrings back to 0
         currentParagraph = 0
         currentString = 0
+        
+        // Shrink delay between paragraphs
+        delayShrink = 2.0
         
         // Reset Paragraph to default color
         attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor(netHex: 0xcd948b), range: NSRange(location: 0, length: attrString1.length))
@@ -501,8 +517,9 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 textDisplay.userInteractionEnabled = false
                 
+                delayShrink -= 0.1
                 // Delays this until after the animation block executes
-                delay(3.0) {
+                delay(delayShrink) {
                     // I have to put the incrementation in here, otherwise .animateWithDuration will return immediately,
                     // while the completion block happens after the incrementation.
                     // self.textViewForPlayer.removeFromSuperview()
@@ -541,7 +558,7 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
         
-        if mistakesMade == 30 {
+        if mistakesMade == 3 {
             
             gameEnded(didWin: false)
         }
