@@ -537,7 +537,7 @@ class GameScene: SKScene, UITextViewDelegate {
                         }, completion: { finished in
                             UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
                                 var frame = self.paragraphs[i].frame
-                                frame.origin.y -= 110
+                                frame.origin.y -= 93
                                 self.paragraphs[i].frame = frame
                                 }, completion: { finished in
                                     }
@@ -608,7 +608,13 @@ class GameScene: SKScene, UITextViewDelegate {
     func updateProgressNodes() {
         
         var progressNode = progressMarkers[currentParagraph]
+        
         progressNode = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
+        // Makes the new node same position as old one
+        progressNode.position = progressMarkers[currentParagraph].position
+        progressNode.xScale = 0.3
+        progressNode.yScale = 0.3
+        
         gameLayer.addChild(progressNode)
         
     }
