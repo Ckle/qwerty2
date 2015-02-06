@@ -615,6 +615,10 @@ class GameScene: SKScene, UITextViewDelegate {
         progressNode.xScale = 0.3
         progressNode.yScale = 0.3
         
+        let scaleUp = SKAction.scaleTo(0.5, duration: 0.1)
+        let scaleDown = SKAction.scaleTo(0.3, duration: 0.2)
+        progressNode.runAction(SKAction.sequence([scaleUp, scaleDown]))
+        
         gameLayer.addChild(progressNode)
         
     }
