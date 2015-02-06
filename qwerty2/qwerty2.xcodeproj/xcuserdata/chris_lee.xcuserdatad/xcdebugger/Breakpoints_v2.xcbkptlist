@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/TitleScene.swift"
-            timestampString = "440720661.244386"
+            timestampString = "444900624.360004"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "touchesBegan(_:withEvent:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "gameEnded(didWin:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "updateTime()"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "didMoveToView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -214,11 +214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "gameEnded(didWin:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -334,11 +334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "addUIElements()"
             landmarkType = "5">
          </BreakpointContent>
@@ -350,11 +350,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "addUIElements()"
             landmarkType = "5">
          </BreakpointContent>
@@ -398,11 +398,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -430,13 +430,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898485.690077"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "669"
-            endingLineNumber = "669"
-            landmarkName = "willMoveFromView(_:)"
-            landmarkType = "5">
+            startingLineNumber = "668"
+            endingLineNumber = "668">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -446,11 +444,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "275"
-            endingLineNumber = "275"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "updateTime()"
             landmarkType = "5">
          </BreakpointContent>
@@ -462,7 +460,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898485.690077"
+            timestampString = "444899717.302739"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
+            landmarkName = "changeTimerColor(color:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "qwerty2/GameScene.swift"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "606"
@@ -478,27 +492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898485.690077"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
-            landmarkName = "changeTimerColor(color:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898401.03335"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "513"
-            endingLineNumber = "513"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -526,11 +524,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444894456.909785"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "addUIElements()"
             landmarkType = "5">
          </BreakpointContent>
@@ -542,11 +540,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898401.03335"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -558,11 +556,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898829.34276"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -570,15 +568,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/GameScene.swift"
-            timestampString = "444898847.337357"
+            timestampString = "444899717.302739"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
             landmarkName = "textView(_:shouldChangeTextInRange:replacementText:)"
             landmarkType = "5">
          </BreakpointContent>

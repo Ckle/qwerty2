@@ -80,7 +80,7 @@ class GameScene: SKScene, UITextViewDelegate {
     super.init(size: size)
         
         // SKView Properties
-        self.backgroundColor = UIColor(red: 102/255, green: 56/255, blue: 85/255, alpha: 1.0)
+        self.backgroundColor = UIColor(netHex: 0x663855)
         
         // Timer Bar Initialize
         self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
@@ -137,8 +137,7 @@ class GameScene: SKScene, UITextViewDelegate {
         self.addChild(mistakesMadeLabel)
         
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "Georgia", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
-        let textFont2 = [NSFontAttributeName: UIFont(name: "Georgia", size: 60.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-LightItalic", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         // Define string attributes
         

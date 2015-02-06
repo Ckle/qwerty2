@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5B023FFB1A77FDF700C833F2 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B023FFA1A77FDF700C833F2 /* Sprites.atlas */; };
-		5B0D44AC1A7847AE00082948 /* 1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5B0D44AB1A7847AE00082948 /* 1.txt */; };
 		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
 		5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A688D1A6089B8007209C5 /* GameOverScene.swift */; };
+		5B75645E1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */; };
+		5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */; };
 		5B7E89311A74326300B50AEA /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */; };
 		5B9079901A57759F0063A5E0 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B90798F1A57759F0063A5E0 /* Levels.swift */; };
 		5B986F291A5EF6B800676E9D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B986F281A5EF6B800676E9D /* Extensions.swift */; };
@@ -39,10 +40,11 @@
 
 /* Begin PBXFileReference section */
 		5B023FFA1A77FDF700C833F2 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
-		5B0D44AB1A7847AE00082948 /* 1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1.txt; sourceTree = "<group>"; };
 		5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = qwertyPlay.playground; sourceTree = "<group>"; };
 		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5B3A688D1A6089B8007209C5 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gill Sans MT Light Italic.ttf"; sourceTree = "<group>"; };
+		5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gill Sans MT Light.ttf"; sourceTree = "<group>"; };
 		5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
 		5B90798F1A57759F0063A5E0 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		5B986F281A5EF6B800676E9D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -81,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B75645B1A84A3D0008F5952 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */,
+				5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		5BF4B7621A42A7F0001EB977 = {
 			isa = PBXGroup;
 			children = (
@@ -124,9 +135,9 @@
 		5BF4B76E1A42A7F0001EB977 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B75645B1A84A3D0008F5952 /* Resources */,
 				5BA5C3091A80316600F3D06F /* TitleScene.sks */,
 				5B986F281A5EF6B800676E9D /* Extensions.swift */,
-				5B0D44AB1A7847AE00082948 /* 1.txt */,
 				5BF4B76F1A42A7F0001EB977 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -230,9 +241,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B0D44AC1A7847AE00082948 /* 1.txt in Resources */,
 				5BF4B77F1A42A7F0001EB977 /* LaunchScreen.xib in Resources */,
+				5B75645E1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf in Resources */,
 				5BF4B77C1A42A7F0001EB977 /* Images.xcassets in Resources */,
+				5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */,
 				5BA5C3081A7EFC8D00F3D06F /* GameUI.atlas in Resources */,
 				5BF6BFC81A76BDEF00EEBA29 /* Levels.atlas in Resources */,
 				5BA5C30A1A80316600F3D06F /* TitleScene.sks in Resources */,

@@ -27,6 +27,18 @@ class TitleScene: SKScene {
         //myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
         
         //self.addChild(myLabel)
+        
+       // printFonts()
+    }
+    
+    func printFonts() {
+        let fontFamilyNames = UIFont.familyNames()
+        for familyName in fontFamilyNames {
+            println("------------------------------")
+            println("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNamesForFamilyName(familyName as String)
+            println("Font Names = [\(names)]")
+        }
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
