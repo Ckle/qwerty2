@@ -77,6 +77,7 @@ class GameScene: SKScene, UITextViewDelegate {
     // Progress Bar
     var progressMarkerOff = SKSpriteNode()
     var progressMarkerOn = SKSpriteNode()
+    var progressMarkers = [SKSpriteNode]()
     
     // -------------------------- INITs
     
@@ -186,12 +187,15 @@ class GameScene: SKScene, UITextViewDelegate {
         for i in 1...paragraphCount {
             
             self.progressMarkerOff = SKSpriteNode(imageNamed: "inGameProgress-OFF.png")
+            let marker = self.progressMarkerOff
+            marker.name = "marker\(i)"
             progressMarkerOff.position = CGPoint(x: x, y: y)
             progressMarkerOff.xScale = 0.3
             progressMarkerOff.yScale = 0.3
             
             x += progressTileWidth + progressTileGap
-            gameLayer.addChild(progressMarkerOff)
+            progressMarkers.append(marker)
+            gameLayer.addChild(marker)
         }
 
     }
@@ -465,10 +469,13 @@ class GameScene: SKScene, UITextViewDelegate {
             
         } else { // This is when player reaches end of a paragraph
             
+            // Finds the final range of the final character in the paragraph
             var rangeOfTextShown: Range = Range(
                 start: advance(textViewForPlayer.text.startIndex, rangeOfText),
                 end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
             charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
+            
+            updateProgressNodes()
             
             // Logic for matching character typed to character required - AGAIN. 
             // THERE IS PROBABLY A BETTER WAY TO DO THIS THAN REPEATING CODE
@@ -589,11 +596,20 @@ class GameScene: SKScene, UITextViewDelegate {
         return true
     }
     
-    func animateCharacters() {
-        var fadeOut = CABasicAnimation(keyPath: "opacity")
-        fadeOut.duration = 0.5
-        fadeOut.fillMode = kCAFillModeForwards
-        fadeOut.toValue = NSNumber(double: 0.0)
+// CA Animation experiment
+//    func animateCharacters() {
+//        var fadeOut = CABasicAnimation(keyPath: "opacity")
+//        fadeOut.duration = 0.5
+//        fadeOut.fillMode = kCAFillModeForwards
+//        fadeOut.toValue = NSNumber(double: 0.0)
+//        
+//    }
+    
+    func updateProgressNodes() {
+        
+        var progressNode = progressMarkers[currentParagraph]
+        progressNode = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
+        gameLayer.addChild(progressNode)
         
     }
     
