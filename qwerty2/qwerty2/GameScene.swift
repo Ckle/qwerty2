@@ -43,7 +43,7 @@ class GameScene: SKScene, UITextViewDelegate {
     public var currentLevel: Int = 1
 
     // Transition Scene Button Variable Declaration
-    let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
+//    let titleScreenNode = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     
     // Characters Typed or Required to be typed
     var charTyped = String()
@@ -124,8 +124,8 @@ class GameScene: SKScene, UITextViewDelegate {
         self.addChild(timerCrop)
         
         // Transition Scene button
-        self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
-        self.addChild(titleScreenNode)
+//        self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
+//        self.addChild(titleScreenNode)
         
         // Mistake Counter
         self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
@@ -150,7 +150,7 @@ class GameScene: SKScene, UITextViewDelegate {
         attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
         attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
         attrString7 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
-        attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful. ", attributes: textFont)
+        attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful.", attributes: textFont)
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
         
