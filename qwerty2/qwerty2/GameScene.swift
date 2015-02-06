@@ -236,7 +236,7 @@ class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (82-79+1)) + 49)
+        gameTime = CGFloat((arc4random() % (85-84+1)) + 84)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -396,7 +396,7 @@ class GameScene: SKScene, UITextViewDelegate {
                             self.textViewForPlayer.attributedText = self.textForPlayer
                             }, completion: { finished in
                         })
-                        println("FINISHED2")}
+                    }
                 )
                 
                 
@@ -477,22 +477,11 @@ class GameScene: SKScene, UITextViewDelegate {
             if currentParagraph < paragraphs.count - 1 {
                 
                 // Animates the paragraphs going down, and back up
-                UIView.animateWithDuration(0.1, delay: 0.25, options: .CurveEaseOut, animations: {
-                    var frame = self.textViewForPlayer.frame
-                    frame.origin.y += 10
-                    self.textViewForPlayer.frame = frame
+                UIView.animateWithDuration(0.3, delay: 0.25, options: .CurveEaseOut, animations: {
+                    self.textViewForPlayer.alpha = 0.0
                     }, completion: { finished in
-                        UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
-                            var frame = self.textViewForPlayer.frame
-                            frame.origin.y -= 100
-                            self.textViewForPlayer.frame = frame
-                            }, completion: { finished in
-                                UIView.animateWithDuration(0.8, delay: 0.2, options: .CurveEaseOut, animations: {
-                                    self.textViewForPlayer.alpha = 0.0
-                                    }, completion: { finished in
-                                })}
-                        )}
-                )
+                        }
+                    )
                 
                 paraAnimDelay = 0 // To reset this value to be used in the for loop for animatinag paras below
                 
@@ -558,7 +547,7 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
         
-        if mistakesMade == 3 {
+        if mistakesMade == 30 {
             
             gameEnded(didWin: false)
         }
