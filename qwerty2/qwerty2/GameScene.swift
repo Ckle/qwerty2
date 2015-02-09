@@ -79,6 +79,12 @@ class GameScene: SKScene, UITextViewDelegate {
     var progressMarkerOn = SKSpriteNode()
     var progressMarkers = [SKSpriteNode]()
     
+    // Labels
+    var levelTitle = SKLabelNode()
+    var levelHighScore = SKLabelNode()
+    
+    var pug = SKSpriteNode()
+    
     // -------------------------- INITs
     
     override init(size: CGSize) {
@@ -87,46 +93,53 @@ class GameScene: SKScene, UITextViewDelegate {
         // Add Game Layer
         self.addChild(gameLayer)
         
+        // Add Labels
+        levelTitle.fontName = "GillSansMT-Light"
+        levelTitle.text = "The First Level"
+        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-50, y: CGRectGetMidY(self.frame)+150)
+        levelTitle.fontSize = 16.0
+        gameLayer.addChild(levelTitle)
+        
         // Add BG Lighter Color Container
-        self.bgContainer.size = CGSize(width: CGRectGetMaxX(self.frame)-60, height: CGRectGetMaxY(self.frame)-200)
-        self.bgContainer.color = UIColor(netHex: 0x72405f)
-        self.bgContainer.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame)+100)
-        self.bgContainer.anchorPoint = CGPoint(x: 0.5, y: 1)
+        bgContainer.size = CGSize(width: CGRectGetMaxX(self.frame)-60, height: CGRectGetMaxY(self.frame)-200)
+        bgContainer.color = UIColor(netHex: 0x72405f)
+        bgContainer.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame)+100)
+        bgContainer.anchorPoint = CGPoint(x: 0.5, y: 1)
         gameLayer.addChild(bgContainer)
     
         // SKView Properties
         self.backgroundColor = UIColor(netHex: 0x663855)
         
         // Timer Bar Initialize
-        self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
-        self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-        self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-        self.bgTimerBar.size.width = (self.size.width)
-        self.bgTimerBar.size.height = 41
-        self.bgTimerBar.zPosition = 0
+        bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
+        bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        bgTimerBar.size.width = (self.size.width)
+        bgTimerBar.size.height = 41
+        bgTimerBar.zPosition = 0
         gameLayer.addChild(bgTimerBar)
         
-        self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
-        self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-        self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-        self.fgTimerBar.size.width = (self.size.width)
-        self.fgTimerBar.size.height = 40
+        fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
+        fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        fgTimerBar.size.width = (self.size.width)
+        fgTimerBar.size.height = 40
         
-        self.timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
-        self.timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-        self.timerBar.anchorPoint = CGPoint(x: 0,y: 1)
-        self.timerBar.size.width = (self.size.width)
-        self.timerBar.size.height = 40
+        timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
+        timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        timerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        timerBar.size.width = (self.size.width)
+        timerBar.size.height = 40
         
-        self.timerCrop.zPosition = 1
+        timerCrop.zPosition = 1
 
         // Create the edge of the bar. Child of timerBar to follow it's max X value
         // Also need to add the timerBar or edge won't show
-        self.timerBarEdge = SKSpriteNode(imageNamed: "inGameTimerEdge.png")
-        self.timerBarEdge.anchorPoint = CGPoint(x: 1,y: 1)
-        self.timerBarEdge.size.height = 42
-        self.timerBarEdge.size.width = 25
-        self.timerBarEdge.zPosition = 3
+        timerBarEdge = SKSpriteNode(imageNamed: "inGameTimerEdge.png")
+        timerBarEdge.anchorPoint = CGPoint(x: 1,y: 1)
+        timerBarEdge.size.height = 42
+        timerBarEdge.size.width = 25
+        timerBarEdge.zPosition = 3
         // timerBar.addChild(timerBarEdge)
         gameLayer.addChild(timerBar)
         gameLayer.addChild(timerBarEdge)
@@ -143,16 +156,16 @@ class GameScene: SKScene, UITextViewDelegate {
 //        self.addChild(titleScreenNode)
         
         // Mistake Counter
-        self.mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
-        self.mistakesMadeLabel.zPosition = 100
-        self.mistakesMadeLabel.fontSize = 40.00
-        self.mistakesMadeLabel.fontName = "Helvetica Neue"
-        self.mistakesMadeLabel.fontColor = SKColor.blackColor()
-        self.mistakesMadeLabel.zPosition = 5
+        mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
+        mistakesMadeLabel.zPosition = 100
+        mistakesMadeLabel.fontSize = 40.00
+        mistakesMadeLabel.fontName = "Helvetica Neue"
+        mistakesMadeLabel.fontColor = SKColor.blackColor()
+        mistakesMadeLabel.zPosition = 5
         gameLayer.addChild(mistakesMadeLabel)
         
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-LightItalic", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-Light", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         // Define string attributes
         
@@ -168,16 +181,17 @@ class GameScene: SKScene, UITextViewDelegate {
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
         
+        // Texture for the Header
         let headerTexture = SKTexture(imageNamed: "inGameHeader-1.png")
-        self.header = SKSpriteNode(texture: headerTexture)
-        self.header.position = CGPoint(x: 0, y: CGRectGetMaxY(self.frame)-39)
-        self.header.size.width = CGRectGetWidth(self.frame)
-        self.header.size.height = 150
-        self.header.anchorPoint = CGPoint(x: 0,y: 1)
+        header = SKSpriteNode(texture: headerTexture)
+        header.position = CGPoint(x: 0, y: CGRectGetMaxY(self.frame)-39)
+        header.size.width = CGRectGetWidth(self.frame)
+        header.size.height = 150
+        header.anchorPoint = CGPoint(x: 0,y: 1)
         gameLayer.addChild(header)
         
         // Progress for paragraphs marker
-        self.progressMarkerOn = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
+        progressMarkerOn = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
         let progressTileWidth = progressMarkerOn.size.width / 4
         let progressTileGap = progressTileWidth * 1.2
         let selectorWidth = progressTileWidth * CGFloat(paragraphCount) + (progressTileGap * CGFloat(paragraphCount)-2)
@@ -198,6 +212,9 @@ class GameScene: SKScene, UITextViewDelegate {
             gameLayer.addChild(marker)
         }
 
+        // Init PugFace
+//        pug = SKSpriteNode(
+        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -278,8 +295,8 @@ class GameScene: SKScene, UITextViewDelegate {
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
-        self.timerBar.size.width = (self.size.width)
-        self.timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
+        timerBar.size.width = (self.size.width)
+        timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
         // Moves the edge of the timerBar (a child of timerBar) to stick to the same max X value of the frame of parent
         // self.timerBarEdge.runAction(SKAction.moveToX((CGRectGetMaxX(timerBar.frame)), duration: 0))
         
@@ -475,6 +492,7 @@ class GameScene: SKScene, UITextViewDelegate {
                 end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
             charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
+            // Updates the ProgressNodes
             updateProgressNodes()
             
             // Logic for matching character typed to character required - AGAIN. 
@@ -588,7 +606,7 @@ class GameScene: SKScene, UITextViewDelegate {
         //var lastCharTyped = textDisplay.text.substringFromIndex(advance(textDisplay.text.startIndex,(lastCharTypedIndex)))
         //println("\(lastCharTyped)")
         
-        if mistakesMade == 30 {
+        if mistakesMade == 3 {
             
             gameEnded(didWin: false)
         }
