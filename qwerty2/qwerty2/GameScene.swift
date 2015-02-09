@@ -84,6 +84,9 @@ class GameScene: SKScene, UITextViewDelegate {
     var levelHighScore = SKLabelNode()
     
     var pug = SKSpriteNode()
+    let pug1 = SKTexture(imageNamed: "inGamePug-1.png")
+    let pug2 = SKTexture(imageNamed: "inGamePug-2.png")
+    let pug3 = SKTexture(imageNamed: "inGamePug-3.png")
     
     // -------------------------- INITs
     
@@ -96,7 +99,7 @@ class GameScene: SKScene, UITextViewDelegate {
         // Add Labels
         levelTitle.fontName = "LeagueGothic-Regular"
         levelTitle.text = "THE FIRST LEVEL"
-        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-135, y: CGRectGetMidY(self.frame)+210)
+        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-155, y: CGRectGetMidY(self.frame)+210)
         levelTitle.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         levelTitle.fontSize = 48.0
         gameLayer.addChild(levelTitle)
@@ -221,10 +224,10 @@ class GameScene: SKScene, UITextViewDelegate {
         }
 
         // Init PugFace
-        pug = SKSpriteNode(imageNamed: "inGamePug-1.png")
-        pug.xScale = 0.3
-        pug.yScale = 0.3
-        pug.position = CGPoint(x: CGRectGetMidX(self.frame)+150, y: CGRectGetMidY(self.frame)+210)
+        pug = SKSpriteNode(texture: pug1)
+        pug.xScale = 0.4
+        pug.yScale = 0.4
+        pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
         gameLayer.addChild(pug)
         
     }
@@ -482,6 +485,8 @@ class GameScene: SKScene, UITextViewDelegate {
                     range: nsRangeOfTextShown)
                 textViewForPlayer.attributedText = textForPlayer
                 
+                updatePug(state: .sad)
+                
             } else {
                 
                 textForPlayer.addAttribute(
@@ -534,6 +539,9 @@ class GameScene: SKScene, UITextViewDelegate {
                     value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
                     range: nsRangeOfTextShown)
                 textViewForPlayer.attributedText = textForPlayer
+                
+                // Changes Pug Face
+                updatePug(state: .sad)
                 
             }
             
@@ -653,6 +661,20 @@ class GameScene: SKScene, UITextViewDelegate {
         
     }
     
+    func updatePug(#state: PugFace) {
+        
+        switch state {
+        case .happy:
+            pug.texture = pug1
+        case .sad:
+            pug.texture = pug2
+        case .proud:
+            pug.texture = pug3
+        default:
+            println("NON EXISTENT PUG")
+        }
+    }
+    
     func changeTimerColor(#color: Int) {
         
         if color == 1 {
@@ -714,6 +736,10 @@ class GameScene: SKScene, UITextViewDelegate {
     }
 }
 
+// Enum for pug's face
+enum PugFace {
+    case sad, proud, happy
+}
 // To make sure the textview cannot be tapped on.
 class CustomTextView: UITextView {
     
