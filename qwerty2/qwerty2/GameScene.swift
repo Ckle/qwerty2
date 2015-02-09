@@ -224,7 +224,7 @@ class GameScene: SKScene, UITextViewDelegate {
         }
 
         // Init PugFace
-        pug = SKSpriteNode(texture: pug1)
+        pug = SKSpriteNode(texture: pug3)
         pug.xScale = 0.4
         pug.yScale = 0.4
         pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
@@ -525,6 +525,8 @@ class GameScene: SKScene, UITextViewDelegate {
                 // have to make sure to add the attributed text string to the UITextView or it won't show
                 textViewForPlayer.attributedText = textForPlayer
                 
+                updatePug(state: .happy)
+                
             } else if charTyped != charRequired {
                 
                 println("FALSE")
@@ -607,6 +609,8 @@ class GameScene: SKScene, UITextViewDelegate {
                     self.textDisplay.editable = true
                     self.textDisplay.userInteractionEnabled = true
                     println("TRUE")
+                    
+                    self.updatePug(state: .proud)
                 }
                 
             } else if currentParagraph == paragraphs.count - 1 {
