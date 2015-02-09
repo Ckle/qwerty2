@@ -28,9 +28,10 @@ class TitleScene: SKScene {
         
         //self.addChild(myLabel)
         
-       // printFonts()
+//        printFonts()
     }
     
+    // Call this if you need to figure out what the names of the fonts are. != font file name.
     func printFonts() {
         let fontFamilyNames = UIFont.familyNames()
         for familyName in fontFamilyNames {

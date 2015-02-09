@@ -4,6 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>LeagueGothic-Regular.otf</string>
+		<string>Sertig.otf</string>
 		<string>Gill Sans MT Light.ttf</string>
 		<string>Gill Sans MT Light Italic.ttf</string>
 	</array>

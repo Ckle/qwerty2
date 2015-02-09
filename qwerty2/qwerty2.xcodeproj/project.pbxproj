@@ -10,6 +10,8 @@
 		5B023FFB1A77FDF700C833F2 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B023FFA1A77FDF700C833F2 /* Sprites.atlas */; };
 		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
 		5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A688D1A6089B8007209C5 /* GameOverScene.swift */; };
+		5B4DC7221A8961D20098C537 /* LeagueGothic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B4DC7211A8961D20098C537 /* LeagueGothic-Regular.otf */; };
+		5B4DC7241A8961F40098C537 /* Sertig.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5B4DC7231A8961F40098C537 /* Sertig.otf */; };
 		5B75645E1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */; };
 		5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */; };
 		5B7564611A8531DF008F5952 /* GameUI.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B7564601A8531DF008F5952 /* GameUI.atlas */; };
@@ -43,6 +45,8 @@
 		5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = qwertyPlay.playground; sourceTree = "<group>"; };
 		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		5B3A688D1A6089B8007209C5 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		5B4DC7211A8961D20098C537 /* LeagueGothic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueGothic-Regular.otf"; sourceTree = "<group>"; };
+		5B4DC7231A8961F40098C537 /* Sertig.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sertig.otf; sourceTree = "<group>"; };
 		5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gill Sans MT Light Italic.ttf"; sourceTree = "<group>"; };
 		5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gill Sans MT Light.ttf"; sourceTree = "<group>"; };
 		5B7564601A8531DF008F5952 /* GameUI.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = GameUI.atlas; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		5B75645B1A84A3D0008F5952 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5B4DC7231A8961F40098C537 /* Sertig.otf */,
+				5B4DC7211A8961D20098C537 /* LeagueGothic-Regular.otf */,
 				5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */,
 				5B75645D1A84A3DE008F5952 /* Gill Sans MT Light.ttf */,
 			);
@@ -246,6 +252,8 @@
 				5BF4B77C1A42A7F0001EB977 /* Images.xcassets in Resources */,
 				5B7564611A8531DF008F5952 /* GameUI.atlas in Resources */,
 				5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */,
+				5B4DC7241A8961F40098C537 /* Sertig.otf in Resources */,
+				5B4DC7221A8961D20098C537 /* LeagueGothic-Regular.otf in Resources */,
 				5BF6BFC81A76BDEF00EEBA29 /* Levels.atlas in Resources */,
 				5BA5C30A1A80316600F3D06F /* TitleScene.sks in Resources */,
 				5BF4B77A1A42A7F0001EB977 /* Main.storyboard in Resources */,

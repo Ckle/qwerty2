@@ -94,11 +94,19 @@ class GameScene: SKScene, UITextViewDelegate {
         self.addChild(gameLayer)
         
         // Add Labels
-        levelTitle.fontName = "GillSansMT-Light"
-        levelTitle.text = "The First Level"
-        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-50, y: CGRectGetMidY(self.frame)+150)
-        levelTitle.fontSize = 16.0
+        levelTitle.fontName = "LeagueGothic-Regular"
+        levelTitle.text = "THE FIRST LEVEL"
+        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-135, y: CGRectGetMidY(self.frame)+210)
+        levelTitle.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        levelTitle.fontSize = 48.0
         gameLayer.addChild(levelTitle)
+        
+        levelHighScore.fontName = "Sertig"
+        levelHighScore.text = "HIGH SCORE: 40.2s"
+        levelHighScore.position = CGPoint(x: 5, y: -17)
+        levelHighScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
+        levelHighScore.fontSize = 15.0
+        levelTitle.addChild(levelHighScore)
         
         // Add BG Lighter Color Container
         bgContainer.size = CGSize(width: CGRectGetMaxX(self.frame)-60, height: CGRectGetMaxY(self.frame)-200)
@@ -213,7 +221,11 @@ class GameScene: SKScene, UITextViewDelegate {
         }
 
         // Init PugFace
-//        pug = SKSpriteNode(
+        pug = SKSpriteNode(imageNamed: "inGamePug-1.png")
+        pug.xScale = 0.3
+        pug.yScale = 0.3
+        pug.position = CGPoint(x: CGRectGetMidX(self.frame)+150, y: CGRectGetMidY(self.frame)+210)
+        gameLayer.addChild(pug)
         
     }
 
