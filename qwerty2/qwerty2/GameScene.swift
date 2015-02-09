@@ -201,7 +201,7 @@ class GameScene: SKScene, UITextViewDelegate {
         header.anchorPoint = CGPoint(x: 0,y: 1)
         gameLayer.addChild(header)
         
-        // Progress for paragraphs marker
+        // Progress for paragraphs marker ** PROBABLY A BETTER WAY TO DO THIS WITH TEXTURES LIKE PUGFACE
         progressMarkerOn = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
         let progressTileWidth = progressMarkerOn.size.width / 4
         let progressTileGap = progressTileWidth * 1.2
@@ -677,6 +677,10 @@ class GameScene: SKScene, UITextViewDelegate {
         default:
             println("NON EXISTENT PUG")
         }
+        
+        let scaleUp = SKAction.scaleTo(0.5, duration: 0.1)
+        let scaleDown = SKAction.scaleTo(0.4, duration: 0.2)
+        pug.runAction(SKAction.sequence([scaleUp, scaleDown]))
     }
     
     func changeTimerColor(#color: Int) {
