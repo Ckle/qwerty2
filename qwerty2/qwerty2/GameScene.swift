@@ -492,7 +492,11 @@ class GameScene: SKScene, UITextViewDelegate {
             } else if charTyped != charRequired {
                 
                 println("FALSE")
+                
+                // rotates mistakes counter
+                rotateMistakes(mistakeCounter: mistakesMade)
                 ++mistakesMade
+                
                 // Changes the color of the text if incorrect letter was typed
                 textForPlayer.addAttribute(
                     NSForegroundColorAttributeName,
@@ -505,8 +509,6 @@ class GameScene: SKScene, UITextViewDelegate {
                 textViewForPlayer.attributedText = textForPlayer
                 
                 updatePug(state: .sad)
-                
-                rotateMistakes(mistakeCounter: 0)
                 
             } else {
                 
@@ -551,7 +553,10 @@ class GameScene: SKScene, UITextViewDelegate {
             } else if charTyped != charRequired {
                 
                 println("FALSE")
+                
+                rotateMistakes(mistakeCounter: mistakesMade)
                 ++mistakesMade
+                
                 // Changes the color of the text if incorrect letter was typed
                 textForPlayer.addAttribute(
                     NSForegroundColorAttributeName,
@@ -653,7 +658,11 @@ class GameScene: SKScene, UITextViewDelegate {
         
         if mistakesMade == 3 {
             
-            gameEnded(didWin: false)
+            self.textDisplay.editable = false
+            
+            delay(1.0) {
+                self.gameEnded(didWin: false)
+            }
         }
 
         return true
@@ -710,10 +719,11 @@ class GameScene: SKScene, UITextViewDelegate {
         let oneEightyDegrees = CGFloat(π)
         
         let rotateRight = SKAction.rotateByAngle(3.8, duration: 0.6)
-        let rotateLeft = SKAction.rotateToAngle(oneEightyDegrees, duration: 0.2)
+        let rotateLeft = SKAction.rotateToAngle((oneEightyDegrees-0.2), duration: 0.2)
+        let rotateRight2 = SKAction.rotateToAngle(oneEightyDegrees, duration: 0.1)
         rotateRight.timingMode = SKActionTimingMode.EaseOut
         rotateLeft.timingMode = SKActionTimingMode.EaseIn
-        mistakeCounterSprite.runAction(SKAction.sequence([rotateRight, rotateLeft]))
+        mistakeCounterSprite.runAction(SKAction.sequence([rotateRight, rotateLeft, rotateRight2]))
     }
     
     func changeTimerColor(#color: Int) {
