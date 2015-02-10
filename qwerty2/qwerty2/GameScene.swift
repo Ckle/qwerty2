@@ -53,6 +53,7 @@ class GameScene: SKScene, UITextViewDelegate {
     var correctCharsTyped = SKLabelNode()
     var mistakesMadeLabel = SKLabelNode()
     var mistakesMade = Int()
+    var mistakeMarkerTexture = SKTexture(imageNamed: "inGameMistake.png")
     
     // Game Layers
     let gameLayer = SKNode()
@@ -83,6 +84,7 @@ class GameScene: SKScene, UITextViewDelegate {
     var levelTitle = SKLabelNode()
     var levelHighScore = SKLabelNode()
     
+    // Pug Face
     var pug = SKSpriteNode()
     let pug1 = SKTexture(imageNamed: "inGamePug-1.png")
     let pug2 = SKTexture(imageNamed: "inGamePug-2.png")
@@ -192,6 +194,13 @@ class GameScene: SKScene, UITextViewDelegate {
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
         
+        for i in 1...3 {
+            
+            let marker = SKSpriteNode(texture: mistakeMarkerTexture)
+            
+            
+        }
+        
         // Texture for the Header
         let headerTexture = SKTexture(imageNamed: "inGameHeader-1.png")
         header = SKSpriteNode(texture: headerTexture)
@@ -212,15 +221,15 @@ class GameScene: SKScene, UITextViewDelegate {
         for i in 1...paragraphCount {
             
             self.progressMarkerOff = SKSpriteNode(imageNamed: "inGameProgress-OFF.png")
-            let marker = self.progressMarkerOff
-            marker.name = "marker\(i)"
+            let progressMarker = self.progressMarkerOff
+            progressMarker.name = "marker\(i)"
             progressMarkerOff.position = CGPoint(x: x, y: y)
             progressMarkerOff.xScale = 0.3
             progressMarkerOff.yScale = 0.3
             
             x += progressTileWidth + progressTileGap
-            progressMarkers.append(marker)
-            gameLayer.addChild(marker)
+            progressMarkers.append(progressMarker)
+            gameLayer.addChild(progressMarker)
         }
 
         // Init PugFace
