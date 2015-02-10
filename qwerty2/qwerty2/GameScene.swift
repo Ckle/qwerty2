@@ -11,6 +11,8 @@ import UIKit
 import Foundation
 import SpriteKit
 
+let π = M_PI
+
 class GameScene: SKScene, UITextViewDelegate {
     
     // --------------------------- GAME VARIABLEs
@@ -53,7 +55,8 @@ class GameScene: SKScene, UITextViewDelegate {
     var correctCharsTyped = SKLabelNode()
     var mistakesMadeLabel = SKLabelNode()
     var mistakesMade = Int()
-    var mistakeMarkerTexture = SKTexture(imageNamed: "inGameMistake.png")
+    let mistakeMarkerTexture = SKTexture(imageNamed: "inGameMistake.png")
+    var mistakeMarkers = [SKSpriteNode]()
     
     // Game Layers
     let gameLayer = SKNode()
@@ -194,13 +197,6 @@ class GameScene: SKScene, UITextViewDelegate {
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
         
-        for i in 1...3 {
-            
-            let marker = SKSpriteNode(texture: mistakeMarkerTexture)
-            
-            
-        }
-        
         // Texture for the Header
         let headerTexture = SKTexture(imageNamed: "inGameHeader-1.png")
         header = SKSpriteNode(texture: headerTexture)
@@ -209,6 +205,20 @@ class GameScene: SKScene, UITextViewDelegate {
         header.size.height = 150
         header.anchorPoint = CGPoint(x: 0,y: 1)
         gameLayer.addChild(header)
+        
+        for i in 1...3 {
+            
+            let marker = SKSpriteNode(texture: mistakeMarkerTexture)
+            marker.xScale = 0.4
+            marker.yScale = 0.4
+            
+            let gap = CGFloat(i) * marker.size.width
+            marker.position = CGPoint(x: gap - 10, y: -148)
+            marker.zPosition = -1
+            mistakeMarkers.append(marker)
+            header.addChild(marker)
+            
+        }
         
         // Progress for paragraphs marker ** PROBABLY A BETTER WAY TO DO THIS WITH TEXTURES LIKE PUGFACE
         progressMarkerOn = SKSpriteNode(imageNamed: "inGameProgress-ON.png")
@@ -496,6 +506,8 @@ class GameScene: SKScene, UITextViewDelegate {
                 
                 updatePug(state: .sad)
                 
+                rotateMistakes(mistakeCounter: 0)
+                
             } else {
                 
                 textForPlayer.addAttribute(
@@ -690,6 +702,18 @@ class GameScene: SKScene, UITextViewDelegate {
         let scaleUp = SKAction.scaleTo(0.5, duration: 0.1)
         let scaleDown = SKAction.scaleTo(0.4, duration: 0.2)
         pug.runAction(SKAction.sequence([scaleUp, scaleDown]))
+    }
+    
+    func rotateMistakes(#mistakeCounter: Int) {
+        
+        let mistakeCounterSprite = mistakeMarkers[mistakeCounter]
+        let oneEightyDegrees = CGFloat(π)
+        
+        let rotateRight = SKAction.rotateByAngle(3.8, duration: 0.6)
+        let rotateLeft = SKAction.rotateToAngle(oneEightyDegrees, duration: 0.2)
+        rotateRight.timingMode = SKActionTimingMode.EaseOut
+        rotateLeft.timingMode = SKActionTimingMode.EaseIn
+        mistakeCounterSprite.runAction(SKAction.sequence([rotateRight, rotateLeft]))
     }
     
     func changeTimerColor(#color: Int) {
