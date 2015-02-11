@@ -22,6 +22,7 @@
 		5B9093CF1A8BEAB40087E845 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B9093CD1A8BEAB40087E845 /* spark.png */; };
 		5B986F291A5EF6B800676E9D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B986F281A5EF6B800676E9D /* Extensions.swift */; };
 		5B9EC07F1A8C021100473581 /* OtherMacros.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EC07E1A8C021100473581 /* OtherMacros.swift */; };
+		5B9EC0811A8C08ED00473581 /* Gill Sans MT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EC0801A8C08ED00473581 /* Gill Sans MT.ttf */; };
 		5BA01ACB1A44AB79005BAE16 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA01ACA1A44AB79005BAE16 /* GameScene.swift */; };
 		5BA5C30A1A80316600F3D06F /* TitleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BA5C3091A80316600F3D06F /* TitleScene.sks */; };
 		5BF4B7711A42A7F0001EB977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF4B7701A42A7F0001EB977 /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		5B9093CD1A8BEAB40087E845 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		5B986F281A5EF6B800676E9D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5B9EC07E1A8C021100473581 /* OtherMacros.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherMacros.swift; sourceTree = "<group>"; };
+		5B9EC0801A8C08ED00473581 /* Gill Sans MT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gill Sans MT.ttf"; sourceTree = "<group>"; };
 		5BA01ACA1A44AB79005BAE16 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5BA5C3091A80316600F3D06F /* TitleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScene.sks; sourceTree = "<group>"; };
 		5BF4B76B1A42A7F0001EB977 /* qwerty2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qwerty2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 		5B75645B1A84A3D0008F5952 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5B9EC0801A8C08ED00473581 /* Gill Sans MT.ttf */,
 				5B4DC7231A8961F40098C537 /* Sertig.otf */,
 				5B4DC7211A8961D20098C537 /* LeagueGothic-Regular.otf */,
 				5B75645C1A84A3DE008F5952 /* Gill Sans MT Light Italic.ttf */,
@@ -273,6 +276,7 @@
 				5B7564611A8531DF008F5952 /* GameUI.atlas in Resources */,
 				5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */,
 				5B9093CF1A8BEAB40087E845 /* spark.png in Resources */,
+				5B9EC0811A8C08ED00473581 /* Gill Sans MT.ttf in Resources */,
 				5B4DC7241A8961F40098C537 /* Sertig.otf in Resources */,
 				5B4DC7221A8961D20098C537 /* LeagueGothic-Regular.otf in Resources */,
 				5B9093CE1A8BEAB40087E845 /* MyParticle.sks in Resources */,

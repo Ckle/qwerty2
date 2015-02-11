@@ -174,7 +174,7 @@ public class GameScene: SKScene, UITextViewDelegate {
 //        self.addChild(titleScreenNode)
         
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-Light", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         // Define string attributes
         
@@ -242,8 +242,9 @@ public class GameScene: SKScene, UITextViewDelegate {
         pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
         gameLayer.addChild(pug)
         
-        sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
-        gameLayer.addChild(sparkParticle)
+        // sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
+        // sparkParticle.zPosition = 10
+        // pug.addChild(sparkParticle)
     }
 
     required public init?(coder aDecoder: NSCoder) {
