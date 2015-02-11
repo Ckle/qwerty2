@@ -53,7 +53,6 @@ class GameScene: SKScene, UITextViewDelegate {
 
     // Score Counter
     var correctCharsTyped = SKLabelNode()
-    var mistakesMadeLabel = SKLabelNode()
     var mistakesMade = Int()
     let mistakeMarkerTexture = SKTexture(imageNamed: "inGameMistake.png")
     var mistakeMarkers = [SKSpriteNode]()
@@ -170,15 +169,6 @@ class GameScene: SKScene, UITextViewDelegate {
         // Transition Scene button
 //        self.titleScreenNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame))
 //        self.addChild(titleScreenNode)
-        
-        // Mistake Counter
-        mistakesMadeLabel.position = CGPoint(x: 50, y: (CGRectGetMaxY(self.frame))-80)
-        mistakesMadeLabel.zPosition = 100
-        mistakesMadeLabel.fontSize = 40.00
-        mistakesMadeLabel.fontName = "Helvetica Neue"
-        mistakesMadeLabel.fontColor = SKColor.blackColor()
-        mistakesMadeLabel.zPosition = 5
-        gameLayer.addChild(mistakesMadeLabel)
         
         // Type
         let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT-Light", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
@@ -782,7 +772,6 @@ class GameScene: SKScene, UITextViewDelegate {
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        self.mistakesMadeLabel.text = "\(mistakesMade)"
         self.timerBarEdge.position = CGPoint(x: CGRectGetMaxX(timerBar.frame), y: (CGRectGetMaxY(self.frame)))
     }
 }
