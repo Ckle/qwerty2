@@ -18,6 +18,8 @@
 		5B7E89311A74326300B50AEA /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */; };
 		5B9079901A57759F0063A5E0 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B90798F1A57759F0063A5E0 /* Levels.swift */; };
 		5B9093CA1A8BDD100087E845 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9093C91A8BDD100087E845 /* ScoreManager.swift */; };
+		5B9093CE1A8BEAB40087E845 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B9093CC1A8BEAB40087E845 /* MyParticle.sks */; };
+		5B9093CF1A8BEAB40087E845 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B9093CD1A8BEAB40087E845 /* spark.png */; };
 		5B986F291A5EF6B800676E9D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B986F281A5EF6B800676E9D /* Extensions.swift */; };
 		5BA01ACB1A44AB79005BAE16 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA01ACA1A44AB79005BAE16 /* GameScene.swift */; };
 		5BA5C30A1A80316600F3D06F /* TitleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BA5C3091A80316600F3D06F /* TitleScene.sks */; };
@@ -54,6 +56,8 @@
 		5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
 		5B90798F1A57759F0063A5E0 /* Levels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
 		5B9093C91A8BDD100087E845 /* ScoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		5B9093CC1A8BEAB40087E845 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		5B9093CD1A8BEAB40087E845 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		5B986F281A5EF6B800676E9D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5BA01ACA1A44AB79005BAE16 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5BA5C3091A80316600F3D06F /* TitleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TitleScene.sks; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		5B9093CB1A8BEA6D0087E845 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				5B9093CC1A8BEAB40087E845 /* MyParticle.sks */,
+				5B9093CD1A8BEAB40087E845 /* spark.png */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
 		5BF4B7621A42A7F0001EB977 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 		5BF4B76D1A42A7F0001EB977 /* qwerty2 */ = {
 			isa = PBXGroup;
 			children = (
+				5B9093CB1A8BEA6D0087E845 /* Particles */,
 				5B7564601A8531DF008F5952 /* GameUI.atlas */,
 				5B023FFA1A77FDF700C833F2 /* Sprites.atlas */,
 				5BF6BFC71A76BDEF00EEBA29 /* Levels.atlas */,
@@ -255,8 +269,10 @@
 				5BF4B77C1A42A7F0001EB977 /* Images.xcassets in Resources */,
 				5B7564611A8531DF008F5952 /* GameUI.atlas in Resources */,
 				5B75645F1A84A3DE008F5952 /* Gill Sans MT Light.ttf in Resources */,
+				5B9093CF1A8BEAB40087E845 /* spark.png in Resources */,
 				5B4DC7241A8961F40098C537 /* Sertig.otf in Resources */,
 				5B4DC7221A8961D20098C537 /* LeagueGothic-Regular.otf in Resources */,
+				5B9093CE1A8BEAB40087E845 /* MyParticle.sks in Resources */,
 				5BF6BFC81A76BDEF00EEBA29 /* Levels.atlas in Resources */,
 				5BA5C30A1A80316600F3D06F /* TitleScene.sks in Resources */,
 				5BF4B77A1A42A7F0001EB977 /* Main.storyboard in Resources */,

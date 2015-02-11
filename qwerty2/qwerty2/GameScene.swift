@@ -92,6 +92,9 @@ public class GameScene: SKScene, UITextViewDelegate {
     let pug2 = SKTexture(imageNamed: "inGamePug-2.png")
     let pug3 = SKTexture(imageNamed: "inGamePug-3.png")
     
+    // Particles
+    let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
+    
     // -------------------------- INITs
     
     override init(size: CGSize) {
@@ -239,6 +242,8 @@ public class GameScene: SKScene, UITextViewDelegate {
         pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
         gameLayer.addChild(pug)
         
+        sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
+        gameLayer.addChild(sparkParticle)
     }
 
     required public init?(coder aDecoder: NSCoder) {
