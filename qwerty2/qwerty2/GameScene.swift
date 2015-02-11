@@ -13,7 +13,7 @@ import SpriteKit
 
 let π = M_PI
 
-class GameScene: SKScene, UITextViewDelegate {
+public class GameScene: SKScene, UITextViewDelegate {
     
     // --------------------------- GAME VARIABLEs
     
@@ -241,13 +241,13 @@ class GameScene: SKScene, UITextViewDelegate {
         
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // --------------------------- GAME METHODS
     
-    override func didMoveToView(view: SKView) {
+    override public func didMoveToView(view: SKView) {
         
         // Add UITextViews
         addUIElements()
@@ -408,7 +408,7 @@ class GameScene: SKScene, UITextViewDelegate {
 
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         // WHAT IS HAPPENING HERE:
         // Tracking an incrementing string character in the chosen TextView
@@ -759,7 +759,7 @@ class GameScene: SKScene, UITextViewDelegate {
         }
     }
     
-    override func willMoveFromView(view: SKView) {
+    override public func willMoveFromView(view: SKView) {
         
         // Remove these UITextViews from the SKView
         textDisplay.removeFromSuperview()
@@ -770,7 +770,7 @@ class GameScene: SKScene, UITextViewDelegate {
 
     }
     
-    override func update(currentTime: CFTimeInterval) {
+    override public func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         self.timerBarEdge.position = CGPoint(x: CGRectGetMaxX(timerBar.frame), y: (CGRectGetMaxY(self.frame)))
     }
