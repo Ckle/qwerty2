@@ -133,7 +133,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
         bgTimerBar.size.width = (self.size.width)
-        bgTimerBar.size.height = 41
+        bgTimerBar.size.height = 40
         bgTimerBar.zPosition = 0
         gameLayer.addChild(bgTimerBar)
         
@@ -179,7 +179,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         // Define string attributes
         
         // Create locally formatted strings
-        attrString1 = NSMutableAttributedString(string: "My name is Dug.", attributes: textFont)
+        attrString1 = NSMutableAttributedString(string: "My name is Dug. I am a pug.", attributes: textFont)
         attrString2 = NSMutableAttributedString(string: "My male man, Jake", attributes: textFont)
         attrString3 = NSMutableAttributedString(string: "has started meeting frequently", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
@@ -242,9 +242,9 @@ public class GameScene: SKScene, UITextViewDelegate {
         pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
         gameLayer.addChild(pug)
         
-        // sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
-        // sparkParticle.zPosition = 10
-        // pug.addChild(sparkParticle)
+//         sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
+//         sparkParticle.zPosition = 10
+//         pug.addChild(sparkParticle)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -321,7 +321,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (85-84+1)) + 84)
+        gameTime = CGFloat((arc4random() % (75-72+1)) + 72)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -483,6 +483,23 @@ public class GameScene: SKScene, UITextViewDelegate {
                         })
                     }
                 )
+                
+            textViewForPlayer.layoutManager.ensureLayoutForTextContainer(textViewForPlayer.textContainer)
+                
+                let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRangeOfTextShown.location)!
+                let end = textViewForPlayer.positionFromPosition(start, offset: nsRangeOfTextShown.length)!
+                
+                let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
+                
+                let rect = textViewForPlayer.firstRectForRange(tRange)
+                var testSprite = SKSpriteNode(imageNamed: "inGamePug-1.png")
+                
+                println("x: \(rect.midX), y: \(rect.midY)")
+                testSprite.position = CGPoint(x: rect.midX, y: rect.midY)
+                testSprite.zPosition = 10
+                gameLayer.addChild(testSprite)
+
+                
                 
                 
             } else if charTyped != charRequired {
@@ -660,7 +677,7 @@ public class GameScene: SKScene, UITextViewDelegate {
                 self.gameEnded(didWin: false)
             }
         }
-
+        
         return true
     }
     
