@@ -12,6 +12,19 @@ import SpriteKit
 
 class GameOverScene: SKScene {
     
+    let gameScene: GameScene
+    
+    init(gameScene:GameScene, size: CGSize ) {
+        
+        self.gameScene = gameScene
+        
+        super.init(size: size)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let Level1Node = SKSpriteNode(color: SKColor .greenColor(), size: CGSizeMake(150.0, 100.0))
     let youLoseNode = SKLabelNode(fontNamed: "Helvetica Neue")
     
@@ -20,7 +33,7 @@ class GameOverScene: SKScene {
         Level1Node.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         youLoseNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 100)
         
-        youLoseNode.text = "You Lose"
+        youLoseNode.text = "\(gameScene.paragraphCount)"
         
         self.addChild(Level1Node)
         self.addChild(youLoseNode)
@@ -34,6 +47,7 @@ class GameOverScene: SKScene {
             if self.nodeAtPoint(location) == self.Level1Node {
                 var scene = GameScene(size: self.size)
                 self.view?.presentScene(scene)
+                
             }
         }
     }

@@ -401,7 +401,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         } else {
             
             println("FAIL")
-            let scene = GameOverScene(size: self.size)
+            let scene = GameOverScene(gameScene: self, size: self.size)
             self.view?.presentScene(scene)
 
         }
@@ -492,7 +492,7 @@ public class GameScene: SKScene, UITextViewDelegate {
                 let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
                 
                 let rect = textViewForPlayer.firstRectForRange(tRange)
-                let x = rect.midX + textViewForPlayer.frame.midX
+                let x = rect.midX + textViewForPlayer.frame.minX
                 let y = rect.midY + textViewForPlayer.frame.midY
                 
                 println("x: \(x), y: \(y)")
