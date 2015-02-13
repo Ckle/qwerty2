@@ -492,14 +492,12 @@ public class GameScene: SKScene, UITextViewDelegate {
                 let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
                 
                 let rect = textViewForPlayer.firstRectForRange(tRange)
-                var testSprite = SKSpriteNode(imageNamed: "inGamePug-1.png")
+                let x = rect.midX + textViewForPlayer.frame.midX
+                let y = rect.midY + textViewForPlayer.frame.midY
                 
-                println("x: \(rect.midX), y: \(rect.midY)")
-                testSprite.position = CGPoint(x: rect.midX, y: rect.midY)
-                testSprite.zPosition = 10
-                gameLayer.addChild(testSprite)
-
-                
+                println("x: \(x), y: \(y)")
+                sparkParticle.position = CGPoint(x: x, y: y)
+                gameLayer.addChild(sparkParticle)
                 
                 
             } else if charTyped != charRequired {
