@@ -38,9 +38,13 @@ public class GameScene: SKScene, UITextViewDelegate {
     let timerBarEdge = SKSpriteNode()
     var fgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
+    
     var startTime = NSTimeInterval()
     var timer = NSTimer()
     var gameTime = CGFloat()
+    var currentTime = NSTimeInterval()
+    var elapsedTime = Double()
+    var seconds = Double()
     
     public var currentLevel: Int = 1
 
@@ -353,9 +357,9 @@ public class GameScene: SKScene, UITextViewDelegate {
     // Updates Timer Bar
     func updateTime() {
         
-        var currentTime = NSDate.timeIntervalSinceReferenceDate()
-        var elapsedTime = currentTime - startTime
-        var seconds = Double(Double(gameTime) - elapsedTime)
+        currentTime = NSDate.timeIntervalSinceReferenceDate()
+        elapsedTime = currentTime - startTime
+        seconds = Double(Double(gameTime) - elapsedTime)
         
         if seconds > 0 {
             
