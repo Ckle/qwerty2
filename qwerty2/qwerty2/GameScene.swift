@@ -29,7 +29,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     var textViewForPlayer = CustomTextView()
     var totalCharsShown = Int()
     var rangeOfText = Int() // For the addToRange function which moves the selected character of the visible UITextView
-    public var paragraphCount = 8
+    public var paragraphCount = 6
     var delayShrink = Double()
     
     // Timer Bar
@@ -178,19 +178,19 @@ public class GameScene: SKScene, UITextViewDelegate {
 //        self.addChild(titleScreenNode)
         
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT", size: 30.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT", size: 28.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         // Define string attributes
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug. I am a pug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "My male man, Jake", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "has started meeting frequently", attributes: textFont)
-        attrString4 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
-        attrString5 = NSMutableAttributedString(string: "I know it is a female man", attributes: textFont)
-        attrString6 = NSMutableAttributedString(string: "because of her fur.", attributes: textFont)
-        attrString7 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
-        attrString8 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful.", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "My male man John, has started meeting", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
+        attrString4 = NSMutableAttributedString(string: "I know it is a female man, because of her fur.", attributes: textFont)
+        attrString5 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
+        attrString6 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful.", attributes: textFont)
+        attrString7 = NSMutableAttributedString(string: "", attributes: textFont)
+        attrString8 = NSMutableAttributedString(string: "", attributes: textFont)
         
         paragraphStrings = [attrString1, attrString2, attrString3, attrString4, attrString5, attrString6, attrString7, attrString8]
         
@@ -399,13 +399,13 @@ public class GameScene: SKScene, UITextViewDelegate {
         if didWin {
             
             println("WIN")
-            let scene = LevelFinishedScene(size: self.size)
+            let scene = LevelFinishedScene(gameScene: self, size: self.size)
             self.view?.presentScene(scene)
 
         } else {
             
             println("FAIL")
-            let scene = GameOverScene(gameScene: self, size: self.size)
+            let scene = GameOverScene(size: self.size)
             self.view?.presentScene(scene)
 
         }
