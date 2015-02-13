@@ -501,7 +501,7 @@ public class GameScene: SKScene, UITextViewDelegate {
                 
                 println("x: \(x), y: \(y)")
                 sparkParticle.position = CGPoint(x: x, y: y)
-                gameLayer.addChild(sparkParticle)
+//                gameLayer.addChild(sparkParticle)
                 
                 
             } else if charTyped != charRequired {

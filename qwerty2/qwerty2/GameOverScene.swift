@@ -36,12 +36,12 @@ class GameOverScene: SKScene {
         
         Level1Node.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
         youLoseNode.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 100)
-        timeTaken.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+        timeTaken.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+100)
         
         youLoseNode.text = "You Lose"
         
         // Display Time taken, rounded to 2 decimals
-        timeTaken.text = "Score: \n \(round(100*gameScene.seconds)/100)"
+        timeTaken.text = "Score: \(round(100*gameScene.seconds)/100)"
         
         self.addChild(Level1Node)
         self.addChild(youLoseNode)
