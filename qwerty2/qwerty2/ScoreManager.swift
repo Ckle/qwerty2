@@ -12,7 +12,7 @@ import SpriteKit
 public class ScoreManager {
     
     // Create a function that can be called to save a score
-    class func saveScore(score: Int, forLevel level: Int) {
+    public func saveScore(score: Int, forLevel level: Int) {
         
         var leaderboard = NSUserDefaults.standardUserDefaults().objectForKey("LeaderBoard") as? NSDictionary ?? NSMutableDictionary()
         var leaderboardMDict = leaderboard.mutableCopy() as NSMutableDictionary
@@ -29,10 +29,10 @@ public class ScoreManager {
         
     }
     
-    class func getScoreDict() -> NSDictionary {
+    public func getScoreDict() -> NSDictionary {
         return NSUserDefaults.standardUserDefaults().objectForKey("Leaderboard") as? NSDictionary ?? NSMutableDictionary()
     }
-    class func getScoreForLevel(level: Int) -> Int? {
+    public func getScoreForLevel(level: Int) -> Int? {
         var leaderboard = getScoreDict()
         return leaderboard["Level \(level)"] as? Int
     }

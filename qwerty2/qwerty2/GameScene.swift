@@ -97,7 +97,6 @@ public class GameScene: SKScene, UITextViewDelegate {
     let pug3 = SKTexture(imageNamed: "inGamePug-3.png")
     
     // Particles
-    let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
     
     // -------------------------- INITs
     
@@ -488,6 +487,9 @@ public class GameScene: SKScene, UITextViewDelegate {
                     }
                 )
                 
+            
+                let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
+                
             textViewForPlayer.layoutManager.ensureLayoutForTextContainer(textViewForPlayer.textContainer)
                 
                 let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRangeOfTextShown.location)!
@@ -497,12 +499,16 @@ public class GameScene: SKScene, UITextViewDelegate {
                 
                 let rect = textViewForPlayer.firstRectForRange(tRange)
                 let x = rect.midX + textViewForPlayer.frame.minX
-                let y = rect.midY + textViewForPlayer.frame.midY
+                let y = rect.minY + (textViewForPlayer.frame.midY - 23)
                 
                 println("x: \(x), y: \(y)")
                 sparkParticle.position = CGPoint(x: x, y: y)
-//                gameLayer.addChild(sparkParticle)
                 
+                gameLayer.addChild(sparkParticle)
+                
+                delay(1.0) {
+                    sparkParticle.removeFromParent()
+                }
                 
             } else if charTyped != charRequired {
                 
