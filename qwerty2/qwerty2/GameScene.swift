@@ -282,6 +282,7 @@ public class GameScene: SKScene, UITextViewDelegate {
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
             textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 175 + (90 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
+            // Re-positions textView to center of X. replaces Rect above
             textShown1.center.x = CGRectGetMidX(self.frame)
             paragraphs.append(textShown1)
             
@@ -487,10 +488,11 @@ public class GameScene: SKScene, UITextViewDelegate {
                     }
                 )
                 
-            
+                // Particle for typing
                 let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
                 
-            textViewForPlayer.layoutManager.ensureLayoutForTextContainer(textViewForPlayer.textContainer)
+                textViewForPlayer.layoutManager.ensureLayoutForTextContainer(
+                textViewForPlayer.textContainer)
                 
                 let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRangeOfTextShown.location)!
                 let end = textViewForPlayer.positionFromPosition(start, offset: nsRangeOfTextShown.length)!
@@ -499,8 +501,10 @@ public class GameScene: SKScene, UITextViewDelegate {
                 
                 let rect = textViewForPlayer.firstRectForRange(tRange)
                 let x = rect.midX + textViewForPlayer.frame.minX
-                let y = rect.minY + (textViewForPlayer.frame.midY - 23)
+                // negative rect because of the origin
+                let y = -rect.minY + textViewForPlayer.frame.midY - 20
                 
+                println("\(nsRangeOfTextShown)")
                 println("x: \(x), y: \(y)")
                 sparkParticle.position = CGPoint(x: x, y: y)
                 
