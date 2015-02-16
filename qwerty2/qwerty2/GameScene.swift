@@ -19,7 +19,6 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     // UITextViews
     var textDisplay = UITextView() // Hidden textView just to detect typing
-    let textShownYPos: CGFloat = 150
     var textShown1 = CustomTextView()
     var paragraphStrings: [NSMutableAttributedString] = [] // An array that all the other AttributedStrings are attached to
     var paragraphs: [CustomTextView] = [] // An array that all the other textViews are added to
@@ -96,6 +95,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     let pug2 = SKTexture(imageNamed: "inGamePug-2.png")
     let pug3 = SKTexture(imageNamed: "inGamePug-3.png")
     
+    let ringTexture = SKTexture(imageNamed: "inGameAnimRing.png")
     // Particles
     
     // -------------------------- INITs
@@ -245,9 +245,6 @@ public class GameScene: SKScene, UITextViewDelegate {
         pug.position = CGPoint(x: CGRectGetMidX(self.frame)+120, y: CGRectGetMidY(self.frame)+225)
         gameLayer.addChild(pug)
         
-//         sparkParticle.position = CGPoint(x: frame.width/2, y: frame.height)
-//         sparkParticle.zPosition = 10
-//         pug.addChild(sparkParticle)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -510,8 +507,18 @@ public class GameScene: SKScene, UITextViewDelegate {
                 
                 gameLayer.addChild(sparkParticle)
                 
+                var ring = SKSpriteNode()
+         
+                ring.texture = ringTexture
+                ring.position = CGPoint(x: x, y: y)
+                ring.size = CGSize(width: 50, height: 50)
+                ring.runAction(SKAction.fadeOutWithDuration(0.5))
+                ring.runAction(SKAction.scaleTo(1.5, duration: 1.0))
+                gameLayer.addChild(ring)
+                
                 delay(1.0) {
                     sparkParticle.removeFromParent()
+                    ring.removeFromParent()
                 }
                 
             } else if charTyped != charRequired {
