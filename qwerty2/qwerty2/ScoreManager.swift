@@ -11,32 +11,36 @@ import SpriteKit
 
 public class ScoreManager {
     
+    let scoreManagerDefaultsKey = "Leaderboard"
+    var score = 0
+    
     // Create a function that can be called to save a score
-    public func saveScore(score: Int, forLevel level: Int) {
+    public func saveScore(score: Int) {
         
-        var leaderboard = NSUserDefaults.standardUserDefaults().objectForKey("LeaderBoard") as? NSDictionary ?? NSMutableDictionary()
-        var leaderboardMDict = leaderboard.mutableCopy() as NSMutableDictionary
+        self.score = score
         
-        if let highestScore = leaderboard[level] as? Int {
-            leaderboardMDict.setValue(highestScore < score ? score: highestScore, forKey: "Level \(level)")
-        }
-        else {
-            leaderboardMDict.setValue(score, forKey: "Level \(level)")
-        }
-        
-        NSUserDefaults.standardUserDefaults().setObject(leaderboardMDict, forKey: "LeaderBoard")
-        NSUserDefaults.standardUserDefaults().synchronize()
+//        var leaderboard = NSUserDefaults.standardUserDefaults().objectForKey(self.scoreManagerDefaultsKey) as? NSDictionary ?? NSMutableDictionary()
+//        var leaderboardMDict = leaderboard.mutableCopy() as NSMutableDictionary
+//        
+//        if let highestScore = leaderboard[level] as? Int {
+//            leaderboardMDict.setValue(highestScore < score ? score: highestScore, forKey: "Level \(level)")
+//        }
+//        else {
+//            leaderboardMDict.setValue(score, forKey: "Level \(level)")
+//        }
+//        
+//        NSUserDefaults.standardUserDefaults().setObject(leaderboardMDict, forKey: self.scoreManagerDefaultsKey)
+//        NSUserDefaults.standardUserDefaults().synchronize()
         
     }
     
-    public func getScoreDict() -> NSDictionary {
-        return NSUserDefaults.standardUserDefaults().objectForKey("Leaderboard") as? NSDictionary ?? NSMutableDictionary()
+    public func getScoreDict() -> NSNumber {
+        return self.score
+//        return NSUserDefaults.standardUserDefaults().objectForKey("Score") as? NSDictionary ?? NSMutableDictionary()
     }
-    public func getScoreForLevel(level: Int) -> Int? {
-        var leaderboard = getScoreDict()
-        return leaderboard["Level \(level)"] as? Int
-    }
-//    class func getAllHighScores() -> String? {
-//        
+    
+//    public func getScoreForLevel(level: Int) -> Int? {
+//        var leaderboard = getScoreDict()
+//        return leaderboard["Level \(level)"] as? Int
 //    }
 }
