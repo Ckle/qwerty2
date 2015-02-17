@@ -342,7 +342,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         currentString = 0
         
         // Shrink delay between paragraphs
-        delayShrink = 2.0
+        delayShrink = 1.5
         
         // Reset Paragraph to default color
         attrString1.addAttribute(NSForegroundColorAttributeName, value: UIColor(netHex: 0xcd948b), range: NSRange(location: 0, length: attrString1.length))
@@ -628,13 +628,13 @@ public class GameScene: SKScene, UITextViewDelegate {
                 for i in (currentParagraph + 1)..<(paragraphCount) {
                     
                     paraAnimDelay++
-                    var delay: Double = (1 / 4) * Double(paraAnimDelay)
-                    UIView.animateWithDuration(0.1, delay: (0.25 + delay), options: .CurveEaseOut, animations: {
+                    var delay: Double = (1 / 6) * Double(paraAnimDelay)
+                    UIView.animateWithDuration(0.1, delay: (0.15 + delay), options: .CurveEaseOut, animations: {
                         var frame = self.paragraphs[i].frame
                         frame.origin.y += 10
                         self.paragraphs[i].frame = frame
                         }, completion: { finished in
-                            UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+                            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
                                 var frame = self.paragraphs[i].frame
                                 frame.origin.y -= 93
                                 self.paragraphs[i].frame = frame
