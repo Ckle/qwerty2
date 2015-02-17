@@ -25,8 +25,7 @@ public class TimeManager {
         gameTime = CGFloat((arc4random() % (allotedTime)) + levelAllottedTimeMin)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
-    
-        println("\(gameTime)")
+        startTime = NSDate.timeIntervalSinceReferenceDate()
         
     }
     
@@ -34,7 +33,7 @@ public class TimeManager {
     @objc public func updateTime() {
         
         currentTime = NSDate.timeIntervalSinceReferenceDate()
-        elapsedTime = Double(currentTime) - Double(gameTime)
+        elapsedTime = Double(currentTime) - Double(startTime)
         seconds = Double(Double(gameTime) - elapsedTime)
         
         if seconds > 0 {

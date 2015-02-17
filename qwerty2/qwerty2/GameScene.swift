@@ -90,7 +90,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     let ringTexture = SKTexture(imageNamed: "inGameAnimRing.png")
     
-    var timeManager = TimeManager()
+    let timeManager = TimeManager()
     
     // -------------------------- INITs
     
@@ -737,14 +737,14 @@ public class GameScene: SKScene, UITextViewDelegate {
         self.bgTimerBar.size.height = 40
         self.bgTimerBar.zPosition = 0
         
-        gameLayer.addChild(bgTimerBar)
+//        gameLayer.addChild(bgTimerBar)
         
         self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.fgTimerBar.size.width = (self.size.width)
         self.fgTimerBar.size.height = 40
         
-        timerCrop.addChild(fgTimerBar)
+//        timerCrop.addChild(fgTimerBar)
         
 
     }
@@ -777,7 +777,7 @@ public class GameScene: SKScene, UITextViewDelegate {
             
         }
         
-        if timeManager.seconds == 0 {
+        if timerBar.size.width == 0 {
             
             gameEnded(didWin: false)
         }
