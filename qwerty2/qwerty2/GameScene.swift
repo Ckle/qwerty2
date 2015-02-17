@@ -38,13 +38,6 @@ public class GameScene: SKScene, UITextViewDelegate {
     var fgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
     
-    var startTime = NSTimeInterval()
-    var timer = NSTimer()
-    var gameTime = CGFloat()
-    var currentTime = NSTimeInterval()
-    var elapsedTime = Double()
-    var seconds = Double()
-    
     public var currentLevel: Int = 1
 
     // Transition Scene Button Variable Declaration
@@ -96,7 +89,8 @@ public class GameScene: SKScene, UITextViewDelegate {
     let pug3 = SKTexture(imageNamed: "inGamePug-3.png")
     
     let ringTexture = SKTexture(imageNamed: "inGameAnimRing.png")
-    // Particles
+    
+    var timeManager = TimeManager()
     
     // -------------------------- INITs
     
@@ -322,13 +316,10 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     func startGame() {
         
-        // Starts Timer
-        gameTime = CGFloat((arc4random() % (35-32+1)) + 32)
-        let aSelector: Selector = "updateTime"
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
-        startTime = NSDate.timeIntervalSinceReferenceDate()
+        timeManager.startTimer(levelAllottedTimeMin: 32, levelAllottedTimeMax: 35)
+        
         timerBar.size.width = (self.size.width)
-        timerBar.runAction(SKAction.scaleXTo(0, duration: Double(gameTime)))
+        timerBar.runAction(SKAction.scaleXTo(0, duration: Double(timeManager.gameTime)))
         // Moves the edge of the timerBar (a child of timerBar) to stick to the same max X value of the frame of parent
         // self.timerBarEdge.runAction(SKAction.moveToX((CGRectGetMaxX(timerBar.frame)), duration: 0))
         
@@ -352,47 +343,10 @@ public class GameScene: SKScene, UITextViewDelegate {
         scene?.userInteractionEnabled = true
     }
     
-    // Updates Timer Bar
-    func updateTime() {
-        
-        currentTime = NSDate.timeIntervalSinceReferenceDate()
-        elapsedTime = currentTime - startTime
-        seconds = Double(Double(gameTime) - elapsedTime)
-        
-        if seconds > 0 {
-            
-            elapsedTime -= NSTimeInterval(seconds)
-            println("\(Double(seconds))")
-            
-        } else {
-            
-            timer.invalidate()
-            gameEnded(didWin: false)
-        }
-        
-        // For Bronze/silver colors of TimerBar
-        var sceneHalfSize = self.frame.width / 2
-        
-        if timerBar.size.width < sceneHalfSize / 2  {
-            
-            changeTimerColor(medals: 1)
-            
-        } else if timerBar.size.width < sceneHalfSize {
-            
-            changeTimerColor(medals: 2)
-            
-        }
-
-        // **Keep for learning purposes**
-        // var secondsLeft = CGFloat(seconds / gameTime)
-        // self.timerBar.size.width = ((self.size.width) * secondsLeft)
-        // self.timerBar.size.width = SKAction.scaleXTo(secondsLeft, duration: 0.2)
-    }
-    
     // Handles Game Over Functions
     func gameEnded(#didWin: Bool) {
         
-        timer.invalidate()
+        timeManager.timer.invalidate()
         
         if didWin {
             
@@ -809,5 +763,23 @@ public class GameScene: SKScene, UITextViewDelegate {
     override public func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         self.timerBarEdge.position = CGPoint(x: CGRectGetMaxX(timerBar.frame), y: (CGRectGetMaxY(self.frame)))
+        
+        // For Bronze/silver colors of TimerBar
+        var sceneHalfSize = self.frame.width / 2
+        
+        if timerBar.size.width < sceneHalfSize / 2  {
+            
+            changeTimerColor(medals: 1)
+            
+        } else if timerBar.size.width < sceneHalfSize {
+            
+            changeTimerColor(medals: 2)
+            
+        }
+        
+        if timeManager.seconds == 0 {
+            
+            gameEnded(didWin: false)
+        }
     }
 }
