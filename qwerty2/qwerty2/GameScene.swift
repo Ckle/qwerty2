@@ -514,8 +514,8 @@ public class GameScene: SKScene, UITextViewDelegate {
                 ring.position = CGPoint(x: x, y: y)
                 ring.alpha = 0.3
                 ring.size = CGSize(width: 50, height: 50)
-                ring.runAction(SKAction.fadeOutWithDuration(0.5))
-                ring.runAction(SKAction.scaleTo(2.0, duration: 0.2))
+                ring.runAction(SKAction.fadeOutWithDuration(0.2))
+                ring.runAction(SKAction.scaleTo(2.0, duration: 0.15))
                 gameLayer.addChild(ring)
                 
                 delay(1.0) {
