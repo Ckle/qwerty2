@@ -146,6 +146,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         fgTimerBar.size.width = (self.size.width)
         fgTimerBar.size.height = 40
         
+        // Used to determine width of other timer bars
         timerBar.color = SKColor(red: 255/255, green: 251/255, blue: 207/255, alpha: 1.0)
         timerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         timerBar.anchorPoint = CGPoint(x: 0,y: 1)
@@ -322,7 +323,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     func startGame() {
         
         // Starts Timer
-        gameTime = CGFloat((arc4random() % (75-72+1)) + 72)
+        gameTime = CGFloat((arc4random() % (35-32+1)) + 32)
         let aSelector: Selector = "updateTime"
         timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
@@ -374,11 +375,11 @@ public class GameScene: SKScene, UITextViewDelegate {
         
         if timerBar.size.width < sceneHalfSize / 2  {
             
-            changeTimerColor(color: 2)
+            changeTimerColor(medals: 1)
             
         } else if timerBar.size.width < sceneHalfSize {
             
-            changeTimerColor(color: 1)
+            changeTimerColor(medals: 2)
             
         }
 
@@ -759,47 +760,39 @@ public class GameScene: SKScene, UITextViewDelegate {
         mistakeCounterSprite.runAction(SKAction.sequence([rotateRight, rotateLeft, rotateRight2]))
     }
     
-    func changeTimerColor(#color: Int) {
+    func changeTimerColor(medals pointsAwarded: Int) {
         
-        if color == 1 {
-           
-            self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvBot.png")
-            self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-            self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-            self.bgTimerBar.size.width = (self.size.width)
-            self.bgTimerBar.size.height = 40
-            self.bgTimerBar.zPosition = 0
-            self.addChild(bgTimerBar)
+        switch pointsAwarded {
             
-            self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvTop.png")
-            self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-            self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-            self.fgTimerBar.size.width = (self.size.width)
-            self.fgTimerBar.size.height = 40
-            
-            timerCrop.addChild(fgTimerBar)
-            
-        } else if color == 2 {
-            
+        case 1:
             self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronBot.png")
-            self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-            self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-            self.bgTimerBar.size.width = (self.size.width)
-            self.bgTimerBar.size.height = 40
-            self.bgTimerBar.zPosition = 0
-            self.addChild(bgTimerBar)
-            
             self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerBronTop.png")
-            self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
-            self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
-            self.fgTimerBar.size.width = (self.size.width)
-            self.fgTimerBar.size.height = 40
-            
-            timerCrop.addChild(fgTimerBar)
-            
-        } else {
+        case 2:
+            self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvBot.png")
+            self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerSilvTop.png")
+        case 3:
+            self.bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
+            self.fgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldTop.png")
+        default: println("No timer bar")
             
         }
+        
+        self.bgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        self.bgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        self.bgTimerBar.size.width = (self.size.width)
+        self.bgTimerBar.size.height = 40
+        self.bgTimerBar.zPosition = 0
+        
+        gameLayer.addChild(bgTimerBar)
+        
+        self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
+        self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
+        self.fgTimerBar.size.width = (self.size.width)
+        self.fgTimerBar.size.height = 40
+        
+        timerCrop.addChild(fgTimerBar)
+        
+
     }
     
     override public func willMoveFromView(view: SKView) {
