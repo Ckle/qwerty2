@@ -396,7 +396,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         if didWin {
             
             println("WIN")
-            let scene = LevelFinishedScene(gameScene: self, size: self.size)
+            let scene = LevelFinishedScene(size: self.size)
             self.view?.presentScene(scene)
 
         } else {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D7396111A92FF9A00153CB3 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7396101A92FF9A00153CB3 /* TimeManager.swift */; };
 		5B023FFB1A77FDF700C833F2 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B023FFA1A77FDF700C833F2 /* Sprites.atlas */; };
 		5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B13A2331A43AB1000B61A5B /* LevelScene.swift */; };
 		5B3A688E1A6089B8007209C5 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3A688D1A6089B8007209C5 /* GameOverScene.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D7396101A92FF9A00153CB3 /* TimeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		5B023FFA1A77FDF700C833F2 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 		5B0D44AF1A784AEB00082948 /* qwertyPlay.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = qwertyPlay.playground; sourceTree = "<group>"; };
 		5B13A2331A43AB1000B61A5B /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
@@ -97,6 +99,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D73960F1A92FB7000153CB3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5B9093C91A8BDD100087E845 /* ScoreManager.swift */,
+				5B90798F1A57759F0063A5E0 /* Levels.swift */,
+				4D7396101A92FF9A00153CB3 /* TimeManager.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		5B75645B1A84A3D0008F5952 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +151,7 @@
 		5BF4B76D1A42A7F0001EB977 /* qwerty2 */ = {
 			isa = PBXGroup;
 			children = (
+				4D73960F1A92FB7000153CB3 /* Models */,
 				5B9093CB1A8BEA6D0087E845 /* Particles */,
 				5B7564601A8531DF008F5952 /* GameUI.atlas */,
 				5B023FFA1A77FDF700C833F2 /* Sprites.atlas */,
@@ -150,8 +163,6 @@
 				5BA01ACA1A44AB79005BAE16 /* GameScene.swift */,
 				5B7E89301A74326300B50AEA /* LevelFinishedScene.swift */,
 				5B3A688D1A6089B8007209C5 /* GameOverScene.swift */,
-				5B9093C91A8BDD100087E845 /* ScoreManager.swift */,
-				5B90798F1A57759F0063A5E0 /* Levels.swift */,
 				5BF4B7781A42A7F0001EB977 /* Main.storyboard */,
 				5BF4B77B1A42A7F0001EB977 /* Images.xcassets */,
 				5BF4B77D1A42A7F0001EB977 /* LaunchScreen.xib */,
@@ -303,6 +314,7 @@
 			files = (
 				5BA01ACB1A44AB79005BAE16 /* GameScene.swift in Sources */,
 				5B9079901A57759F0063A5E0 /* Levels.swift in Sources */,
+				4D7396111A92FF9A00153CB3 /* TimeManager.swift in Sources */,
 				5B9EC07F1A8C021100473581 /* OtherMacros.swift in Sources */,
 				5B9093CA1A8BDD100087E845 /* ScoreManager.swift in Sources */,
 				5BF4B7751A42A7F0001EB977 /* TitleScene.swift in Sources */,
