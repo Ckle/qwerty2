@@ -390,14 +390,14 @@ public class GameScene: SKScene, UITextViewDelegate {
         // let attributedString = NSMutableAttributedString(string: nsText)
         // Above not needed because i DID using para as the attributed string
 
+        // Finding the current selection of character that needs to be typed from the visible UITextView
+        var rangeOfTextShown: Range = Range(
+            start: advance(textViewForPlayer.text.startIndex, rangeOfText),
+            end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
+        charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
+        
         // logic for underline changing along with incrementing text range to determine character required
         if totalCharsShown > (rangeOfText + 1) {
-            
-            // Finding the current selection of character that needs to be typed from the visible UITextView
-            var rangeOfTextShown: Range = Range(
-                start: advance(textViewForPlayer.text.startIndex, rangeOfText),
-                end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
-            charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
             // Creates the Underline. Removes first underline which was just manually put in place when gameScene init
             textForPlayer.addAttribute(
@@ -423,35 +423,14 @@ public class GameScene: SKScene, UITextViewDelegate {
 //                
 //                textViewForPlayer.attributedText = textForPlayer
                 
-                animateType(nsRange: nsRangeOfTextShown, character: charRequired)
+                animateTypeCorrect(nsRange: nsRangeOfTextShown, character: charRequired)
                 
             } else if charTyped != charRequired {
                 
                 println("FALSE")
                 
-                // rotates mistakes counter
-                rotateMistakes(mistakeCounter: mistakesMade)
-                ++mistakesMade
+                animateTypeIncorrect(nsRange: nsRangeOfTextShown)
                 
-                // Changes the color of the text if incorrect letter was typed
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
-                    range: nsRangeOfTextShown)
-                textForPlayer.addAttribute(
-                    NSBackgroundColorAttributeName,
-                    value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
-                    range: nsRangeOfTextShown)
-                textViewForPlayer.attributedText = textForPlayer
-                
-                updatePug(state: .sad)
-                
-            } else {
-                
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(red: 200/255, green: 200/255, blue: 200/255, alpha: 1.0),
-                    range: nsRangeOfTextShown)
             }
 
             if rangeOfText < (totalCharsShown - 1) {
@@ -461,12 +440,6 @@ public class GameScene: SKScene, UITextViewDelegate {
             }
             
         } else { // This is when player reaches end of a paragraph
-            
-            // Finds the final range of the final character in the paragraph
-            var rangeOfTextShown: Range = Range(
-                start: advance(textViewForPlayer.text.startIndex, rangeOfText),
-                end: advance(textViewForPlayer.text.startIndex, rangeOfText + 1))
-            charRequired = textViewForPlayer.text.substringWithRange(rangeOfTextShown)
             
             // Updates the ProgressNodes
             updateProgressNodes()
@@ -479,31 +452,17 @@ public class GameScene: SKScene, UITextViewDelegate {
                 
                 updatePug(state: .happy)
                 
-                animateType(nsRange: nsRangeOfTextShown, character: charRequired)
+                animateTypeCorrect(nsRange: nsRangeOfTextShown, character: charRequired)
                 
             } else if charTyped != charRequired {
                 
                 println("FALSE")
                 
-                rotateMistakes(mistakeCounter: mistakesMade)
-                ++mistakesMade
-                
-                // Changes the color of the text if incorrect letter was typed
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
-                    range: nsRangeOfTextShown)
-                textForPlayer.addAttribute(
-                    NSBackgroundColorAttributeName,
-                    value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
-                    range: nsRangeOfTextShown)
-                textViewForPlayer.attributedText = textForPlayer
-                
-                // Changes Pug Face
-                updatePug(state: .sad)
+                animateTypeIncorrect(nsRange: nsRangeOfTextShown)
                 
             }
             
+            // Removes the last underline
             textForPlayer.removeAttribute(
                 NSUnderlineStyleAttributeName,
                 range: NSMakeRange((rangeOfText), 1))
@@ -607,7 +566,7 @@ public class GameScene: SKScene, UITextViewDelegate {
 //        fadeOut.toValue = NSNumber(double: 0.0)
 //        
 //    }
-    func animateType(#nsRange: NSRange, character: String) {
+    func animateTypeCorrect(#nsRange: NSRange, character: String) {
         
         UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
             self.textForPlayer.addAttribute(
@@ -665,6 +624,26 @@ public class GameScene: SKScene, UITextViewDelegate {
                 ring.removeFromParent()
             }
         }
+    }
+    
+    func animateTypeIncorrect(#nsRange: NSRange) {
+        
+        // rotates mistakes counter
+        rotateMistakes(mistakeCounter: mistakesMade)
+        ++mistakesMade
+        
+        // Changes the color of the text if incorrect letter was typed
+        textForPlayer.addAttribute(
+            NSForegroundColorAttributeName,
+            value: UIColor(red: 209/255, green: 23/255, blue: 23/255, alpha: 1.0),
+            range: nsRange)
+        textForPlayer.addAttribute(
+            NSBackgroundColorAttributeName,
+            value: UIColor(red: 201/255, green: 121/255, blue: 129/255, alpha: 0.5),
+            range: nsRange)
+        textViewForPlayer.attributedText = textForPlayer
+        
+        updatePug(state: .sad)
     }
     
     func updateProgressNodes() {
