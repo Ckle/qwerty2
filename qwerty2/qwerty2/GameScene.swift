@@ -317,7 +317,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     func startGame() {
         
-        timeManager.startTimer(levelAllottedTimeMin: 32, levelAllottedTimeMax: 35)
+        timeManager.startTimer(levelAllottedTimeMin: 41, levelAllottedTimeMax: 44)
         
         timerBar.size.width = (self.size.width)
         timerBar.runAction(SKAction.scaleXTo(0, duration: Double(timeManager.gameTime)))
@@ -493,7 +493,7 @@ public class GameScene: SKScene, UITextViewDelegate {
                         }, completion: { finished in
                             UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
                                 var frame = self.paragraphs[i].frame
-                                frame.origin.y -= 93
+                                frame.origin.y -= 100
                                 self.paragraphs[i].frame = frame
                                 }, completion: { finished in
                                     }
@@ -568,6 +568,7 @@ public class GameScene: SKScene, UITextViewDelegate {
 //    }
     func animateTypeCorrect(#nsRange: NSRange, character: String) {
         
+        // Animates the type flashing white, and then fading to a subtle bg color
         UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
             self.textForPlayer.addAttribute(
                 NSForegroundColorAttributeName,
@@ -586,25 +587,27 @@ public class GameScene: SKScene, UITextViewDelegate {
             }
         )
         
+        // Not animating particles for spaces.
         if character != " " {
+            
             // Particle for typing
             let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
             
             textViewForPlayer.layoutManager.ensureLayoutForTextContainer(
                 textViewForPlayer.textContainer)
             
+            // Find the rect of the individual character in range of being typed
             let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRange.location)!
             let end = textViewForPlayer.positionFromPosition(start, offset: nsRange.length)!
-            
             let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
-            
             let rect = textViewForPlayer.firstRectForRange(tRange)
             let x = rect.midX + textViewForPlayer.frame.minX
-            // negative rect because of the origin
-            let y = -rect.minY + textViewForPlayer.frame.midY - 20
+            // negative rect because of the origin. -5 is cus x-height of lower case letters is a little lower. to centre it.
+            let y = -rect.midY + textViewForPlayer.textContainerInset.top + textViewForPlayer.frame.midY - 5
             
             println("\(nsRange)")
             println("x: \(x), y: \(y)")
+            println("\(textViewForPlayer.textContainerInset.bottom) Inset")
             sparkParticle.position = CGPoint(x: x, y: y)
             
             gameLayer.addChild(sparkParticle)

@@ -41,8 +41,9 @@ class LevelFinishedScene: SKScene {
         timeTaken.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+100)
         
         youWinNode.text = "You Win!"
+        
         // Display Time taken, rounded to 2 decimals
-        timeTaken.text = "Score: \(round(100*timeManager.seconds)/100)s left"
+        timeTaken.text = "Score: \(timeManager.getFinalTime())s left"
         
         self.addChild(Level1Node)
         self.addChild(youWinNode)
