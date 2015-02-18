@@ -104,7 +104,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         // Add Labels
         levelTitle.fontName = "LeagueGothic-Regular"
         levelTitle.text = "THE FIRST LEVEL"
-        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-155, y: CGRectGetMidY(self.frame)+210)
+        levelTitle.position = CGPoint(x: CGRectGetMidX(self.frame)-158, y: CGRectGetMidY(self.frame)+210)
         levelTitle.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Left
         levelTitle.fontSize = 48.0
         gameLayer.addChild(levelTitle)
@@ -117,14 +117,14 @@ public class GameScene: SKScene, UITextViewDelegate {
         levelTitle.addChild(levelHighScore)
         
         // Add BG Lighter Color Container
-        bgContainer.size = CGSize(width: CGRectGetMaxX(self.frame)-60, height: CGRectGetMaxY(self.frame)-200)
-        bgContainer.color = UIColor(netHex: 0x72405f)
-        bgContainer.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame)+100)
-        bgContainer.anchorPoint = CGPoint(x: 0.5, y: 1)
+        bgContainer.size = CGSize(width: 150, height: CGRectGetMaxY(self.frame))
+        bgContainer.color = UIColor(netHex: 0x724058)
+        bgContainer.position = CGPoint(x: CGRectGetMaxX(self.frame) - 70, y: CGRectGetMaxY(frame))
+        bgContainer.anchorPoint = CGPoint(x: 0, y: 1)
         gameLayer.addChild(bgContainer)
     
         // SKView Properties
-        self.backgroundColor = UIColor(netHex: 0x663855)
+        self.backgroundColor = UIColor(netHex: 0x66384d)
         
         // Timer Bar Initialize
         bgTimerBar = SKSpriteNode(imageNamed: "inGameTimerGoldBot.png")
@@ -173,7 +173,7 @@ public class GameScene: SKScene, UITextViewDelegate {
 //        self.addChild(titleScreenNode)
         
         // Type
-        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT", size: 28.0) ?? UIFont.systemFontOfSize(18.0)]
+        let textFont = [NSFontAttributeName: UIFont(name: "GillSansMT", size: 26.0) ?? UIFont.systemFontOfSize(18.0)]
         let italFont = [NSFontAttributeName: UIFont(name: "Georgia-Italic", size: 40.0) ?? UIFont.systemFontOfSize(18.0)]
         // Define string attributes
         
@@ -217,7 +217,7 @@ public class GameScene: SKScene, UITextViewDelegate {
         let progressTileWidth = progressMarkerOn.size.width / 4
         let progressTileGap = progressTileWidth * 1.2
         let selectorWidth = progressTileWidth * CGFloat(paragraphCount) + (progressTileGap * CGFloat(paragraphCount)-2)
-        var x = (self.frame.width - selectorWidth) / 2
+        var x: CGFloat = 33
         var y = self.frame.height / 2 + 80
         
         for i in 1...paragraphCount {
@@ -273,10 +273,10 @@ public class GameScene: SKScene, UITextViewDelegate {
             
             var paragraphNumber: CGFloat = CGFloat(i) + 1
             // Missing 'argument textContainer in call below', various other errors like 'consuective statements on a line must be separated by ;'
-            textShown1 = CustomTextView(frame: CGRectMake(CGRectGetMidX(self.frame), 175 + (90 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
+            textShown1 = CustomTextView(frame: CGRectMake(22, 175 + (90 * paragraphNumber), CGRectGetWidth(self.frame) - 80, CGRectGetHeight(self.frame)-400))
             textShown1.backgroundColor = UIColor.clearColor()
             // Re-positions textView to center of X. replaces Rect above
-            textShown1.center.x = CGRectGetMidX(self.frame)
+//            textShown1.center.x = CGRectGetMidX(self.frame)
             paragraphs.append(textShown1)
             
             // Make the paragraphs the default colour
@@ -317,7 +317,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     func startGame() {
         
-        timeManager.startTimer(levelAllottedTimeMin: 41, levelAllottedTimeMax: 44)
+        timeManager.startTimer(levelAllottedTimeMin: 42, levelAllottedTimeMax: 45)
         
         timerBar.size.width = (self.size.width)
         timerBar.runAction(SKAction.scaleXTo(0, duration: Double(timeManager.gameTime)))
@@ -607,7 +607,6 @@ public class GameScene: SKScene, UITextViewDelegate {
             
             println("\(nsRange)")
             println("x: \(x), y: \(y)")
-            println("\(textViewForPlayer.textContainerInset.bottom) Inset")
             sparkParticle.position = CGPoint(x: x, y: y)
             
             gameLayer.addChild(sparkParticle)
