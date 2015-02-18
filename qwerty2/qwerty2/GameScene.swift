@@ -423,60 +423,7 @@ public class GameScene: SKScene, UITextViewDelegate {
 //                
 //                textViewForPlayer.attributedText = textForPlayer
                 
-                UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-                    self.textForPlayer.addAttribute(
-                        NSForegroundColorAttributeName,
-                        value: UIColor.whiteColor(),
-                        range: nsRangeOfTextShown)
-                    self.textViewForPlayer.attributedText = self.textForPlayer
-                    }, completion: { finished in
-                        UIView.transitionWithView(self.textViewForPlayer, duration: 0.2, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
-                            self.textForPlayer.addAttribute(
-                                NSForegroundColorAttributeName,
-                                value: UIColor(netHex: 0x8b505c),
-                                range: nsRangeOfTextShown)
-                            self.textViewForPlayer.attributedText = self.textForPlayer
-                            }, completion: { finished in
-                        })
-                    }
-                )
-                
-                // Particle for typing
-                let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
-                
-                textViewForPlayer.layoutManager.ensureLayoutForTextContainer(
-                textViewForPlayer.textContainer)
-                
-                let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRangeOfTextShown.location)!
-                let end = textViewForPlayer.positionFromPosition(start, offset: nsRangeOfTextShown.length)!
-                
-                let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
-                
-                let rect = textViewForPlayer.firstRectForRange(tRange)
-                let x = rect.midX + textViewForPlayer.frame.minX
-                // negative rect because of the origin
-                let y = -rect.minY + textViewForPlayer.frame.midY - 20
-                
-                println("\(nsRangeOfTextShown)")
-                println("x: \(x), y: \(y)")
-                sparkParticle.position = CGPoint(x: x, y: y)
-                
-                gameLayer.addChild(sparkParticle)
-                
-                var ring = SKSpriteNode()
-         
-                ring.texture = ringTexture
-                ring.position = CGPoint(x: x, y: y)
-                ring.alpha = 0.3
-                ring.size = CGSize(width: 50, height: 50)
-                ring.runAction(SKAction.fadeOutWithDuration(0.2))
-                ring.runAction(SKAction.scaleTo(2.0, duration: 0.15))
-                gameLayer.addChild(ring)
-                
-                delay(1.0) {
-                    sparkParticle.removeFromParent()
-                    ring.removeFromParent()
-                }
+                animateType(nsRange: nsRangeOfTextShown, character: charRequired)
                 
             } else if charTyped != charRequired {
                 
@@ -529,15 +476,10 @@ public class GameScene: SKScene, UITextViewDelegate {
             if charTyped == charRequired {
                 
                 println("CORRECT")
-                // Changes the color of the text if correct letter was typed
-                textForPlayer.addAttribute(
-                    NSForegroundColorAttributeName,
-                    value: UIColor(netHex: 0x8b505c),
-                    range: nsRangeOfTextShown)
-                // have to make sure to add the attributed text string to the UITextView or it won't show
-                textViewForPlayer.attributedText = textForPlayer
                 
                 updatePug(state: .happy)
+                
+                animateType(nsRange: nsRangeOfTextShown, character: charRequired)
                 
             } else if charTyped != charRequired {
                 
@@ -665,6 +607,65 @@ public class GameScene: SKScene, UITextViewDelegate {
 //        fadeOut.toValue = NSNumber(double: 0.0)
 //        
 //    }
+    func animateType(#nsRange: NSRange, character: String) {
+        
+        UIView.transitionWithView(textViewForPlayer, duration: 0.1, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+            self.textForPlayer.addAttribute(
+                NSForegroundColorAttributeName,
+                value: UIColor.whiteColor(),
+                range: nsRange)
+            self.textViewForPlayer.attributedText = self.textForPlayer
+            }, completion: { finished in
+                UIView.transitionWithView(self.textViewForPlayer, duration: 0.2, options: .BeginFromCurrentState | .TransitionCrossDissolve | .AllowAnimatedContent, animations: {
+                    self.textForPlayer.addAttribute(
+                        NSForegroundColorAttributeName,
+                        value: UIColor(netHex: 0x8b505c),
+                        range: nsRange)
+                    self.textViewForPlayer.attributedText = self.textForPlayer
+                    }, completion: { finished in
+                })
+            }
+        )
+        
+        if character != " " {
+            // Particle for typing
+            let sparkParticle = SKEmitterNode(fileNamed: "MyParticle")
+            
+            textViewForPlayer.layoutManager.ensureLayoutForTextContainer(
+                textViewForPlayer.textContainer)
+            
+            let start = textViewForPlayer.positionFromPosition(textViewForPlayer.beginningOfDocument, offset: nsRange.location)!
+            let end = textViewForPlayer.positionFromPosition(start, offset: nsRange.length)!
+            
+            let tRange = textViewForPlayer.textRangeFromPosition(start, toPosition: end)
+            
+            let rect = textViewForPlayer.firstRectForRange(tRange)
+            let x = rect.midX + textViewForPlayer.frame.minX
+            // negative rect because of the origin
+            let y = -rect.minY + textViewForPlayer.frame.midY - 20
+            
+            println("\(nsRange)")
+            println("x: \(x), y: \(y)")
+            sparkParticle.position = CGPoint(x: x, y: y)
+            
+            gameLayer.addChild(sparkParticle)
+            
+            var ring = SKSpriteNode()
+            
+            ring.texture = ringTexture
+            ring.position = CGPoint(x: x, y: y)
+            ring.alpha = 0.3
+            ring.size = CGSize(width: 50, height: 50)
+            ring.runAction(SKAction.fadeOutWithDuration(0.2))
+            ring.runAction(SKAction.scaleTo(2.0, duration: 0.15))
+            gameLayer.addChild(ring)
+            
+            delay(1.0) {
+                sparkParticle.removeFromParent()
+                ring.removeFromParent()
+            }
+        }
+    }
     
     func updateProgressNodes() {
         
@@ -747,7 +748,6 @@ public class GameScene: SKScene, UITextViewDelegate {
         
         timerCrop.addChild(fgTimerBar)
         
-
     }
     
     override public func willMoveFromView(view: SKView) {
