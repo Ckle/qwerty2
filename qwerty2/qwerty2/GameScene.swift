@@ -37,6 +37,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     let timerBarEdge = SKSpriteNode()
     var fgTimerBar = SKSpriteNode()
     var timerBar = SKSpriteNode()
+    var medals = 3
     
     public var currentLevel: Int = 1
 
@@ -737,14 +738,14 @@ public class GameScene: SKScene, UITextViewDelegate {
         self.bgTimerBar.size.height = 40
         self.bgTimerBar.zPosition = 0
         
-//        gameLayer.addChild(bgTimerBar)
+        gameLayer.addChild(bgTimerBar)
         
         self.fgTimerBar.position = CGPoint(x: 0, y: (CGRectGetMaxY(self.frame)))
         self.fgTimerBar.anchorPoint = CGPoint(x: 0,y: 1)
         self.fgTimerBar.size.width = (self.size.width)
         self.fgTimerBar.size.height = 40
         
-//        timerCrop.addChild(fgTimerBar)
+        timerCrop.addChild(fgTimerBar)
         
 
     }
@@ -767,12 +768,16 @@ public class GameScene: SKScene, UITextViewDelegate {
         // For Bronze/silver colors of TimerBar
         var sceneHalfSize = self.frame.width / 2
         
-        if timerBar.size.width < sceneHalfSize / 2  {
+        if medals == 2 && timerBar.size.width < sceneHalfSize / 2 {
             
+            medals = 1
+            println("CHANGE")
             changeTimerColor(medals: 1)
             
-        } else if timerBar.size.width < sceneHalfSize {
+        }
+        else if medals == 3 && timerBar.size.width < sceneHalfSize {
             
+            medals = 2
             changeTimerColor(medals: 2)
             
         }
