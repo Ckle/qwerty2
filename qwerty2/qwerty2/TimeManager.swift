@@ -10,6 +10,8 @@ import Foundation
 import SpriteKit
 import UIKit
 
+private let _TimeManagerSharedInstance = TimeManager()
+
 public class TimeManager {
     
     var startTime = NSTimeInterval()
@@ -19,6 +21,12 @@ public class TimeManager {
     var elapsedTime = Double()
     var seconds = Double()
     
+    // Creates Singleton, which allows the private declaration above to reference the same instance
+    // of TimeManager. that way the variables can be passed around between V/C classes
+    class var sharedInstance: TimeManager {
+        return _TimeManagerSharedInstance
+    }
+
     public func startTimer(#levelAllottedTimeMin: Int, levelAllottedTimeMax: Int) {
         // Starts Timer
         var allotedTime: UInt32 = levelAllottedTimeMax - levelAllottedTimeMin + 1

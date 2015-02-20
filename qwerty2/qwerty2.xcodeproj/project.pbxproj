@@ -34,6 +34,7 @@
 		5BF4B77F1A42A7F0001EB977 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BF4B77D1A42A7F0001EB977 /* LaunchScreen.xib */; };
 		5BF4B78B1A42A7F0001EB977 /* qwerty2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF4B78A1A42A7F0001EB977 /* qwerty2Tests.swift */; };
 		5BF6BFC81A76BDEF00EEBA29 /* Levels.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5BF6BFC71A76BDEF00EEBA29 /* Levels.atlas */; };
+		5BFC72401A956D99000314CB /* StopWatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC723F1A956D99000314CB /* StopWatchManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		5BF4B7891A42A7F0001EB977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BF4B78A1A42A7F0001EB977 /* qwerty2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = qwerty2Tests.swift; sourceTree = "<group>"; };
 		5BF6BFC71A76BDEF00EEBA29 /* Levels.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Levels.atlas; sourceTree = "<group>"; };
+		5BFC723F1A956D99000314CB /* StopWatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatchManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				5B90798F1A57759F0063A5E0 /* Levels.swift */,
 				5B9093C91A8BDD100087E845 /* ScoreManager.swift */,
 				5B78AF1F1A93BEF7008ECA5E /* TimeManager.swift */,
+				5BFC723F1A956D99000314CB /* StopWatchManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				5B78AF201A93BEF7008ECA5E /* TimeManager.swift in Sources */,
 				5B9EC07F1A8C021100473581 /* OtherMacros.swift in Sources */,
 				5B9093CA1A8BDD100087E845 /* ScoreManager.swift in Sources */,
+				5BFC72401A956D99000314CB /* StopWatchManager.swift in Sources */,
 				5BF4B7751A42A7F0001EB977 /* TitleScene.swift in Sources */,
 				5B7E89311A74326300B50AEA /* LevelFinishedScene.swift in Sources */,
 				5B13A2341A43AB1000B61A5B /* LevelScene.swift in Sources */,

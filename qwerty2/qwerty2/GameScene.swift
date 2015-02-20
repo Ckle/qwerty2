@@ -91,7 +91,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     let ringTexture = SKTexture(imageNamed: "inGameAnimRing.png")
     
-    let timeManager = TimeManager()
+    let timeManager = TimeManager.sharedInstance
     
     // -------------------------- INITs
     
@@ -179,8 +179,8 @@ public class GameScene: SKScene, UITextViewDelegate {
         
         // Create locally formatted strings
         attrString1 = NSMutableAttributedString(string: "My name is Dug. I am a pug.", attributes: textFont)
-        attrString2 = NSMutableAttributedString(string: "My male man John, has started meeting", attributes: textFont)
-        attrString3 = NSMutableAttributedString(string: "with a female man.", attributes: textFont)
+        attrString2 = NSMutableAttributedString(string: "I have a male man who lives with me. His name is John.", attributes: textFont)
+        attrString3 = NSMutableAttributedString(string: "John has recently started meeting a female man", attributes: textFont)
         attrString4 = NSMutableAttributedString(string: "I know it is a female man, because of her fur.", attributes: textFont)
         attrString5 = NSMutableAttributedString(string: "It is long like an English Sheepdog", attributes: textFont)
         attrString6 = NSMutableAttributedString(string: "except that an English Sheepdog is beautiful.", attributes: textFont)
@@ -317,7 +317,7 @@ public class GameScene: SKScene, UITextViewDelegate {
     
     func startGame() {
         
-        timeManager.startTimer(levelAllottedTimeMin: 42, levelAllottedTimeMax: 45)
+        timeManager.startTimer(levelAllottedTimeMin: 49, levelAllottedTimeMax: 51)
         
         timerBar.size.width = (self.size.width)
         timerBar.runAction(SKAction.scaleXTo(0, duration: Double(timeManager.gameTime)))

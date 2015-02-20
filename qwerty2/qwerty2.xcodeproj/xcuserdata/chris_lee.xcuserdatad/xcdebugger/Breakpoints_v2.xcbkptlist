@@ -572,11 +572,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "qwerty2/TimeManager.swift"
-            timestampString = "445906641.939482"
+            timestampString = "446061682.298552"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "startTimer(levelAllottedTimeMin:levelAllottedTimeMax:)"
             landmarkType = "5">
          </BreakpointContent>

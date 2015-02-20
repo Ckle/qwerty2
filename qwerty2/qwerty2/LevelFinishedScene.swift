@@ -18,7 +18,7 @@ class LevelFinishedScene: SKScene {
     let timeTaken = SKLabelNode(fontNamed: "Helvetica Neue")
     // Creates GameScene as a constant
     let gameScene: GameScene
-    let timeManager = TimeManager()
+    let timeManager = TimeManager.sharedInstance
     
     // Using the init method, passes the GameScene object as a member of GameOverScene
     // Now we should be able to access the variables in GameScene
@@ -43,7 +43,7 @@ class LevelFinishedScene: SKScene {
         youWinNode.text = "You Win!"
         
         // Display Time taken, rounded to 2 decimals
-        timeTaken.text = "Score: \(timeManager.getFinalTime())s left"
+        timeTaken.text = "Score: \(self.timeManager.getFinalTime())s left"
         
         self.addChild(Level1Node)
         self.addChild(youWinNode)
